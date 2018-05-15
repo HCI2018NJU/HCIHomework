@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>场馆活动</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <link href="../../../css/venue/activity.css" rel="stylesheet">
+    <link href="../../../css/venue/venue-nav.css" rel="stylesheet">
+    <link href="../../../css/venue/activity-left-nav.css" rel="stylesheet">
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="venue-nav"></div>
+    <div id="below-nav">
+        <div class="row">
+            <div class="col-1">
+                <div id="activity-left-nav"></div>
+            </div>
+            <div class="col-9 center-content">
+                <div id="activity-container">
+                    <!--<button id="type"><i class="iconfont">&#xe626;</i>类型</button>-->
+                </div>
+                <div style="float: right" class="page" id="activity-page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/venue/venue-nav.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/activity-left-nav.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/activity-items.js"></script>
+</body>
+</html>

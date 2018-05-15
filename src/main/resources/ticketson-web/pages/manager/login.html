@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketSon-经理登陆</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/form.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="/pages/manager/statistics.html">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="form-container">
+                <div id="header">
+                    <div>经理登陆</div>
+                </div>
+                <div id="icon-wrapper">
+                    <label><i class="icon-font">&#xe622;</i></label>
+                </div>
+                <div id="account-part">
+                    <input id="account" type="text" placeholder="账号">
+                </div>
+                <div id="password-part">
+                    <input id="psw" type="password" placeholder="密码">
+                </div>
+                <button onclick="login()">登陆</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+   function login() {
+       let account = $("#account").val();
+       let psw = $("#psw").val();
+       $.post("/api/manager/login",{
+           "account":account,
+           "psw":psw
+       }).done(function () {
+           forward("/pages/manager/statistics.html");
+       }).fail(function (data) {
+           layer.msg(data.responseText);
+       });
+   }
+</script>
+<script type="text/javascript" src="../../js/common/util/info-manager.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+
+</body>
+</html>

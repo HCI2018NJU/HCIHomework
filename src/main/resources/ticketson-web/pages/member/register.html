@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketSon-会员注册</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/form.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body id="most-container">
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="index.html">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="form-container">
+                <div id="header">
+                    <div>会员注册</div>
+                    <div id="message">欢迎加入ticketson，请务必准确填写您的邮箱</div>
+                </div>
+                <div id="icon-wrapper">
+                    <label><i class="icon-font">&#xe622;</i></label>
+                </div>
+                <div id="account-part">
+                    <input id="email" type="email" placeholder="邮箱">
+                </div>
+                <div id="password-part">
+                    <input id="psw" type="password" placeholder="密码">
+                </div>
+                <button onclick="register()">注册</button>
+                <div id="bottom-message">
+                    <a href="./login.html">已经有账号？立即登陆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+    function register() {
+        let email = $("#email").val();
+        let psw = $("#psw").val();
+        if(email===""||psw===""){
+            layer.msg("您有尚未填写的信息");
+            return;
+        }
+        console.log(email+"------"+psw);
+        let loading_index;
+        loading_index = layer.load();
+        $.post("/api/member/register",{
+            "email":email,
+            "psw":psw
+        }).done(function () {
+            layer.close(loading_index);
+            layer.alert("激活链接发送成功",function (index) {
+                layer.close(index);
+                forward("/pages/member/login.html");
+            });
+        }).fail(function (data) {
+            layer.close(loading_index);
+            layer.msg(data.responseText);
+        });
+    }
+</script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+</body>
+</html>

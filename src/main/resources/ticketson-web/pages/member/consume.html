@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-专属你的票务网站</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
+    <link href="../../lib/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../css/member/consume.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/jquery-ui.min.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+    <script src="../../lib/echarts.min.js"></script>
+</head>
+<body>
+<div id="container" style="font-size: 14px">
+    <div id="member-nav"></div>
+    <div id="below-nav">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8" style="margin-top: 40px">
+                <div class="row" style="margin-top: 40px">
+                    <div class="col-8">
+                        <div id="consume-line-chart" style="width: inherit;height: 600px"></div>
+                    </div>
+                    <div class="col-4" style="border-left: 1px solid #f4f4f4;padding-left: 20px;overflow: auto">
+                        <div id="consume-type-pie-chart" style="width: inherit;height: 500px;"></div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 60px" onclick="test1()">
+                    <div class="col-8">
+                        <div id="consume-order-type-pie-chart" style="width: inherit;height: 400px"></div>
+                    </div>
+                    <div class="col-4" style="border-left: 1px solid #f4f4f4;padding-left: 20px;overflow: auto">
+                        <div style="margin-top: 140px">
+                            <strong>单比最高</strong>
+                            <div style="color: #9f9f9f;margin-bottom: 20px" id="top3-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+        const consume_data_loading = layer.load();
+        $.post("/api/member/getStatistics",{
+            mid:getMid(),
+        }).done(function (data) {
+            setData(data);
+            layer.close(consume_data_loading);
+        }).fail(function (data) {
+            layer.msg(data.responseText);
+        });
+    });
+</script>
+<script type="text/javascript" src="../../js/member/consume.js"></script>
+</body>
+</html>

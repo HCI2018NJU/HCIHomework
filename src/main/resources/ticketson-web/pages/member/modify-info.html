@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketSon-完善信息</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/form.css" rel="stylesheet">
+    <link href="../../css/common/location-fillter.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="index.html">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="form-container">
+                <div id="header">
+                    <div>修改信息</div>
+                    <div id="message">这么做是为了向您推荐当地的活动</div>
+                </div>
+                <div id="icon-wrapper">
+                    <label><i class="icon-font">&#xe621;</i></label>
+                </div>
+                <div id="account-part">
+                    <input name="nickname" placeholder="昵称">
+                </div>
+                <div id="location-part"></div>
+                <button onclick="perfectInfo()">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/common/location-filter.js"></script>
+<script type="text/javascript" src="../../js/common/util/info-manager.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script>
+    let layer;
+    const member = JSON.parse(window.localStorage.getItem("member"));
+    const mid = member["mid"];
+    console.log(mid);
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+        //如果是修改信息
+        $.post("/api/member/getInfo",{
+            "mid":mid,
+        }).done(function (data) {
+            $("input[name='nickname']").val(data.nickname);
+            const provinceName = province_object[data.provinceCode].name;
+            const cityName = city_object[data.cityCode].name;
+            const discrictName = area_object[data.districtCode].name;
+            outW(data.provinceCode,provinceName,data.cityCode,cityName,data.districtCode,discrictName);
+        }).fail(function (data) {
+            layer.msg(data.responseText);
+        });
+    });
+    function perfectInfo() {
+        const nickname = $("input[name='nickname']").val();
+        const provinceCode = present_province_id;
+        const cityCode = present_city_id;
+        const districtCode = present_district_id;
+        if(nickname===""||provinceCode===null||provinceCode===""
+            ||cityCode===null||cityCode===""||districtCode===null||districtCode===""){
+            layer.msg("您有未输入的选项");
+            return;
+        }
+        $.post("/api/member/perfectInfo",{
+            "mid": mid,
+            "provinceCode":present_province_id,
+            "cityCode": present_city_id,
+            "districtCode":present_district_id,
+            "nickname":nickname,
+        }).done(function (data) {
+            //设置会员信息
+            window.localStorage.setItem("member",JSON.stringify(data));
+            forward("/pages/member/index.html");
+        }).fail(function (data) {
+            layer.msg(data.responseText);
+        });
+    }
+</script>
+</body>
+</html>

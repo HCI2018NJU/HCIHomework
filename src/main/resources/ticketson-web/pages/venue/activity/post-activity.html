@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../css/venue/post-activity.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/jscolor.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="../../member/index.html">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 60px">
+                <legend>发布计划</legend>
+            </fieldset>
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">活动名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" autocomplete="off" placeholder="请输入名称" class="layui-input">
+                               <!--lay-verify="required">-->
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">活动类型</label>
+                    <div class="layui-input-inline">
+                        <select id="activity-type" name="type" >
+                                <!--lay-verify="required"-->
+                        <!--&gt;-->
+                            <option value="">请选择类型</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">活动描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div id="period-part" style="display: inline-block;float: left"></div>
+                    <button type="button" class="ticketson-btn-primary" id="period-create" onclick="showPeriodInput()">新建场次</button>
+                    <input class="long-layui-input" id="period-input" type="datetime" style="display: none;" autofocus="autofocus">
+                </div>
+                <div class="layui-form-item">
+                    <div id="price-part"></div>
+                    <button type="button" class="ticketson-btn-primary" id="level-create" onclick="showPriceInput()">新建价格</button>
+                    <div id="level-item-input" style="display: none">
+                        <label class="level-label">1级</label>
+                        <label class="color-label"></label>
+                        <input type="text" class="price-input" id="price-input" placeholder="价格" onkeydown="onPriceInputEnter()">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">价格等级</label>
+                    <div class="layui-input-inline">
+                        <select id="level-type" name="level" >
+                                <!--lay-verify="required"-->
+                        <!--&gt;-->
+                            <option value="">请选择价格等级</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="post-pic">上传图片</button>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="activity-pic">
+                            <p id="demoText"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn" lay-submit="" lay-filter="post-activity-info" style="margin-left: 0">设定座位价格</button>
+                    </div>
+                </div>
+            </form>
+            <!--<div class="ticketson-form-item">-->
+                <!--<button class="ticketson-btn" id="submit-button" onclick="postActivityInfo()">设定座位价格</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/common/type-filter.js"></script>
+<script type="text/javascript" src="../../../js/common/level.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/post-activity.js"></script>
+<script type="text/javascript" src="../../../js/common/util/info-manager.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+a,a:hover,select,select:hover {
+    text-decoration: none;
+}
+a:focus,input:focus, select:focus {
+    outline: none;
+}
+
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_s16t15pxs84zpvi.eot');
+    src: url('//at.alicdn.com/t/font_568761_s16t15pxs84zpvi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_s16t15pxs84zpvi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_s16t15pxs84zpvi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_s16t15pxs84zpvi.svg#iconfont') format('svg');
+}
+.icon-font{
+    font-family:"iconfont";
+    font-size:26px;
+    font-style:normal;
+    margin-right: 4px;
+    float: left;
+    color: #969696;
+}
+
+#manager-nav-content {
+    /*border-bottom: 1px solid #f0f0f0;*/
+    height: 56px;
+    /*margin-bottom: 16px;*/
+    padding-left: 100px;
+    padding-right: 100px;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.06);*/
+}
+#logo {
+    color: #ff5a5f;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 8px;
+    float: left;
+}
+.tab,.tab-separate {
+    font-size: 14px;
+    color: #333;
+    margin-left: 60px;
+    float: right;
+    display: inline;
+    height: inherit;
+}
+.tab:hover {
+    /*border-bottom: 2px solid #707070;*/
+}
+.tab-separate {
+    padding-top: 20px;
+    padding-bottom: 14px;
+}
+.tab span{
+    color: #333;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 14px;
+    cursor: pointer;
+}
+.tab span:hover{
+    color: #333;
+}
+
+#tabs .active{
+    color: #ff5a5f;
+}
+#tabs span{
+    float: left;
+}
+
+#header {
+    height: 40px;
+    border-bottom: 2px solid #f6f6f6;
+    background-color: #f6f6f6;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #9f9f9f;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.table-btn {
+    color: #333;
+    cursor: pointer;
+}
+.table-btn:hover {
+    color: #9b9b9b;
+}
+
+.ticketson-btn {
+    width: 100px;
+    text-align: center;
+    height: 26px;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #d4d4d4;
+    background-color: inherit;
+    cursor: pointer;
+    /*border-radius: 5px;*/
+}
+button:focus {
+    outline: none;
+}
+

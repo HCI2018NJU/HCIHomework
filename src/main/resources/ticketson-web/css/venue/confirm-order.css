@@ -1,0 +1,133 @@
+#container {
+    color: #333;
+    font-size: 14px;
+    overflow: auto;
+}
+a {
+    text-decoration: none;
+}
+#logo {
+    color: #ff5a5f;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 8px;
+    float: left;
+    text-decoration: none;
+}
+#below-nav {
+    overflow: auto;
+    margin-top: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.layui-table {
+    margin-top: 0;
+}
+.order-header {
+    height: 40px;
+    border-bottom: 2px solid #f6f6f6;
+}
+.order-header>div {
+    border-bottom: 2px solid #ff5a5f;
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 120px;
+    color: #ff5a5f;
+}
+
+.activity-title {
+    /*height: 40px;*/
+    font-weight: 500;
+    font-size: 14px;
+    color: #666;
+    background-color: #f2f2f2;
+    padding: 20px 10px;
+    height: 60px;
+}
+.ticketson-select {
+    width: 200px;
+    height: 30px;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #f6f6f6;
+}
+.order-content {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    overflow: auto;
+}
+input[type=radio]{
+    margin-right: 4px;
+}
+.pay {
+    display: inline;
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_f136lfn7qgtfyldi.eot');
+    src: url('//at.alicdn.com/t/font_568761_f136lfn7qgtfyldi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_f136lfn7qgtfyldi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_f136lfn7qgtfyldi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_f136lfn7qgtfyldi.svg#iconfont') format('svg');
+}
+.icon {
+    font-family: 'iconfont';
+    font-style: normal;
+}
+#member-icon {
+    font-size: 56px;
+    float: left;
+}
+#email-part {
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+    padding-top: 4px;
+}
+.message-icon {
+    color: #1f9be0;
+}
+#pay-part {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-top: 20px;
+}
+#pay-part>div:first-child {
+    height: 30px;
+    color: #9f9f9f;
+    border-bottom: 1px solid #f6f6f6;
+}
+#pay-part>div:nth-child(2){
+    margin-left: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.info-card {
+    font-size: 10px;
+    color: #9f9f9f;
+    border: 1px solid #f5eabd;
+    padding: 4px;
+}
+.ticketson-btn {
+    background-color: #ff5a5f;
+    color: white;
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+    border: 1px solid #ff5a5f;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.before-discount {
+    text-decoration: line-through;
+    color: #9f9f9f;
+    margin-left: 4px;
+}

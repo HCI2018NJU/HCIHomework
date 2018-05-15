@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketSon-场馆注册</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/form.css" rel="stylesheet">
+    <link href="../../css/common/location-fillter.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="#">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="form-container">
+                <div id="header">
+                    <div>场馆注册</div>
+                    <div id="message">请务必准确填写场馆地址，以便用户找到</div>
+                </div>
+                <div id="icon-wrapper">
+                    <label><i class="icon-font">&#xe61d;</i></label>
+                </div>
+                <div id="account-part">
+                    <input type="text" placeholder="名称">
+                </div>
+                <div id="password-part">
+                    <input type="password" placeholder="密码">
+                </div>
+                <div id="location-part"></div>
+                <div id="specific-location-part">
+                    <input type="text" placeholder="详细地址">
+                </div>
+                <button onclick="register()">编辑平面图</button>
+                <div id="bottom-message">
+                    <a href="/pages/venue/login.html">已经有账号？立即登陆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+    function register() {
+       let name = $("#account-part input").val();
+       let psw = $("#password-part input").val();
+       let location = $("#specific-location-part input").val();
+       if(name===""||psw===""||location===""||
+       present_district_id===null||present_district_id===undefined||present_district_id===""){
+           layer.msg("您有尚未填写的选项");
+           return;
+       }
+        $.post("/api/venue/register",{
+            "name": name,
+            "psw":psw,
+            "provinceCode":present_province_id,
+            "cityCode": present_city_id,
+            "districtCode":present_district_id,
+            "location":location,
+        }).done(function (data) {
+            window.localStorage.setItem("register_v_name",data.name);
+            forward("/pages/venue/layout.html?vid="+data.vid);
+        }).fail(function (data) {
+            layer.msg(data.responseText);
+        });
+    }
+</script>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/common/location-filter.js"></script>
+<script type="text/javascript" src="../../js/common/util/info-manager.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+</body>
+</html>

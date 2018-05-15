@@ -1,0 +1,89 @@
+#below-nav {
+    margin-top: 40px;
+}
+
+#header {
+    height: 40px;
+    border-bottom: 2px solid #f6f6f6;
+    background-color: #f6f6f6;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #9f9f9f;
+}
+.ticketson-select,.ticketson-input {
+    width: 360px;
+    height: 30px;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #d4d4d4;
+    background-color: inherit;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+input:focus {
+    outline: none;
+}
+.ticketson-btn {
+    background-color: #ff5a5f;
+    color: white;
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+    border: 1px solid #ff5a5f;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+#exchange-part {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    border: 1px solid #f6f6f6;
+}
+#order-part {
+    margin-top: 40px;
+    overflow: auto;
+}
+#ticket-part {
+    margin-top: 80px;
+}
+#my-ticketson-nav {
+    height: 40px;
+    border-bottom: 2px solid #ff5a5f;
+}
+#my-ticketson-nav>div {
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    color: #333;
+    display: inline;
+    float: left;
+    background-color: inherit;
+    cursor: pointer;
+}
+#my-ticketson-nav .selected-tab{
+    background-color: #ff5a5f;
+    color: white;
+}
+.layui-table {
+    margin-top: 0;
+}
+.page {
+    float: right;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_pzdcmnhj0qdoyldi.eot');
+    src: url('//at.alicdn.com/t/font_568761_pzdcmnhj0qdoyldi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_pzdcmnhj0qdoyldi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_pzdcmnhj0qdoyldi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_pzdcmnhj0qdoyldi.svg#iconfont') format('svg');
+}
+.icon-font {
+    font-family: 'iconfont';
+    font-style: normal;
+    font-size: 20px;
+}

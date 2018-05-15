@@ -1,0 +1,197 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.row>div {
+    padding: 0;
+}
+#activity-container {
+    margin-left: 100px;
+    margin-right: 100px;
+    /*border: 1px solid #f8f8f8;*/
+    margin-top: 40px;
+    overflow: auto;
+    /*padding: 10px;*/
+    font-size: 14px;
+}
+#activity-info>div {
+    display: inline-block;
+    float: left;
+}
+#activity-pic-wrapper {
+    width: 20%;
+}
+#activity-info-container {
+    width: 55%;
+    margin-right: 5%;
+}
+#activity-info-wrapper {
+    border-bottom: 1px solid #f6f6f6;
+    padding-bottom: 40px;
+}
+#venue-info-wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #f6f6f6;
+}
+#subscribe-wrapper {
+    width: 20%;
+}
+#activity-pic {
+    width: 80%;
+    height: 300px;
+    background-color: #f8f8f8;
+    border: none;
+    /*margin: 10px;*/
+}
+.activity-title {
+    /*height: 40px;*/
+    font-weight: 700;
+    font-size: 20px;
+}
+#activity-description {
+    font-size: 14px;
+    color: #333;
+    text-indent: 28px;
+}
+#progress-bar {
+    height: 100px;
+    background-color: rgba(255, 90, 95, 0.06);
+}
+#progress-bar span {
+    height: 20px;
+    margin-top: 40px;
+    width: 25%;
+    background-color: #ff5a5f;
+}
+.paragraph {
+    margin-bottom: 20px;
+    overflow: auto;
+}
+#period-part,#period-label,#price-label,#price-part {
+    display: inline-block;
+    float: left;
+}
+#period-label,#price-label {
+    width: 10%;
+}
+#period-part,#price-part {
+    width: 90%;
+}
+#period-part label,#price-part label {
+    background-color: #fcfcfc;
+    padding: 4px 10px;
+    border: 1px dotted #d4d4d4;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+    margin-right: 20px;
+    /*margin-bottom: 10px;*/
+    /*display: inline-block;*/
+}
+#period-label label,#price-label label{
+    color: #969696;
+    padding-left: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 14px;
+}
+.ticketson-btn-primary {
+    background-color: #ff5a5f;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 32px;
+    width: 168px;
+    border-radius: 5px;
+}
+.ticketson-btn {
+    background-color: white;
+    border: 1px solid #ff5a5f;
+    color: #ff5a5f;
+    cursor: pointer;
+    height: 32px;
+    width: 168px;
+    border-radius: 5px;
+}
+.ticketson-btn-gray {
+    background-color: white;
+    border: 1px solid #9f9f9f;
+    color: #9f9f9f;
+    cursor: pointer;
+    height: 26px;
+    width: 60px;
+    border-radius: 5px;
+    float: right;
+}
+button:focus {
+    outline: none;
+}
+#subscribe-wrapper {
+    padding: 20px;
+    border: 5px solid #9f9f9f;
+}
+.disappear {
+    display: none !important;
+}
+#subscribe-title {
+    height: 40px;
+    border-bottom: 1px solid #9f9f9f;
+    font-size: 12px;
+}
+#subscribe-title span {
+    font-weight: 700;
+    font-size: 20px;
+
+}
+.subscribe-label {
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+#subscribe-period-part {
+    margin: 20px 0;
+}
+#period-choice {
+    border: 1px solid #d4d4d4;
+    padding: 10px;
+    text-align: center;
+}
+.layui-input {
+    width: inherit;
+    border: 1px solid #d4d4d4;
+}
+
+#venue-city {
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 20px;
+    color: #7a7a7a;
+}
+#venue-location {
+    /*color: #7a7a7a;*/
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_x2twgzbkzibjra4i.eot');
+    src: url('//at.alicdn.com/t/font_568761_x2twgzbkzibjra4i.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_x2twgzbkzibjra4i.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_x2twgzbkzibjra4i.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_x2twgzbkzibjra4i.svg#iconfont') format('svg');
+}
+.icon-font {
+    font-size: 14px;
+    color: #7a7a7a;
+    font-family:"iconfont";
+    font-style: normal;
+}
+.message {
+    color: #7a7a7a;
+    font-size: 12px;
+    width: 100%;
+    font-weight: 300;
+}
+.submit-part {
+    margin-top: 40px;
+    padding-bottom: 10px;
+    /*border-bottom: 1px solid #9f9f9f;*/
+}

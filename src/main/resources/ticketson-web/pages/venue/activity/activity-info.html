@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../lib/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="../../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../../css/venue/activity-info.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/jquery-ui.min.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="member-nav"></div>
+    <div id="activity-container">
+        <div id="activity-info">
+            <div id="activity-pic-wrapper">
+                <img id="activity-pic">
+            </div>
+            <div id="activity-info-container">
+                <div id="activity-info-wrapper">
+                    <div class="paragraph activity-title">
+                        <span id="type">演唱会·流行</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span id="title">[A CLASSIC TOUR 学友·经典]世界巡回演唱会</span>
+                        <span>-</span>
+                        <span id="city">佛山站</span>
+                    </div>
+                    <div class="paragraph" id="activity-description">
+                        根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +
+                        "每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。
+                    </div>
+                    <div class="paragraph" id="progress-bar">
+                        <span><label></label></span>
+                    </div>
+                    <div class="paragraph">
+                        <div id="period-label">
+                            <label>演出时间：</label>
+                        </div>
+                        <div id="period-part">
+                            <!--<label>2018-09-17 09:00:00</label>-->
+                            <!--<label>2018-09-17 09:00:00</label>-->
+                            <!--<label>2018-09-17 09:00:00</label>-->
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <div id="price-label">
+                            <label>选择票价：</label>
+                        </div>
+                        <div id="price-part">
+                            <!--<label>80</label>-->
+                        </div>
+                    </div>
+                    <button class="ticketson-btn-primary" style="margin-left: 10%" onclick="toChooseSeat()">选座购买</button>
+                    <button class="ticketson-btn" style="margin-left: 20px" onclick="showSubscribeCard()">立即预订</button>
+                </div>
+                <div id="venue-info-wrapper">
+                    <div class="paragraph">
+                        <span class="activity-title" id="venue-name">星光剧院</span>
+                        <span id="venue-city">江苏省·南京市·栖霞区</span>
+                    </div>
+                    <div class="paragraph" style="color: #7a7a7a;"><i class="icon-font">&#xe617;</i><span id="venue-location"></span></div>
+                    <!--<div class="paragraph" style="text-indent: 28px" id="venue-description">-->
+                        <!--根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +-->
+                        <!--"每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div id="subscribe-wrapper" class="disappear">
+                <div id="subscribe-title">¥<span>80</span>&nbsp;&nbsp;每张<button class="ticketson-btn-gray" onclick="cancelBuyImmediately()">取消</button></div>
+                <div id="subscribe-period-part">
+                    <div class="subscribe-label">场次</div>
+                    <div id="period-choice">2018-09-17 09:00:00</div>
+                </div>
+                <div id="sum-part" class="layui-form">
+                    <div class="subscribe-label">张数</div>
+                    <div class="layui-form-item">
+                        <div id="subscribe-number-wrapper" class="layui-input-inline" style="width: 100%">
+                            <select id="subscribe-number" name="number"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-part">
+                    <button style="width: 100%" class="ticketson-btn-primary" onclick="immediatePurchase()">立即支付</button>
+                    <div class="message" style="padding-top: 10px;text-align: center">演出开场前两周将会为您配票</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/activity-info.js"></script>
+<script type="text/javascript" src="../../../js/common/util/info-manager.js"></script>
+</body>
+</html>

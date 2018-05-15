@@ -1,0 +1,73 @@
+#container {
+    overflow: auto;
+    font-size: 14px;
+}
+#activity-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.activity-item {
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 46px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.activity-item:hover {
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+    /*border-bottom: none;*/
+}
+.more-info a {
+    color: #459f9a;
+}
+.specific {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    display: none;
+}
+.post-img {
+    width: inherit;
+    height: auto;
+}
+.activity-price label,.activity-period label{
+    background-color: #f6f6f6;
+    border: 1px solid #d2d2d2;
+    padding: 3px 12px;
+    margin-right: 10px;
+    min-width: 120px;
+    text-align: center;
+    height: 26px;
+}
+.label {
+    color: #969696;
+    width: 80px;
+    font-size: 13px;
+}
+.activity-period {
+    margin-top: 18px;
+}
+.activity-price {
+    margin-top: 4px;
+}
+.activity-period,.activity-price {
+    font-size: 12px;
+    display: inline-block;
+    color: #707070;
+}
+.activity-description {
+    text-indent: 30px;
+    border: 1px solid #f0f0f0;
+    padding: 6px;
+    font-size: 14px;
+    /*margin-right: 6px;*/
+    color: #707070;
+}
+#buy-ticket {
+    background-color: #ff5a5f;
+    color: white;
+    border: 1px solid #ff5a5f;
+    width: 120px;
+    /*border-radius: 20px;*/
+    margin-top: 10px;
+    font-size: 14px;
+    height: 32px;
+}

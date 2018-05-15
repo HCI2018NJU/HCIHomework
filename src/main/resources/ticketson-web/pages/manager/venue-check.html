@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-场馆审核</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
+    <link href="../../css/manager/manager-nav.css" rel="stylesheet">
+    <link href="../../css/member/my-ticketson.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="manager-nav"></div>
+    <div id="below-nav">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div id="header">TicketsOn中心&nbsp;>&nbsp;场馆审核</div>
+                <div id="my-ticketson-nav">
+                    <div tab="register" class="selected-tab">注册审核</div>
+                    <div tab="modify" onclick="toModifyCheck()">修改审核</div>
+                </div>
+                <table id="venue-check" class="layui-table">
+                    <thead>
+                    <tr>
+                        <td>注册码</td>
+                        <td>名称</td>
+                        <td>地址</td>
+                        <td>座位总数</td>
+                        <td>注册时间</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div style="float: right" class="page" id="venue-check-page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/manager/manager-nav.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../js/manager/venue-check.js"></script>
+</html>

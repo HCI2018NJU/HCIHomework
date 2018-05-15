@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TickesOn-选择座位</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="../../../css/venue/activity-layout.css">
+    <link rel="stylesheet" href="../../../css/venue/choose-seat.css">
+    <link href="../../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../../css/venue/venue-nav.css" rel="stylesheet">
+    <script src="../../../lib/fabric.js"></script>
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/custom-fabric.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="member-nav" style="overflow: auto"></div>
+    <div id="venue-nav"></div>
+    <div id="below-nav">
+        <div id="canvases" style="text-align: center">
+            <div id="venue-header"></div>
+            <div id="gs-header">
+                <button class='ticketson-select' style='float: left;margin-top: 5px;cursor: pointer' onclick="changeCanvasPointer(0)">选择区域</button>
+                <img src="../../../resources/shapes/stage.svg" style="width: 40px;height: 40px">
+            </div>
+        </div>
+        <div id="right-nav">
+            <div id="ticket-header">
+                已选【<span id="total-seats">0</span>】
+            </div>
+            <div id="ticket-part"></div>
+            <div style="text-align: center;padding: 10px;vertical-align: middle">
+                <button id="orderTicktets" class="ticketson-btn" onclick="submitOrder()">结账¥<span id="total-price">0</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../../js/venue/venue-nav.js"></script>
+<script type="text/javascript" src="../../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../../js/common/level.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/choose-seat.js"></script>
+</body>
+</html>

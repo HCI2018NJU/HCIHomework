@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动订单</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <link href="../../../css/venue/activity.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/member/my-ticketson.css">
+    <link href="../../../css/venue/venue-nav.css" rel="stylesheet">
+    <link href="../../../css/venue/activity-left-nav.css" rel="stylesheet">
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="venue-nav"></div>
+    <div id="below-nav">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-9 center-content">
+                <div id="header">TicketsOn&nbsp;>&nbsp;订单管理&nbsp;>&nbsp;
+                    <select id="period-select" onchange="toSelectedOrders()"></select>
+                </div>
+                <div id="exchange-part">
+                    <div>
+                        <input id="orderid-input" class='ticketson-input' placeholder="订单编号">
+                        <button class="ticketson-btn">查询</button>
+                    </div>
+                </div>
+                <div id="subscribed">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>订单编号</th>
+                            <th>商品名称</th>
+                            <th>票价</th>
+                            <th>数量</th>
+                            <th>折扣</th>
+                            <th>订单金额</th>
+                            <th>订单状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="page" id="subscribed-page"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/venue/venue-nav.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/activity-order.js"></script>
+</body>
+</html>

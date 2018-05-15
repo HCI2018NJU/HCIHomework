@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>设置座位信息</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/venue/layout.less" rel="stylesheet/less" type="text/css" />
+    <script src="../../lib/fabric.js"></script>
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/less.min.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/custom-fabric.js"></script>
+    <script src="../../lib/jscolor.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="navigation" id="header">
+        <div id="top-nav">
+            <div id="title-wrapper">
+                <span id="title"></span>
+            </div>
+        </div>
+        <div id="toolbar">
+            <label id="default-operations">
+                <img id="line-pen" src="../../resources/icons/linepencil.svg" onclick="switchToLine()" />
+                <img id="text-pen" src="../../resources/icons/text.svg" onclick="addText()"/>
+                <img id="select-icon" src="../../resources/icons/select.svg" onclick="switchToSelectRect()" />
+                <img id="add-seat-icon" src="../../resources/icons/seat.svg" onclick="addSeats()"/>
+                <img src="../../resources/icons/delete.svg" onclick="deleteObject()"/>
+                <img src="../../resources/icons/clear.svg" onclick="clearCanvas()"/>
+            </label>
+            <label id="shape-icons">
+                <label class="separate">|</label>
+                <img src="../../resources/shapes/oval.svg" onclick="switchToEllipse()"/>
+                <img src="../../resources/shapes/rect.svg" onclick="switchToRect()"/>
+                <img src="../../resources/shapes/triangle.svg" onclick="switchToTriangle()" />
+                <img src="../../resources/shapes/polygon5.svg" onclick="switchToPoly()" />
+            </label>
+            <label id="text-settings">
+                <label class="separate">|</label>
+                <select id="fontFamily" style="margin-bottom: 4px">
+                    <option value="arial black">arial black</option>
+                    <option value="helvetica">helvetica</option>
+                    <option value="myriad pro">myriad pro</option>
+                    <option value="delicious">delicious</option>
+                    <option value="verdana">verdana</option>
+                    <option value="georgia">georgia</option>
+                    <option value="courier">courier</option>
+                    <option value="comic sans ms">comic sans ms</option>
+                    <option value="impact">impact</option>
+                    <option value="monaco">monaco</option>
+                    <option value="optima">optima</option>
+                    <option value="hoefler text">hoefler text</option>
+                    <option value="plaster">plaster</option>
+                    <option value="engagement">engagement</option>
+                </select>
+                <input type="number" id="fontSize" placeholder="字号">
+                <input class="jscolor" id="text-fill">
+                <select id="textAlign">
+                    <option value="left">左对齐</option>
+                    <option value="right">右对齐</option>
+                    <option value="center">居中对齐</option>
+                </select>
+            </label>
+            <button id="submit" onclick="submitVenue()">提交</button>
+            <button id="save" onclick="saveVenue()">保存</button>
+        </div>
+    </div>
+    <div id="below-header">
+        <div id="left-nav-wrapper">
+            <div class="navigation" id="left-nav">
+                <button class="collapse-menu" id="venue-menu" onclick="showVenue()">场馆平面图</button>
+                <div id="floors"></div>
+            </div>
+        </div>
+        <div id="canvases">
+
+        </div>
+        <div id="right-nav-wrapper">
+            <div class="navigation" id="right-nav">
+                <div id="inspector">
+                    <button class="collapse-menu">基本设置</button>
+                    <div id="tool-options">
+                        <div id="grand-size">
+                            <label id="position">
+                                <label>位置：</label>
+                                <input id="shape-left-number" class="normal-input" type="number" >
+                                <input id="shape-top-number" class="normal-input" type="number" >
+                            </label>
+                            <label>
+                                <label></label>
+                                <label class="input-name">x</label>
+                                <label class="input-name">y</label>
+                            </label>
+                            <label id="size">
+                                <label>大小：</label>
+                                <input id="shape-width-number" class="normal-input" type="number">
+                                <input id="shape-height-number" class="normal-input" type="number">
+                            </label>
+                            <label>
+                                <label></label>
+                                <label class="input-name">宽</label>
+                                <label class="input-name">高</label>
+                            </label>
+                        </div>
+                        <div id="line-size">
+                            <label id="dot1">
+                                <label>起点：</label>
+                                <input id="shape-x1-number" class="normal-input" type="number" >
+                                <input id="shape-y1-number" class="normal-input" type="number" >
+                            </label>
+                            <label>
+                                <label></label>
+                                <label class="input-name">x1</label>
+                                <label class="input-name">y1</label>
+                            </label>
+                            <label id="dot2">
+                                <label>终点：</label>
+                                <input id="shape-x2-number" class="normal-input" type="number">
+                                <input id="shape-y2-number" class="normal-input" type="number">
+                            </label>
+                            <label>
+                                <label></label>
+                                <label class="input-name">x2</label>
+                                <label class="input-name">y2</label>
+                            </label>
+                        </div>
+                        <label id="scale">
+                            <label>放缩：</label>
+                            <input id="shape-scaleX-range" class="normal-input" type="range" min="0.1" max="3" step="0.01">
+                            <input id="shape-scaleX-number" class="normal-input" type="number">
+                        </label>
+                        <label id="skewX">
+                            <label>倾斜(x)</label>
+                            <input id="shape-skewX-range" class="normal-input" type="range" min="0" max="80" step="1">
+                            <input id="shape-skewX-number" class="normal-input" type="number">
+                        </label>
+                        <label id="skewY">
+                            <label>倾斜(y)</label>
+                            <input id="shape-skewY-range" class="normal-input" type="range" min="0" max="80" step="1">
+                            <input id="shape-skewY-number" class="normal-input" type="number">
+                        </label>
+                        <label id="rotate">
+                            <label>旋转：</label>
+                            <input id="shape-angle-range" class="normal-input" type="range" min="0" max="360" step="1">
+                            <input id="shape-angle-number" class="normal-input" type="number">
+                        </label>
+                        <label id="flip">
+                            <label>翻转：</label>
+                            <img id="shape-flipX" src="../../resources/icons/hflip.svg">
+                            <img id="shape-flipY" src="../../resources/icons/vflip.svg">
+                        </label>
+                        <label id="border">
+                            <label>边框：</label>
+                            <input id="shape-strokeWidth-range" class="normal-input" type="range" min="1" max="10" step="0.1">
+                            <input id="shape-strokeWidth-number" class="normal-input" type="number">
+                        </label>
+                        <label id="opacity">
+                            <label>透明度：</label>
+                            <input id="shape-opacity-range" class="normal-input" type="range" min="0.1" max="1" step="0.1">
+                            <input id="shape-opacity-number" class="normal-input" type="number">
+                        </label>
+                        <div id="color">
+                            <label>颜色：</label>
+                            <input id="shape-fill-color" class="normal-input jscolor">
+                            <input id="shape-stroke-color" class="normal-input jscolor">
+                        </div>
+                        <div id="color-label">
+                            <label></label>
+                            <label class="input-name">填充</label>
+                            <label class="input-name">边框</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="create-grandstand">
+                    <button class="collapse-menu">看台</button>
+                    <div id="grand-infos">
+                        <div id="floor-info">
+                            <label class="label">楼层：</label>
+                            <label id="floor-value">一层</label>
+                        </div>
+                        <div id="grandstand-info">
+                            <label class="label">名称：</label>
+                            <label id="grandstand-value">中央大厅</label>
+                        </div>
+                    </div>
+                    <div id="grand-options">
+                        <div id="floor-option">
+                            <label>楼层：</label>
+                            <select id="floor-select"></select>
+                            <input class="normal-input" id="floor-input" onkeypress="onAddFloorEnter()" onblur="finishAddFloor()">
+                            <span id="add-floor" onclick="addFloor()">+</span>
+                        </div>
+                        <div id="grandstand-option">
+                            <label>名称：</label>
+                            <input class="normal-input" id="grandstand-input">
+                        </div>
+                        <button onclick="saveGrandstand()">保存看台信息</button>
+                        <button onclick="createNewGrandstand()">编辑看台平面图</button>
+                        <button onclick="hideGrandOptions()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script src="../../js/venue/layout/variables.js"></script>
+<script src="../../js/venue/layout/shape-factory.js"></script>
+<script src="../../js/venue/layout/operation-setting.js"></script>
+<script src="../../js/venue/layout/operation-left-nav.js"></script>
+<script src="../../js/venue/layout/operation-grandstand.js"></script>
+<script src="../../js/venue/layout/operation-toolbar.js"></script>
+<script src="../../js/venue/layout/operation-canvas.js"></script>
+<script src="../../js/common/href-helper.js"></script>
+</html>

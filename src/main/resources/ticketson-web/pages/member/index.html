@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-专属你的票务网站</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
+    <link href="../../lib/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../css/member/index.css" rel="stylesheet">
+    <link href="../../css/common/location-fillter.css" rel="stylesheet">
+    <link href="../../css/common/type-filter.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/jquery-ui.min.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container" style="font-size: 14px">
+    <div id="member-nav"></div>
+    <div id="below-nav">
+        <div id="filter-wrapper" style="display: none">
+            <div class="row">
+                <div class="col-2">
+                    <div id="type-part"></div>
+                </div>
+                <div class="col-6">
+                    <div id="location-part"></div>
+                </div>
+                <div class="col-4">
+                    <div id="period-part">
+                        <div id="period-wrapper">
+                            <div id="period-container">
+                                <input id="period-input" placeholder="时间">
+                                <button id='search-button'>搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+        <div class="row" id="activity-container"></div>
+        <div id="activity-page" class="page"></div>
+    </div>
+</div>
+<script>
+    let layer;
+    $(function() {
+        layui.use(['form', 'laydate','layer'], function() {
+            let laydate = layui.laydate;
+            layer = layui.layer;
+            laydate.render({
+                elem: '#period-input',
+                type: 'datetime',
+                range: true,
+                calendar: true,
+                theme: '#49bab5'
+            });
+        });
+    });
+</script>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../js/common/type-filter.js"></script>
+<script type="text/javascript" src="../../js/common/location-filter.js"></script>
+<script type="text/javascript" src="../../js/member/index.js"></script>
+</body>
+</html>

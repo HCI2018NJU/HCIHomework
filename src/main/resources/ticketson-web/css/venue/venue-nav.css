@@ -1,0 +1,151 @@
+a,a:hover {
+    text-decoration: none;
+}
+a:focus {
+    outline: none;
+}
+
+li {
+    list-style-type: none;
+}
+ul {
+    padding-left: 0;
+}
+button,button:focus {
+    outline: none;
+    cursor: pointer;
+    height: 30px;
+}
+#venue-nav-content {
+    border-bottom: 1px solid #f0f0f0;
+    height: 56px;
+    margin-bottom: 16px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+#logo {
+    color: #ff5a5f;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 8px;
+    float: left;
+}
+.tab {
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+    width: 100px;
+}
+.tab:hover {
+    color: #ff5a5f;
+    border-bottom: none !important;
+}
+.tab-left .active{
+    color: #ff5a5f;
+}
+.tab-left a{
+    float: left;
+}
+.tab-right a{
+    float: right;
+}
+
+@font-face {
+    font-family: 'iconfont';  /* project id 568748 */
+    src: url('//at.alicdn.com/t/font_568748_3k8e26mpc4bo6r.eot');
+    src: url('//at.alicdn.com/t/font_568748_3k8e26mpc4bo6r.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568748_3k8e26mpc4bo6r.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568748_3k8e26mpc4bo6r.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568748_3k8e26mpc4bo6r.svg#iconfont') format('svg');
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568752 */
+    src: url('//at.alicdn.com/t/font_568752_28djct9p90wqxgvi.eot');
+    src: url('//at.alicdn.com/t/font_568752_28djct9p90wqxgvi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568752_28djct9p90wqxgvi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568752_28djct9p90wqxgvi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568752_28djct9p90wqxgvi.svg#iconfont') format('svg');
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568754 */
+    src: url('//at.alicdn.com/t/font_568754_l9murr3k402akyb9.eot');
+    src: url('//at.alicdn.com/t/font_568754_l9murr3k402akyb9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568754_l9murr3k402akyb9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568754_l9murr3k402akyb9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568754_l9murr3k402akyb9.svg#iconfont') format('svg');
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568758 */
+    src: url('//at.alicdn.com/t/font_568758_z6s0xfk6z91nstt9.eot');
+    src: url('//at.alicdn.com/t/font_568758_z6s0xfk6z91nstt9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568758_z6s0xfk6z91nstt9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568758_z6s0xfk6z91nstt9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568758_z6s0xfk6z91nstt9.svg#iconfont') format('svg');
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_iix7pxhj7d1s8aor.eot');
+    src: url('//at.alicdn.com/t/font_568761_iix7pxhj7d1s8aor.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_iix7pxhj7d1s8aor.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_iix7pxhj7d1s8aor.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_iix7pxhj7d1s8aor.svg#iconfont') format('svg');
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_3ud6giiebaitfbt9.eot');
+    src: url('//at.alicdn.com/t/font_568761_3ud6giiebaitfbt9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_3ud6giiebaitfbt9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_3ud6giiebaitfbt9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_3ud6giiebaitfbt9.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont";
+    font-size:14px;
+    font-style:normal;
+    margin-right: 4px;
+}
+#logout {
+    color: #969696;
+    width: 100px;
+    text-align: center;
+}
+#check-ticket,#post-activity {
+    width: 80px;
+    border: 1px solid #ff5a5f;
+}
+#check-ticket {
+    color: #ff5a5f;
+    background-color: white;
+    float: right;
+}
+#post-activity {
+    color: white;
+    background-color: #ff5a5f;
+    border-radius: 20px;
+}
+.center-content {
+    padding-left: 60px;
+    /*padding-right: 60px;*/
+}
+#below-nav {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+input:focus {
+    outline: none;
+}
+#ticket-input {
+    width: 60%;
+    height: 30px;
+    /*border-radius: 5px;*/
+    border-left: 1px solid #c3c3c3;
+    border-top: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+    border-right: none;
+    padding: 2px 24px;
+    font-size: 14px;
+    float: right;
+}
+.input-tab {
+    margin-top: 14px;
+}

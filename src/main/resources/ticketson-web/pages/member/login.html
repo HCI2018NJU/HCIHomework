@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketSon-会员登陆</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/form.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="index.html">TicketsOn</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="form-container">
+                <div id="header">
+                    <div>会员登陆</div>
+                    <div id="message">欢迎回到ticketson，登陆看看最近上新了哪些活动吧</div>
+                </div>
+                <div id="icon-wrapper">
+                    <label><i class="icon-font">&#xe622;</i></label>
+                </div>
+                <div id="account-part">
+                    <input id="email" type="email" placeholder="邮箱">
+                </div>
+                <div id="password-part">
+                    <input id="psw" type="password" placeholder="密码">
+                </div>
+                <button onclick="login()">登陆</button>
+                <div id="bottom-message">
+                    <a href="./register.html">没有账号？立即注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+   function login() {
+       let email = $("#email").val();
+       let psw = $("#psw").val();
+       $.post("/api/member/login",{
+           "email":email,
+           "psw":psw
+       }).done(function (data) {
+           //设置会员信息
+           window.localStorage.setItem("member",JSON.stringify(data));
+           if(data.cityCode===0){
+               forward("/pages/member/perfect-info.html");
+           }else {
+               forward("/pages/member/index.html");
+           }
+       }).fail(function (data) {
+           layer.msg(data.responseText);
+       });
+   }
+</script>
+<script type="text/javascript" src="../../js/common/util/info-manager.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+/*choose-seat*/
+#right-nav {
+    width: 20%;
+    border: 1px solid #e6e6e6;
+    height: 820px;
+}
+#ticket-header {
+    text-align: center;
+    border-bottom: 1px solid #f6f6f6;
+    height: 30px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.ticket-item {
+    height: 120px;
+    border-bottom: 1px solid #f6f6f6;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: auto;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_det61vq8efnoecdi.eot');
+    src: url('//at.alicdn.com/t/font_568761_det61vq8efnoecdi.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_det61vq8efnoecdi.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_det61vq8efnoecdi.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_det61vq8efnoecdi.svg#iconfont') format('svg');
+}
+.seat-wrapper,.seat-info {
+    display: inline-block;
+    float: left;
+}
+.seat-info {
+    margin-left: 30px;
+    /*margin-top: 10px;*/
+}
+.seat-info>div {
+    height: 30px;
+    font-size: 14px;
+    width: 100%;
+}
+.seat {
+    font-family: "iconfont";
+    font-style: normal;
+    font-size: 32px;
+}
+.seat-price {
+    width: inherit;
+    text-align: center;
+}
+.delete {
+    font-family: "iconfont";
+    font-style: normal;
+    font-size: 16px;
+    float: right;
+    cursor: pointer;
+    margin-top: 3px;
+}
+#orderTicktets {
+    width: 100%;
+    height: 40px;
+    opacity: 0.2;
+    cursor: not-allowed;
+}

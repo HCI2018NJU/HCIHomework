@@ -1,0 +1,117 @@
+#container {
+    padding-left: 100px;
+    padding-right: 100px;
+    color: #333;
+    font-size: 14px;
+}
+#logo {
+    color: #ff5a5f;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 8px;
+    float: left;
+}
+button{
+    font-size: 14px;
+}
+button:focus,input:focus {
+    outline: none;
+}
+label {
+    vertical-align: middle;
+}
+.period-label {
+    width: 300px;
+    text-align: center;
+    padding-top: 10px;
+}
+.level-item {
+    display: inline-block;
+    float: left;
+    width: 300px;
+}
+.level-label,.color-label,.price-input {
+    width: 100px;
+    padding-left: 15px;
+    float: left;
+    height: 38px;
+    color: #555;
+}
+.level-label {
+    background-color: #fbfbfb;
+    padding-top: 10px;
+    border: 1px solid #e6e6e6;
+    margin-bottom: 0 !important;
+}
+.color-label {
+    background-color: #ff0000;
+    padding-top: 10px;
+    border: none;
+    margin-bottom: 0!important;
+}
+.price-input {
+    border: 1px solid #e6e6e6;
+}
+.ticketson-btn-primary,.period-label {
+    border: 1px solid #e6e6e6;
+    float: left;
+    background-color: white;
+    height: 38px;
+    width: 300px;
+    color: #555;
+    cursor: pointer;
+}
+.ticketson-btn-primary {
+    display: block;
+    border-radius: 2px;
+}
+.ticketson-btn {
+    height: 38px;
+    width: 110px;
+    background-color: #009688;
+    color: white;
+    border: none;
+    font-size: 14px;
+    border-radius: 2px;
+    display: block;
+    cursor: pointer;
+}
+.ticketson-btn-primary:hover {
+    border: 1px solid #D2D2D2;
+    /*background-color: white;*/
+    /*color: #555;*/
+}
+.long-layui-input {
+    width: 300px;
+    /*display: inline;*/
+    border-radius: 2px;
+    display: inline-block;
+    height: 38px;
+    border: 1px solid #e6e6e6;
+    padding-left: 10px;
+}
+
+.period-label,.level-item {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+#period-create,#level-create,#level-item-input {
+    margin-bottom: 20px;
+}
+
+
+#post-pic {
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    color: #555;
+}
+#post-pic:hover {
+    border: 1px solid #d2d2d2;
+}
+#activity-pic {
+    /*height: 300px;*/
+    /*width: auto;*/
+    height: 200px;
+    width: auto;
+    display: none;
+}

@@ -1,0 +1,64 @@
+#container {
+    color: #333;
+    font-size: 14px;
+    overflow: auto;
+}
+a {
+    text-decoration: none;
+}
+#logo {
+    color: #ff5a5f;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 8px;
+    float: left;
+    text-decoration: none;
+}
+#below-nav {
+    padding-left: 100px;
+    padding-right: 100px;
+    overflow: auto;
+    margin-top: 40px;
+}
+#below-nav>div {
+    display: inline-block;
+    float: left;
+}
+#canvases {
+    /*padding-left: 40px;*/
+    /*padding-top: 40px;*/
+    padding: 20px;
+    background-color: #f6f6f6;
+    width: 80%;
+    /*margin-left: 10%;*/
+    height: 820px;
+    overflow: auto;
+}
+#venue-header,#gs-header {
+    text-align: center;
+    padding: 10px;
+    height: 60px;
+    font-size: 20px;
+    background-color: white;
+    border-bottom: 1px solid #f6f6f6;
+}
+button:focus, select:focus {
+    outline: none;
+}
+.ticketson-btn {
+    background-color: #ff5a5f;
+    color: white;
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    border: 1px solid #ff5a5f;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.ticketson-select {
+    width: 80px;
+    height: 30px;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #f6f6f6;
+}

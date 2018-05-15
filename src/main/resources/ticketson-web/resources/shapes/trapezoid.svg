@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="284px" height="206px" viewBox="0 0 284 206" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="70 0.17578125 208.621094 0.17578125 244.433594 103.0625 283.285156 205.949219 0.79296875 205.949219"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle">
+            <use fill="#9B9B9B" fill-rule="evenodd" xlink:href="#path-1"></use>
+            <path stroke="#9B9B9B" stroke-width="1" d="M70.3593582,0.67578125 L1.48865336,205.449219 L282.561889,205.449219 L243.961382,103.226866 L208.265709,0.67578125 L70.3593582,0.67578125 Z"></path>
+        </g>
+    </g>
+</svg>

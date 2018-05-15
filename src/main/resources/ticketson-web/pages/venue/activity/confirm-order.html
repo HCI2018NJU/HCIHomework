@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-确认订单信息</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <link href="../../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../../css/venue/confirm-order.css" rel="stylesheet">
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container" style="display: none">
+    <div id="member-nav"></div>
+    <div id="below-nav">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="paragraph activity-title">
+                    <span id="city"></span>
+                    <span>></span>
+                    <span id="venue-name"></span>
+                    <span>></span>
+                    <span id="type"></span>
+                    <span>></span>
+                    <span id="title"></span>
+                    <span>></span>
+                    <span id="time"></span>
+                </div>
+                <div class="order-header">
+                    <div>商品清单</div>
+                </div>
+                <div class="order-content" style="width: 100%;padding-left: 0">
+                    <table style="width:inherit;" id="goods-list" class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>商品名称</th>
+                            <th>座位号</th>
+                            <th>楼层</th>
+                            <th>看台</th>
+                            <th>价格</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <table style="width: inherit" id="immediate-goods-list" class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>商品名称</th>
+                            <th>场次</th>
+                            <th>等级</th>
+                            <th>价格</th>
+                            <th>数量</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div style="float: right">
+                        <label class="info-card">
+                            <i class="icon message-icon">&#xe628;</i>
+                            <span><strong>温馨提示：</strong>请仔细核对订单信息</span>
+                        </label>
+                        合计：¥<span class="total-price"></span>
+                    </div>
+                </div>
+                <div class="order-header">
+                    <div>选择优惠券</div>
+                </div>
+                <div class="order-content">
+                    <select id="coupon-select" class='ticketson-select' onchange="changeCoupon()"></select>
+                    <a href="#" style="color: #05757a">[ticketson优惠方案]</a>
+                </div>
+                <div class="order-header">
+                    <div>选择支付方式</div>
+                </div>
+                <div class="order-content">
+                    <div class="pay"><input type="radio" value="支付宝" name="pay" checked>支付宝</div>
+                    <div class="pay"><input type="radio" value="微信支付" name="pay">微信支付</div>
+                    <div class="pay"><input type="radio" value="网上银行" name="pay">网上银行</div>
+                </div>
+                <div class="order-header">
+                    <div>购票</div>
+                </div>
+                <div class="order-content">
+                    <div style="overflow: auto">
+                        <i id="member-icon" class="icon">&#xe622;</i>
+                        <div id="email-part">
+                            <div>
+                                <label>邮箱：</label>
+                                <label id="email"></label>
+                            </div>
+                            <div>
+                                <label class="info-card">
+                                    <i class="icon message-icon">&#xe628;</i>
+                                    <span><strong>温馨提示：</strong>请核对账号信息</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pay-part">
+                        <div>电子票支付</div>
+                        <div>
+                            <div>
+                                <label>账号：</label>
+                                <input type="text" id="bid">
+                            </div>
+                            <div>
+                                <label>密码：</label>
+                                <input type="password" id="bankPsw">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="info-card">
+                                <i class="icon message-icon">&#xe628;</i>
+                                <span>请在15分钟内完成支付，否则订单将会自动取消</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr style="background-color: #f6f6f6;height: 2px">
+                <div class="order-content">
+                    <div style="overflow: auto;font-size: 12px;color: #9f9f9f">
+                        <div style="float: right"><input type="checkbox">我已阅读并同意<a href="#" style="color: #05757a">《退订条款》</a></div>
+                    </div>
+                    <div style="overflow: auto;font-size: 16px;margin-top: 4px;">
+                        <div style="float: right">待支付总额：
+                            <span style="color: #ff5a5f">¥</span>
+                            <span id="after-discount" style="color: #ff5a5f"></span>
+                            <span class="before-discount">¥</span>
+                            <span class="before-discount total-price"></span></div>
+                    </div>
+                    <div style="overflow: auto">
+                        <div id="member-discount" style="float: right;color: #9f9f9f"></div>
+                    </div>
+                    <div style="overflow: auto">
+                        <div style="float: right">
+                            <button class="ticketson-btn" style="margin-top: 4px" onclick="pay()">确认支付</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/confirm-order.js"></script>
+</html>

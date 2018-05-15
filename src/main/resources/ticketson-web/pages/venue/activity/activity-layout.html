@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../lib/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="../../../css/venue/activity-layout.css">
+    <script src="../../../lib/fabric.js"></script>
+    <script src="../../../lib/jquery-3.3.1.js"></script>
+    <script src="../../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../../lib/custom-fabric.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+
+</head>
+<body>
+<div id="container">
+    <div class="row">
+        <div class="col-1">
+            <a id="logo" href="../../member/index.html">TicketsOn</a>
+        </div>
+        <div class="col-10"></div>
+        <div class="col-1" style="margin-top: 20px">
+            <button type="button" class="ticketson-btn" onclick="submitLayouts()">提交</button>
+        </div>
+    </div>
+    <div id="below-nav">
+        <div id="canvases" style="text-align: center;margin-left: 10%">
+            <div id="venue-header"></div>
+            <div id="gs-header">
+                <button class='ticketson-select' style='float: left;margin-top: 5px;cursor: pointer' onclick="changeCanvasPointer(0)">选择区域</button>
+                <img src="../../../resources/shapes/stage.svg" style="width: 40px;height: 40px">
+                <select id="level-select" class='ticketson-select' style='float: right;margin-top: 5px' onchange="changePrice()"></select>
+            </div>
+            <!--<canvas id="venue"></canvas>-->
+        </div>
+    </div>
+</div>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+</script>
+<script type="text/javascript" src="../../../js/common/level.js"></script>
+<script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/common/result-helper.js"></script>
+<script type="text/javascript" src="../../../js/venue/activity/activity-layout.js"></script>
+</body>
+</html>

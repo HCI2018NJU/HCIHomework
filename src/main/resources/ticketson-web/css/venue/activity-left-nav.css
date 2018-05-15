@@ -1,0 +1,24 @@
+#activity-left-nav-content {
+    width: inherit;
+    margin-top: 30px;
+}
+.tab {
+    color: #333;
+}
+.tab:hover{
+    color: #ff5a5f;
+}
+.activity-type {
+    height: 34px;
+    font-size: 14px;
+    padding-right: 20px;
+}
+#activity-left-nav-content span {
+    display: none;
+}
+#activity-left-nav-content .active {
+    color: #ff5a5f;
+}
+#activity-left-nav-content .active span {
+    display: inline;
+}
