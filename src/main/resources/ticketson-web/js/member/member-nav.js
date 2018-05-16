@@ -101,7 +101,7 @@ function toLogin() {
 }
 
 function toVenue() {
-    window.localStorage.removeItem("member");
+    // window.localStorage.removeItem("member");
     forward("/pages/venue/login.html");
 }
 
