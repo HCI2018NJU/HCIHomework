@@ -127,6 +127,7 @@ function cancelBuyImmediately() {
 //显示立即购买卡片
 function showSubscribeCard() {
     $("#subscribe-wrapper").removeClass("disappear");
+    $("#subscribe-wrapper").addClass("dialog");
 
     if(selected_period===null||selected_period===""||selected_price===null||selected_price===""||selected_period===undefined||selected_price===undefined){
         layer.msg("请选择场次和价格");
