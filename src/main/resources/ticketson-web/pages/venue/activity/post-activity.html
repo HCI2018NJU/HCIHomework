@@ -24,14 +24,14 @@
                 <legend>发布计划</legend>
             </fieldset>
             <form class="layui-form layui-form-pane" action="">
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 10px">
                     <label class="layui-form-label">活动名称</label>
                     <div class="layui-input-block">
                         <input type="text" name="name" autocomplete="off" placeholder="请输入名称" class="layui-input">
                                <!--lay-verify="required">-->
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 10px">
                     <label class="layui-form-label">活动类型</label>
                     <div class="layui-input-inline">
                         <select id="activity-type" name="type" >
@@ -41,27 +41,27 @@
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">活动描述</label>
+                <div class="layui-form-item layui-form-text" style="margin-bottom: 20px">
+                    <!--<label class="layui-form-label">活动描述</label>-->
                     <div class="layui-input-block">
-                        <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="description" placeholder="活动描述在此输入..." class="layui-textarea"></textarea>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 0px">
                     <div id="period-part" style="display: inline-block;float: left"></div>
-                    <button type="button" class="ticketson-btn-primary" id="period-create" onclick="showPeriodInput()">新建场次</button>
-                    <input class="long-layui-input" id="period-input" type="datetime" style="display: none;" autofocus="autofocus">
+                    <button type="button" class="ticketson-btn-primary" id="period-create" onclick="showPeriodInput()">添加场次</button>
+                    <input class="long-layui-input" id="period-input" type="datetime" style="display: none;margin-bottom: 20px" autofocus="autofocus">
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 0px">
                     <div id="price-part"></div>
-                    <button type="button" class="ticketson-btn-primary" id="level-create" onclick="showPriceInput()">新建价格</button>
-                    <div id="level-item-input" style="display: none">
+                    <button type="button" class="ticketson-btn-primary" id="level-create" onclick="showPriceInput()">添加价格</button>
+                    <div id="level-item-input" style="display: none;margin-bottom: 20px">
                         <label class="level-label">1级</label>
                         <label class="color-label"></label>
                         <input type="text" class="price-input" id="price-input" placeholder="价格" onkeydown="onPriceInputEnter()">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 10px">
                     <label class="layui-form-label">价格等级</label>
                     <div class="layui-input-inline">
                         <select id="level-type" name="level" >
@@ -71,20 +71,23 @@
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+
+                <div class="layui-form-item" style="margin-bottom: 20px">
                     <div class="layui-upload">
-                        <button type="button" class="layui-btn" id="post-pic">上传图片</button>
+                        <button type="button" class="layui-btn" id="post-pic">上传活动海报</button>
                         <div class="layui-upload-list">
                             <img class="layui-upload-img" id="activity-pic">
                             <p id="demoText"></p>
                         </div>
                     </div>
                 </div>
+
                 <div class="layui-form-item">
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="margin-left: 0px">
                         <button type="button" class="layui-btn" lay-submit="" lay-filter="post-activity-info" style="margin-left: 0">设定座位价格</button>
                     </div>
                 </div>
+
             </form>
             <!--<div class="ticketson-form-item">-->
                 <!--<button class="ticketson-btn" id="submit-button" onclick="postActivityInfo()">设定座位价格</button>-->
