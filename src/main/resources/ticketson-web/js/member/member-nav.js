@@ -10,18 +10,37 @@ if(member_city === "市辖区"){
     member_city = city_object[member["cityCode"]].province;
 }
 
-
-let member_nav =
+let member_nav_visitor =
     "<nav class='row' id='member-nav-content'>" +
         "<div class='col-1'>" +
             "<a id='logo' href='/pages/member/index.html'>TicketsOn</a>" +
         "</div>" +
         "<div class='col-6'>" +
-            // "<input id='search-activity' placeholder='尝试搜索喜剧'>"+
+            "<input id='search-activity' placeholder='尝试搜索喜剧'>"+
         "</div>"+
         "<div id='tabs' class='col-5'>" +
-            "<div class='member-tab'><span onclick='toVenue()'>场馆入口</span></div>" +
-            "<div class='member-tab-separate'>|</div>"+
+    // "<div class='member-tab'><span onclick='toVenue()'>场馆入口</span></div>" +
+    // "<div class='member-tab-separate'>|</div>"+
+            "<div class='member-tab'>" +
+                "<span onclick='toRegister()'>注册</span>" +
+            "</div>"+
+            "<div class='member-tab'>" +
+                "<span onclick='toLogin()'>登陆</span>" +
+            "</div>"+
+        "</div>" +
+    "</nav>";
+
+    let member_nav =
+    "<nav class='row' id='member-nav-content'>" +
+        "<div class='col-1'>" +
+            "<a id='logo' href='/pages/member/index.html'>TicketsOn</a>" +
+        "</div>" +
+        "<div class='col-6'>" +
+            "<input id='search-activity' placeholder='尝试搜索喜剧'>"+
+        "</div>"+
+        "<div id='tabs' class='col-5'>" +
+            // "<div class='member-tab'><span onclick='toVenue()'>场馆入口</span></div>" +
+            // "<div class='member-tab-separate'>|</div>"+
             "<div class='member-tab'>" +
                 "<span onclick='toOrderManage()'>订单管理</span>" +
             "</div>"+
@@ -32,7 +51,12 @@ let member_nav =
             "</div>"+
         "</div>" +
     "</nav>";
-$("#member-nav").append(member_nav);
+if(is_login){
+    $("#member-nav").append(member_nav);
+}else {
+    $("#member-nav").append(member_nav_visitor);
+}
+
 
 let member_card =
     "<div id='member-card'>" +
@@ -95,9 +119,14 @@ function logout() {
 }
 
 function toLogin() {
+    console.log("tologin");
     if(!is_login){
-        forward("/pages/member/login.html");
+        forward("/pages/login/login.html?usertype=member");
     }
+}
+
+function toRegister() {
+    forward("/pages/member/register.html");
 }
 
 function toVenue() {

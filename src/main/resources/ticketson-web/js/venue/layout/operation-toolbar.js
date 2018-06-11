@@ -230,7 +230,7 @@ function submitVenue() {
     }).done(function () {
         layer.alert("注册信息提交成功，系统已为您生成注册码（"+getUrlParam("vid")+"）,请妥善保管注册码和密码，等待经理审核。您可以登陆检查审核状态",function (index) {
             layer.close(index);
-            forward("/pages/venue/login.html");
+            forward("/pages/login/login-venue.html");
         });
     }).fail(function (data) {
         layer.msg(data.responseText);

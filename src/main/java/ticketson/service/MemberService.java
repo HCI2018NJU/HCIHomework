@@ -14,7 +14,7 @@ public interface MemberService {
      * @param psw 密码
      * @return
      */
-    public void register(String email,String psw);
+    public void register(String email,String psw,String nickname);
 
     /**
      * 用户登陆

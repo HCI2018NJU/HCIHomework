@@ -6,8 +6,8 @@
     padding: 0;
 }
 #activity-container {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
     /*border: 1px solid #f8f8f8;*/
     margin-top: 40px;
     overflow: auto;
@@ -35,7 +35,7 @@
 }
 #activity-pic {
     width: 80%;
-    height: 350px;
+    height: auto;
     background-color: #f8f8f8;
     border: none;
     /*margin: 10px;*/

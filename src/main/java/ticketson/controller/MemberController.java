@@ -25,21 +25,22 @@ public class MemberController {
      * @return
      */
     @PostMapping("/register")
-    public void register(String email,String psw){
-        memberService.register(email,psw);
+    public void register(String email,String psw,String nickname){
+        System.out.println(psw+"  "+nickname);
+        memberService.register(email,psw,nickname);
     }
 
-    /**
-     * 激活账号，通过激活链接发送的请求 ==
-     * @param token 激活码
-     * @param email 会员ID
-     * @return 如果激活成功，则跳转到登陆界面
-     */
-    @RequestMapping(value = "/activateEmail", method = RequestMethod.GET)
-    public String activateEmail(String token,String email){
-        System.out.println("call activate email");
-        return memberService.activateEmail(token,email);
-    }
+//    /**
+//     * 激活账号，通过激活链接发送的请求 ==
+//     * @param token 激活码
+//     * @param email 会员ID
+//     * @return 如果激活成功，则跳转到登陆界面
+//     */
+//    @RequestMapping(value = "/activateEmail", method = RequestMethod.GET)
+//    public String activateEmail(String token,String email){
+//        System.out.println("call activate email");
+//        return memberService.activateEmail(token,email);
+//    }
 
     /**
      * 会员登陆 ==

@@ -1,0 +1,53 @@
+a,body {
+    color: #333
+}
+
+a {
+    cursor: pointer
+}
+
+a:focus,a:hover {
+    color: #2f2f2f;
+    text-decoration: none
+}
+
+a:focus {
+    outline: none
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.h4,h4 {
+    font-size: 18px
+}
+
+.main .title {
+    font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif
+}
+
+
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: #FFFFFF;
+    background-image: none;
+    color: #333;
+    /* -webkit-text-fill-color: red; //这个私有属性是有效的 */
+}
+
+@font-face {
+    font-family: 'iconfont';  /* project id 568761 */
+    src: url('//at.alicdn.com/t/font_568761_pq20lmuz2yqwu3di.eot');
+    src: url('//at.alicdn.com/t/font_568761_pq20lmuz2yqwu3di.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_568761_pq20lmuz2yqwu3di.woff') format('woff'),
+    url('//at.alicdn.com/t/font_568761_pq20lmuz2yqwu3di.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_568761_pq20lmuz2yqwu3di.svg#iconfont') format('svg');
+}
+.icon-font{
+    font-family:"iconfont";
+    font-style:normal;
+    font-size: 14px;
+}
+
+

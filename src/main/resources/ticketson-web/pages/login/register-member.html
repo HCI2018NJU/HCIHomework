@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn - 会员注册</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet">
+    <link href="../../css/login/login.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div class="sign">
+    <div class="close-button"><i class="icon-font">&#xe619;</i></div>
+    <div class="main">
+        <h4 class="title">
+            <div class="normal-title">
+                <a class="login-tab active" tabindex="">会员</a>
+                <b>·</b>
+                <a class="login-tab" tabindex="" href="register-venue.html">场馆</a>
+            </div>
+        </h4>
+
+        <!--<h4 class="reset-title">会员注册</h4>-->
+        <div class="js-sign-in-container">
+            <div class="form" id="new_session" action="/sessions" accept-charset="UTF-8" method="post">
+                <div class="input-prepend restyle js-normal">
+                    <input placeholder="昵称" type="text" id="nickname"/>
+                    <i class="iconfont ic-user"></i>
+                </div>
+                <div class="input-prepend restyle no-radius js-normal">
+                    <input placeholder="邮箱" type="email" id="account"/>
+                    <i class="iconfont ic-user"></i>
+                </div>
+                <div class="input-prepend">
+                    <input placeholder="密码" type="password" id="password"/>
+                    <i class="iconfont ic-password"></i>
+                </div>
+                <button class="sign-in-button" id="sign-in-form-submit-btn" type="button">
+                    <span id="sign-in-loading"></span>
+                    注册
+
+                </button>
+
+            </div>
+            <!-- 更多登录方式 -->
+            <div class="more-sign">
+                <h6 id="login-link" class="a"><a href="/pages/login/login-member.html"> 已有账号？立即登陆</a></h6>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+    $("#sign-in-form-submit-btn").on('click',register);
+
+    function register() {
+        const email = $("#account").val();
+        const psw = $("#password").val();
+        const nickname = $("#nickname").val();
+        if(email===""||psw===""||nickname===""){
+            layer.msg("您有尚未填写的信息");
+            return;
+        }
+        $("#sign-in-loading").css("display","inline-block");
+        $.post("/api/member/register",{
+            "email":email,
+            "psw":psw,
+            "nickname":nickname
+        }).done(function () {
+            $("#sign-in-loading").css("display","none");
+            layer.alert("激活链接发送成功",function (index) {
+                layer.close(index);
+                forward("/pages/login/login-member.html");
+            });
+        }).fail(function (data) {
+            $("#sign-in-loading").css("display","none");
+            layer.msg("该账号已被注册");
+        });
+    }
+</script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+</html>

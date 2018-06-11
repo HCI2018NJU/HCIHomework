@@ -39,13 +39,14 @@ public class MemberServiceImpl implements MemberService {
      * @return
      */
     @Override
-    public void register(String email, String psw) {
+    public void register(String email, String psw, String nickname) {
         if(memberRepository.findByEmail(email)!=null){
             throw new ResourceConflictException("该邮箱已被注册");
         }
         Member member = new Member();
         member.setEmail(email);
         member.setPsw(psw);
+        member.setNickname(nickname);
         member.setRegisterTime(System.currentTimeMillis());
         try {
             member = EmailHelper.sendActivateMail(member);
@@ -133,7 +134,7 @@ public class MemberServiceImpl implements MemberService {
                     //重新设置token防止被禁用的用户利用激活
                     member.setToken(token.replace("1", "c"));
                     memberRepository.save(member);
-                    return "账号激活成功";
+                    return "/pages/member/index";
                 } else {
                     throw new InvalidRequestException("激活码验证不通过");
 //                    return "激活码验证不通过";

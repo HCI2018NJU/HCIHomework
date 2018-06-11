@@ -69,6 +69,11 @@ public class VenueServiceImpl implements VenueService {
         venue.setDistrictCode(districtCode);
         venue.setProvinceCode(provinceCode);
         venue.setRegisterTime(System.currentTimeMillis());
+
+        //更改：直接通过，不经过审核
+        venue.setChecked(true);
+        venue.setCheckPassed(true);
+
         venue = venueRepository.save(venue);
         VenueModel venueModel = new VenueModel(venue);
         return venueModel;

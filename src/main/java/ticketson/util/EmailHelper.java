@@ -22,7 +22,7 @@ public class EmailHelper {
 
     private static final String FROM = "shea_wong@163.com";//发件人的email
     private static final String PWD = "76JmFrcauWvJ";//发件人密码--邮箱密码
-    private static final String URL = "Http://localhost:8080/api/member/activateEmail";
+    private static final String URL = "Http://localhost:8080/activateEmail";
     private static final int TIMELIMIT = 1000*60*60*24; //激活邮件过期时间24小时
     private static final String TITLE = "请确认您的邮件--TicketsOn";
     private static final String HOST = "smtp.163.com";

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn - 登陆</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet">
+    <link href="../../css/login/login.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+
+<div class="sign">
+    <div class="close-button"><i class="icon-font">&#xe619;</i></div>
+    <div class="main">
+        <h4 class="title">
+            <div class="normal-title">
+                <a class="login-tab" tabindex="" href="login-member.html">会员</a>
+                <b>·</b>
+                <a class="login-tab active" tabindex="">场馆</a>
+            </div>
+        </h4>
+        <div class="js-sign-in-container">
+            <div class="form" id="new_session" action="/sessions" accept-charset="UTF-8" method="post">
+                <div class="input-prepend restyle js-normal">
+                    <input placeholder="邮箱" type="email" id="account"/>
+                    <i class="iconfont ic-user"></i>
+                </div>
+                <div class="input-prepend">
+                    <input placeholder="密码" type="password" id="password"/>
+                    <i class="iconfont ic-password"></i>
+                </div>
+                <button class="sign-in-button" id="sign-in-form-submit-btn" type="button">
+                    <span id="sign-in-loading"></span>
+                    登录
+
+                </button>
+            </div>
+            <!-- 更多登录方式 -->
+            <div class="more-sign">
+                <h6 id="register-link" class="a"><a href="/pages/login/register-venue.html"> 没有账号？立即注册</a></h6>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+    $("#sign-in-form-submit-btn").on('click',login);
+
+    function login() {
+        let account = $("#account").val();
+        let psw = $("#password").val();
+        if(account===""||psw===""){
+            layer.msg("您有尚未填写的信息");
+            return;
+        }
+        $("#sign-in-loading").css("display","inline-block");
+        $.post("/api/venue/login",{
+            "vid": account,
+            "psw":psw,
+        }).done(function () {
+            window.localStorage.setItem("vid",account);
+            $("#sign-in-loading").css("display","none");
+            forward("/pages/venue/activity/activity.html?type=0");
+        }).fail(function (data) {
+            $("#sign-in-loading").css("display","none");
+            //如果是修改未审核或修改不通过
+            if(data.responseText.substring(0,2)==="修改"){
+                layer.alert(data.responseText,function (index) {
+                    layer.close(index);
+                    window.localStorage.setItem("vid",account);
+                    forward("/pages/venue/activity/activity.html?type=0");
+                });
+            }else {
+                layer.msg("登陆失败，请检查账号或密码是否正确");
+            }
+        });
+    }
+
+</script>
+
+</html>

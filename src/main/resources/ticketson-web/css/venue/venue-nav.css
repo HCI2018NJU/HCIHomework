@@ -30,7 +30,7 @@ button,button:focus {
     margin-top: 8px;
     float: left;
 }
-.tab {
+#tabs .tab, .tab-right .tab {
     font-size: 14px;
     color: #333;
     margin-top: 20px;
@@ -104,7 +104,7 @@ button,button:focus {
     font-style:normal;
     margin-right: 4px;
 }
-#logout {
+.tab-right #logout {
     color: #969696;
     width: 100px;
     text-align: center;

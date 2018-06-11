@@ -103,7 +103,7 @@ function pay() {
     }).fail(function (data) {
         layer.alert(data.responseText,function (index) {
             layer.close(index);
-            forward("/pages/member/index.html");
+            forward("/pages/member/home.html");
         });
     });
 }

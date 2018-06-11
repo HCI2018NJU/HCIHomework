@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn - 场馆注册</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../lib/layui/css/layui.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet">
+    <link href="../../css/login/login.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div class="sign">
+    <div class="close-button"><i class="icon-font">&#xe619;</i></div>
+    <div class="main">
+        <h4 class="title">
+            <div class="normal-title">
+                <a class="login-tab" tabindex="" href="register-member.html">会员</a>
+                <b>·</b>
+                <a class="login-tab active" tabindex="">场馆</a>
+            </div>
+        </h4>
+        <!--<h4 class="reset-title">场馆注册</h4>-->
+        <div class="js-sign-in-container">
+            <div class="form" id="new_session">
+                <div class="input-prepend restyle js-normal">
+                    <input placeholder="名称" type="text" id="name"/>
+                    <!--<i class="iconfont ic-user"></i>-->
+                </div>
+                <div class="input-prepend restyle no-radius js-normal">
+                    <input placeholder="密码" type="password" id="password"/>
+                    <!--<i class="iconfont ic-user"></i>-->
+                </div>
+                <div class="input-prepend restyle no-radius js-normal region">
+                    <input id="province" type="text" placeholder="省" readonly>
+                    <i id="province-more" class="icon-font unfold">&#xe612;</i>
+                    <ul id="province-dropdown-menu" class="dropdown-menu"></ul>
+                </div>
+                <div class="input-prepend restyle no-radius js-normal region">
+                    <input id="city" type="text" placeholder="市" readonly />
+                    <i id="city-more" class="icon-font unfold">&#xe612;</i>
+                    <ul id="city-dropdown-menu" class="dropdown-menu"></ul>
+                </div>
+                <div class="input-prepend restyle no-radius js-normal region">
+                    <input id="area" type="text" placeholder="区" readonly />
+                    <i id="area-more" class="icon-font unfold">&#xe612;</i>
+                    <ul id="area-dropdown-menu" class="dropdown-menu"></ul>
+                </div>
+                <div class="input-prepend">
+                    <textarea placeholder="详细地址" type="text" id="specific-location" rows="2"></textarea>
+                    <!--<i class="iconfont ic-password"></i>-->
+                </div>
+                <button class="sign-in-button" id="sign-in-form-submit-btn" type="button">
+                    <span id="sign-in-loading"></span>
+                    注册
+
+                </button>
+
+            </div>
+            <!-- 更多登录方式 -->
+            <div class="more-sign">
+                <h6 class="a" id="login-link"><a href="/pages/login/login-venue.html"> 已有账号？立即登陆</a></h6>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    let layer;
+    layui.use(['layer'],function () {
+        layer = layui.layer;
+    });
+
+    $("#sign-in-form-submit-btn").on('click',register);
+
+    function register() {
+        let name = $("#name").val();
+        let psw = $("#password").val();
+        let location = $("#specific-location").val();
+        if(name===""||psw===""||location===""||
+            present_area_id===null||present_area_id===undefined||present_area_id===""){
+            layer.msg("您有尚未填写的选项");
+            return;
+        }
+        $.post("/api/venue/register",{
+            "name": name,
+            "psw":psw,
+            "provinceCode":present_province_id,
+            "cityCode": present_city_id,
+            "districtCode":present_area_id,
+            "location":location,
+        }).done(function (data) {
+            window.localStorage.setItem("register_v_name",data.name);
+            forward("/pages/venue/layout.html?vid="+data.vid);
+        }).fail(function (data) {
+            layer.msg(data.responseText);
+        });
+    }
+</script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/common/regions_master/region_filter.js"></script>
+</html>
