@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-专属你的票务网站</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css" media="all">
+    <link href="../../lib/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../css/member/index.css" rel="stylesheet">
+    <link href="../../css/common/location-fillter.css" rel="stylesheet">
+    <link href="../../css/common/type-filter.css" rel="stylesheet">
+    <link href="../../css/type/style.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/jquery-ui.min.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container" style="font-size: 14px">
+    <div id="type-container-div">
+        <!-- 加载城市 start  -->
+        <dl class="type_block" id="city_block">
+            <dt>城　市：</dt>
+            <dd><a class="active" href="javascript:void(0)" onclick="cityfilter('',this)">全部</a></dd>
+            <dd class="search_city_num" id="search_city_num_tj">
+                <ul class="search_city_all clear" id="city-menu">
+                </ul>
+            </dd>
+        </dl>
+        <!-- 加载城市 end -->
+
+        <!-- 加载分类 start-->
+        <dl class="type_block" id="category_filter_id">
+            <dt>分　类：</dt>
+            <dd><a class="active" href="javascript:void(0)" onclick="categoryfilter('',this)">全部</a></dd>
+            <dd class="search_city_num">
+                <ul class="clear">
+                </ul>
+            </dd>
+        </dl>
+        <!-- 加载分类 end -->
+    </div>
+    <!--分类结果展示-->
+    <div id="result-part">
+        <div id="result-nav">
+            <div tab="subscribed" class="selected-tab">推荐排序</div>
+        </div>
+        <div class="order" id="subscribed">
+            <ul id="result-menu">
+
+            </ul>
+            <div class="page" id="subscribed-page"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script>
+    let present_province_id = '';
+    function addProvinces() {
+        province.map(function (p) {
+            const province_item = "<li id='" + p.id + "' pname='" + p.name + "'><a><span>" + p.name + "</span></a></li>";
+            $("#province-dropdown-menu").append(province_item);
+        });
+        $("#province-dropdown-menu>li").on({'click': onProvinceMenuClick});
+    }
+    function addCitys() {
+        [{name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'},
+            {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}
+            , {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'},
+            {name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'},
+            {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'}].map(function (c) {
+            const city_item = "<li id='" + c.id + "' cname='" + c.name + "'><a>" + c.name + "</a></li>";
+            $("#city-menu").append(city_item);
+        });
+        $("#city-menu>li>a").on({'click': addTypeResults});
+    }
+
+    function addTypeResults() {
+        [{title: "千与千寻——久石让·宫崎骏经典作品视听音乐会"}, {title: "“魅力端午”北京交响乐团音乐会"}]
+            .map(function (r) {
+                const result_item = "<li id='" + r.id + "' cname='" + r.title + "'><div class='result-img'> <img " +
+                    "src='../../resources/icons/sample.jpg' /></div>" +
+                    "<div class='result-txt'><h3><a>" + r.title + "</a></h3></div></li>";
+                $("#result-menu").append(result_item);
+            })
+    }
+</script>
+<script>
+    $(function () {
+        addCitys();
+    })
+</script>
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../js/common/type-filter.js"></script>
+<script type="text/javascript" src="../../js/common/location-filter.js"></script>
+<script type="text/javascript" src="../../js/member/index.js"></script>
+<script type="text/javascript" src="../../js/type/type-result.js"></script>
+</body>
+</html>
