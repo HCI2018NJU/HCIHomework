@@ -3,11 +3,45 @@ let selected_period;
 let selected_pid;
 let selected_price;
 let selected_level;
+let full_desctioption;
+let brief_desctioption;
 const aid = getUrlParam("aid");
 
 
 layui.use(['form'],function () {
     form = layui.form;
+});
+
+console.log("temp");
+
+//show the img of the first hot show
+$(".m-hot .z-crt .hot").eq(0).css("display","block");
+$(".m-hot .z-crt .info").eq(0).css("display","none");
+$(".m-hot .z-crt").css("background","url(//dui.dmcdn.cn/dm_2015/goods/images/m-sdlst-ico.png) no-repeat 3px 7px");
+$(".m-hot .z-crt").eq(0).css("background","none");
+$(".m-hot .z-crt").eq(0).find(".hot").css("background-color","#f6f6f6");
+
+
+$("#m-infonav .hd .itm-tab").on('click',function () {
+    $("#m-infonav .bd .itm-tab").removeClass("z-show");
+    $("#m-infonav .hd .itm-tab").removeClass("z-crt");
+    const index = $(this).attr("data-idx");
+    console.log($(this).attr("data-idx"));
+    $("#m-infonav .bd .itm-tab").eq(index).addClass("z-show");
+    $("#m-infonav .hd .itm-tab").eq(index).addClass("z-crt");
+});
+
+$("#gexhTuijian .itm").on('mouseenter',function () {
+    $(".m-hot .z-crt .hot").css("display","none");
+    $(".m-hot .z-crt .info").css("display","block");
+    $("#gexhTuijian .itm").css("background","url(//dui.dmcdn.cn/dm_2015/goods/images/m-sdlst-ico.png) no-repeat 3px 7px");
+    $(this).css("background","none");
+    $(this).find(".hot").css({
+        "display":"block",
+        "background-color":"#f6f6f6"
+    });
+    $(this).find(".info").css("display","none");
+
 });
 
 //设置可购买张数
@@ -37,13 +71,24 @@ $(function () {
 function initActivityInfo(activity) {
     $("#container").attr('aid',activity.aid);
     $("#type").text(activity.type);
+    $("#type-guide").text(activity.type);
     $("#title").text(activity.name);
     let city_name = city_object[activity.venue.cityCode].name;
     if(city_name === '市辖区'){
         city_name = city_object[activity.venue.cityCode].province;
     }
     $("#city").text(city_name);
-    $("#activity-description").text(activity.description);
+    $("#city-guide").text(city_name);
+    full_desctioption = activity.description;
+    brief_desctioption = full_desctioption.length>90?full_desctioption.substring(0,90)+"...":full_desctioption;
+    if(full_desctioption.length>90){
+        $("#more-description").css("display","block");
+    }else {
+        $("#more-description").css("display","none");
+    }
+    $("#added-description").text(full_desctioption);
+    $("#activity-description").text(brief_desctioption);
+    $("#added-img").attr("src",activity.url);
     activity.periods.map(function (period,index) {
         let label = "<label pid='"+period.pid+"' beginTime='"+period.beginTime+"' period='"+period.begin+"' onclick='choosePeriod(this)'>"+period.begin+"</label>";
         $("#period-part").append(label);
@@ -61,6 +106,18 @@ function initActivityInfo(activity) {
     $("#venue-location").text(activity.venue.location);
     $("#activity-pic").attr('src',activity.url);
     initSubscribeNumber(20);
+}
+
+function unfold() {
+    if($("#more-description").attr("folded")==="fold"){
+        $("#activity-description").text(full_desctioption);
+        $("#more-description").attr("folded","unfold");
+        $("#more-description").text("收起")
+    }else {
+        $("#activity-description").text(brief_desctioption);
+        $("#more-description").attr("folded","fold");
+        $("#more-description").text("展开");
+    }
 }
 
 //选择场次
@@ -183,3 +240,5 @@ function setSubscribeNumber(left_count) {
     $("#subscribe-number").empty();
     initSubscribeNumber(left_count>20?20:left_count);
 }
+
+

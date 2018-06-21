@@ -17,6 +17,10 @@ layui.use(['carousel', 'form', 'laydate','layer'], function(){
 
 getActivities();
 
+let str = "成都哈哈曲艺社--闲庭旗舰店";
+console.log(str.length);
+console.log(str.substring(0,8));
+
 
 
 function getActivities() {
@@ -60,7 +64,7 @@ function setGalleryActivities(data) {
                         "<div class='col-3'>" +
                             "<img src='"+activity.url+"'>" +
                         "</div>" +
-                        "<div class='col-5'>" +
+                        "<div class='col-5' onclick='toActivityDetail("+activity.aid+")'>" +
                             "<div class='promo-info'>" +
                                 "<label class='promo-title'>"+activity.name+"</label>" +
                                 "<label class='promo-price'>¥&nbsp;"+lowest_price+"<sub class='promo-price-tail'>起</sub></label>" +
@@ -68,7 +72,7 @@ function setGalleryActivities(data) {
                             "<div class='promo-period'>" +activity_period_content +"</div>" +
                             "<div class='promo-button'>" +
                                 "<button class='promo-choose-seat'>选座购买</button>" +
-                                "<button class='promo-more' onclick='toActivityDetail("+activity.aid+")'>查看详情</button>" +
+                                // "<button class='promo-more' onclick='toActivityDetail("+activity.aid+")'>查看详情</button>" +
                             "</div>" +
                         "</div>" +
                     "</div>" +

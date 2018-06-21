@@ -117,7 +117,7 @@ function initNav() {
         // const member_name = "王馨雨";
         const member_nav =
             "<ul class='nav' style='float: right'>" +
-                "<li class='member-tab' id='member-info-wrapper'>" +
+                "<li class='member-tab' id='member-info-tab'>" +
                     "<a tabindex=''>"+member_name+"<i class='icon-font'>&#xe612</i>"+"</a>" +
                     "<div id='member-card'>" +
                         "<div class='member-card-item-top'>"+
@@ -146,8 +146,8 @@ function initNav() {
                 "</li>" +
             "</ul>";
         $("#member-info-wrapper").append(member_nav);
-        $("#member-info-wrapper").on('mouseenter',showMemberCard);
-        $("#member-info-wrapper").on('mouseleave',hideMemberCard);
+        $("#member-info-tab").on('mouseenter',showMemberCard);
+        $("#member-info-tab").on('mouseleave',hideMemberCard);
         $("#logout").on('click',logout);
     }else {
         const member_nav =
@@ -170,7 +170,7 @@ function initNav() {
 
 function showMemberCard() {
     if(!is_login){
-        forward("/pages/login/login-member.html")
+        forward("/pages/login/login-member.html");
         return;
     }
     $.post("/api/member/getInfo",{
