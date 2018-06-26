@@ -2,6 +2,11 @@ const aid = getUrlParam("aid");
 const pid = getUrlParam("pid");
 const way = getUrlParam("way");
 
+const chosen = "#CCCCFF";
+const unavailable = "#CCCCCC";
+
+
+
 if(way==="online"){
     $("#venue-nav").css("display","none");
 }else {
@@ -33,6 +38,20 @@ let seat_tooltip_rect = null;
 let seat_tooltip_width = 120;
 let seat_tooltip_height = 200;
 let seat_size = 40;
+
+const prices = window.localStorage.getItem("a_choose_seat_prices").split("_");
+prices.map((price,idx)=>{
+    if(idx===0){
+        return;
+    }
+    const color = level[idx-1];
+    const level_span = "<div style='display: inline'>" +
+        "<label class='level-block' style='background-color:"+color+"'></label>"+
+        "<label class='price-block'>¥"+price+"</label>"+
+    "</div>";
+    $("#level-part").append(level_span);
+});
+
 
 // let hoverTimer = null;
 
@@ -67,11 +86,26 @@ function createCanvas(layout,index){
         "height":720,
     });
     canvas.loadFromJSON(layout);
+    let added_obj = [];
     canvas.forEachObject(function (obj) {
         obj.hasControls = false;
         obj.lockMovementX = true;
         obj.lockMovementY = true;
+        if(obj.type.split('-')[0]==="grandstand"){
+            if(obj.hasCanvas){
+                console.log(obj);
+                added_obj.push(makeGSTooltipRect({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2}));
+                added_obj.push(makeGSTooltip({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2},obj));
+            }
+        }
     });
+    added_obj.map(function (obj) {
+        canvas.add(obj);
+        obj.hasControls = false;
+        obj.lockMovementX = true;
+        obj.lockMovementY = true;
+    });
+    canvas.renderAll();
     canvas.on({
         'mouse:over':onMouseOver,
         'mouse:out': onMouseOut,
@@ -94,21 +128,25 @@ function createCanvas(layout,index){
 function onMouseOver(event) {
     let obj = event.target;
     if(obj){
-        if(obj.type==='seat-rect'){
+        if(obj.type!==null){
             let canvas = canvases[canvas_pointer];
-            let pointer = canvas.getPointer();
-            obj.setShadow({ color: 'rgba(0,0,0,0.7)',blur: 10 });
-            showTooltip(obj,canvas,pointer);
-            // checkSeatState(obj,canvas,pointer);
+            if(obj.type==='seat-rect'){
+                let pointer = canvas.getPointer();
+                obj.setShadow({ color: 'rgba(0,0,0,0.7)',blur: 10 });
+                showTooltip(obj,canvas,pointer);
+                // checkSeatState(obj,canvas,pointer);
 
-            // hoverTimer = window.setTimeout(function () {
-            //     checkSeatState(obj,canvas,pointer);
-            // },200);
-            // checkSeatState(obj);
-        }else if(obj.type.split('-')[0] === 'grandstand'){
-            obj.setShadow({ color: 'rgba(0,0,0,0.7)',blur: 10 });
-            showGSTooltip(obj);
+                // hoverTimer = window.setTimeout(function () {
+                //     checkSeatState(obj,canvas,pointer);
+                // },200);
+                // checkSeatState(obj);
+            }else if(obj.type.split('-')[0] === 'grandstand'){
+                obj.setShadow({ color: 'rgba(0,0,0,0.7)',blur: 10 });
+                // showGSTooltip(obj);
+                canvas.renderAll();
+            }
         }
+
     }
 }
 function onMouseOut(event) {
@@ -116,34 +154,44 @@ function onMouseOut(event) {
     // hoverTimer = -1;
     let obj = event.target;
     if(obj){
-        if(obj.type === 'seat-rect'){
-            obj.setShadow({ color: 'rgba(0,0,0,0.0)',blur: 0 });
-            hideToolTip();
-        }else if(obj.type.split('-')[0]==='grandstand'){
-            obj.setShadow({ color: 'rgba(0,0,0,0.0)',blur: 0 });
-            hideGsToolTip();
+        if(obj.type!==null){
+            let canvas = canvases[canvas_pointer];
+            if(obj.type === 'seat-rect'){
+                obj.setShadow({ color: 'rgba(0,0,0,0.0)',blur: 0 });
+                hideToolTip();
+            }else if(obj.type.split('-')[0]==='grandstand'){
+                obj.setShadow({ color: 'rgba(0,0,0,0.0)',blur: 0 });
+                // hideGsToolTip();
+                canvas.renderAll();
+            }
         }
+
     }
 }
 function onMouseMove() {
-    if(gs_tooltip){
-        moveGSTooltip();
-    }
+    // if(gs_tooltip){
+    //     moveGSTooltip();
+    // }
 }
 function onSelectCreated(event) {
     let obj = event.target;
     //显示基本设置选项
 //        updateSettings();
     //显示看台选项
-    if(obj && obj.type.split('-')[0] === 'grandstand'){
-        //如果该图形已经被设置为看台，即已经建立了画布，则直接显示信息
-        if(obj.hasCanvas) {
-            hideGsToolTip();
-            changeCanvasPointer(obj.g_id);
+    if(obj){
+        if(obj.type!==null){
+            if(obj && obj.type.split('-')[0] === 'grandstand'){
+                //如果该图形已经被设置为看台，即已经建立了画布，则直接显示信息
+                if(obj.hasCanvas) {
+                    hideGsToolTip();
+                    changeCanvasPointer(obj.g_id);
+                }
+            }else if(obj.type === 'seat-rect'){
+                addToChart(obj);
+            }
         }
-    }else if(obj.type === 'seat-rect'){
-        addToChart(obj);
     }
+
 }
 
 //将选择的座位添加进购物车
@@ -157,8 +205,8 @@ function addToChart(obj) {
         //从购物车之中删除
         removeFromChart(obj);
     }else {
-        if($("#ticket-part").find('.ticket-item').length>=6){
-            layer.msg("您最多只可一次购买六张票");
+        if($("#ticket-part").find('.ticket-item').length>=5){
+            layer.msg("您最多只可一次购买五张票");
             return;
         }
         //将所选座位加进购物车
@@ -167,7 +215,7 @@ function addToChart(obj) {
             "<div style='overflow: auto'><i class='delete'>&#xe610;</i> </div>"+
             "<div class='seat-wrapper'>" +
             "<div><i class='seat' style='color: "+obj.fill+"'>&#xe63a;</i></div>" +
-            "<div class='seat-price' style='color: "+obj.fill+"'>"+obj.price+"</div>" +
+            "<div class='seat-price' style='color: "+obj.fill+"'>¥<span>"+obj.price+"</span></div>" +
             "</div>"+
             "<div class='seat-info'>" +
             "<div>座号：<span class='seat-location'>"+obj.row+"排"+obj.column+"座"+"</span></div>"+
@@ -180,7 +228,7 @@ function addToChart(obj) {
             removeFromChart(obj);
         });
         obj.set('state','已选择');
-        obj.set('fill',"#ffb2ec");
+        obj.set('fill',chosen);
         canvases[canvas_pointer].renderAll();
         //计算总票数
         $("#total-seats").text(parseInt($("#total-seats").text())+1);
@@ -217,12 +265,14 @@ function removeFromChart(obj) {
     let fill = $("#"+seatid).attr('price-fill');
     obj.set('fill',fill);
     canvases[canvas_pointer].renderAll();
-    let price = $("#"+seatid).find('.seat-price').text();
+    let price = $("#"+seatid).find('.seat-price span').text();
     $("#"+seatid).remove();
     //计算总票数
     $("#total-seats").text(parseInt($("#total-seats").text())-1);
     //计算总价格
     let totalPrice = parseFloat($("#total-price").text());
+    console.log(totalPrice);
+    console.log(parseFloat(price));
     totalPrice = totalPrice - parseFloat(price);
     $("#total-price").text(totalPrice);
     //判断是否要将按钮设为不可点
@@ -345,19 +395,22 @@ function makeGSTooltipRect(pointer) {
         width: gs_tooltip_width,
         height: gs_tooltip_height,
         strokeWidth: 1,
-        fill: '#000000',
-        stroke: '#000000',
-        shadow: 'rgba(0,0,0,0.3) 6px 6px 12px'
+        fill: '#ffffff',
+        stroke: '#ffffff',
+        // shadow: 'rgba(0,0,0,0.3) 6px 6px 12px'
     });
 }
 
 function makeGSTooltip(pointer,obj) {
     let position_item = '楼层：'+obj.floor+'\n\n看台：'+obj.name+'\n\n价格：'+obj.lowestPrice+"~"+obj.highestPrice;
+    if(obj.lowestPrice===obj.highestPrice){
+        position_item = '楼层：'+obj.floor+'\n\n看台：'+obj.name+'\n\n价格：'+obj.lowestPrice;
+    }
     return new fabric.IText(position_item, {
         left: pointer.x+10,
         top: pointer.y+10,
         fontFamily: 'optima',
-        fill: '#ffffff',
+        fill: '#333333',
         fontSize: 12
     });
 }
@@ -525,5 +578,9 @@ function submitOrder() {
     }
 
 }
+
+$(".give-up").on('click',function () {
+    forward(`/pages/venue/activity/activity-info.html?aid=${aid}`);
+});
 
 

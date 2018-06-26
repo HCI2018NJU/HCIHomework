@@ -30,7 +30,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
     Page<Order> findByPeriod_PidAndPaySuccess(long pid,boolean paySuccess,Pageable pageable);
 
-    int countByMember_MidAndIsUnSubscribed(long mid,boolean isUnSubscribed);
+    int countByMember_MidAndIsUnSubscribedAndPaySuccess(long mid,boolean isUnSubscribed,boolean paySuccess);
 
 
     //得到未支付的订单所用

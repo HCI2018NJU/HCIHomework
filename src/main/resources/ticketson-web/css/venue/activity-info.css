@@ -6,16 +6,16 @@
     padding: 0;
 }
 #activity-container {
-    margin-left: 200px;
-    margin-right: 200px;
+    /*margin-left: 200px;*/
+    /*margin-right: 200px;*/
     /*border: 1px solid #f8f8f8;*/
 
     overflow: auto;
     /*padding: 10px;*/
     font-size: 14px;
     border: 1px solid #eaeceb;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-top: 40px;
     padding-bottom: 40px;
 
@@ -24,8 +24,8 @@
 
 #crumb-guide {
     margin-top: 40px;
-    margin-left: 200px;
-    margin-right: 200px;
+    /*margin-left: 200px;*/
+    /*margin-right: 200px;*/
     height: 40px;
     /*border-bottom: 2px solid #f6f6f6;*/
     background-color: #f6f6f6;
@@ -40,18 +40,18 @@
 }
 
 #added-info {
-    margin-left: 200px;
-    margin-right: 200px;
+    /*margin-left: 200px;*/
+    /*margin-right: 200px;*/
     /*border: 1px solid #f8f8f8;*/
     margin-top: 40px;
     overflow: auto;
     border: 1px solid #eaeceb;
 }
 #activity-pic-wrapper {
-    width: 30%;
+    width: 25%;
 }
 #activity-info-container {
-    width: 70%;
+    width: 75%;
 }
 #activity-info-wrapper {
     border-bottom: 1px solid #f6f6f6;
@@ -116,10 +116,10 @@
     float: left;
 }
 #period-label,#price-label {
-    width: 10%;
+    width: 80px;
 }
 #period-part,#price-part {
-    width: 90%;
+    /*width: 80%;*/
 }
 #period-part label,#price-part label {
     background-color: #fcfcfc;
@@ -575,7 +575,7 @@ ul{
 .m-liveinfo .ct .table-info1 {
     /*width: 700px;*/
     font-family: "宋体";
-    padding: 10px 86px 0 100px;
+    padding: 10px ;
     /*margin-left: 0px;!important;*/
     /*margin-right: 0px;!important;*/
     /*background-color: transparent;!important;*/
@@ -699,9 +699,7 @@ ul{
     background-position: 966px 0;
     zoom: 1;
 }
-.mn {
-    border-right: 1px solid #eaeceb;
-}
+
 
 .m-box-col2 .mn {
     position: relative;
@@ -762,3 +760,11 @@ ul{
 }
 
 
+/*#hotProjects {*/
+    /*border-right: 1px solid #ededed;*/
+    /*border-bottom: 1px solid #ededed;*/
+/*}*/
+
+/*.m-detail {*/
+    /*border: 1px solid #ededed;*/
+/*}*/

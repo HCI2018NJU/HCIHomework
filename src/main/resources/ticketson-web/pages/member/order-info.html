@@ -15,63 +15,122 @@
 </head>
 <body>
 <div id="container">
-    <div id="member-nav" class="header"></div>
+    <div id="member-nav" class="top-nav"></div>
     <div id="below-nav">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div id="header">我的ticketson&nbsp;>&nbsp;订单详情</div>
-                <div id="order-part">
-                    <div style="display: none" id="subscribed">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>订单编号</th>
-                                <th>商品名称</th>
-                                <th>票价</th>
-                                <th>数量</th>
-                                <th>折扣</th>
-                                <th>订单金额</th>
-                                <th>订单状态</th>
-                                <th>下单时间</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="my-ticketson">我的TicketsOn</div>
+                        <div class="left-nav">
+                            <div class="left-tab active-left">
+                                <a href="../../pages/member/order-manage.html">我的订单</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/coupon.html">我的优惠券</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/consume.html">我的账单</a>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display: none" id="unsubscribed">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>订单编号</th>
-                                <th>商品名称</th>
-                                <th>票价</th>
-                                <th>数量</th>
-                                <th>折扣</th>
-                                <th>订单金额</th>
-                                <th>退订手续费</th>
-                                <th>退订原因</th>
-                                <th>下单时间</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div id="ticket-part">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>票据编号</th>
-                                <th>楼层</th>
-                                <th>看台</th>
-                                <th>位置</th>
-                                <th>等级</th>
-                                <th>票价</th>
-                                <th>商品状态</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                    <div class="col-10">
+                        <div class="right-part order-info-part">
+                            <div class="order-state-part orderDet_show_wrap">
+                                <div class="order-part-title">订单状态</div>
+                                <ul class="orderDet_msg_warp">
+                                    <li id="order-state"></li>
+                                    <li id="order-id" class="orderDet_msg_info"></li>
+                                    <li id="order-date" class="orderDet_msg_info"></li>
+
+                                </ul>
+                                <div class="operation-part">
+                                    <button class='order-info-btn-topay'>去支付</button>
+                                    <button class='order-info-btn-unsub'>退订</button>
+                                </div>
+                            </div>
+                            <div class="orderDet_show_wrap">
+                                <div class="order-part-title">订单详情</div>
+                                <div id="order-info-wrapper">
+                                    <div id="order-info-container"></div>
+                                    <div>
+                                        <table class="layui-table" >
+                                            <thead>
+                                            <tr>
+                                                <th>票据编号</th>
+                                                <th>位置</th>
+                                                <th>票价</th>
+                                                <th>商品状态</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="orderDet_show_wrap" style="padding-right: 60px">
+                                <div class="order-part-title">收货信息</div>
+                                <ul class="buyer-info">
+                                    <li>
+                                        <span class="orderDet-addr-title">配送方式：</span>
+                                        <span>现场取票</span>
+                                    </li>
+                                    <li>
+                                        <span class="orderDet-addr-title">收获地址：</span>
+                                        <span id="buyer"></span>
+                                    </li>
+                                    <li>
+                                        <span class="orderDet-addr-title">取票凭证：</span>
+                                        <span> 凭取票码联系TicketsOn票务工作人员取票 客服热线：13951897687</span>
+                                    </li>
+                                </ul>
+                                <div class="above">
+                                    <ul class="orderDet-sum-wrap" id="sub-price-part">
+                                        <li>
+                                            <span>订单总额：</span>
+                                            <span style="float: right;text-decoration: line-through;color: #9f9f9f" class="total-price"></span>
+                                            <span style="float: right">&nbsp;&nbsp;</span>
+                                            <span style="float: right;color: #ff5a5f" class="pay-price"></span>
+                                        </li>
+                                        <li>
+                                            <span>返回积分：</span>
+                                            <span style="float: right" class="return-score"></span>
+                                        </li>
+                                    </ul>
+                                    <ul class="orderDet-sum-wrap" id="unsub-price-part">
+                                        <li>
+                                            <span>订单总额：</span>
+                                            <span style="float: right;text-decoration: line-through;color: #9f9f9f" class="total-price"></span>
+                                            <span style="float: right">&nbsp;&nbsp;</span>
+                                            <span style="float: right;color: #ff5a5f" class="pay-price"></span>
+                                        </li>
+                                        <li>
+                                            <span>退订手续费：</span>
+                                            <span style="float: right" class="unsub-fees"></span>
+                                        </li>
+                                    </ul>
+                                    <ul class="orderDet-sum-wrap" id="topay-price-part">
+                                        <li>
+                                            <span>订单总额：</span>
+                                            <span style="float: right;" class="total-price"></span>
+                                            <!--&nbsp;&nbsp;-->
+                                            <!--<span style="float: right;color: #ff5a5f" class="pay-price"></span>-->
+                                        </li>
+                                    </ul>
+                                    <ul  class="orderDet-sum-wrap" >
+                                        <li>
+                                            <span>返回积分：</span>
+                                            <span style="float: right" class="return-score"></span>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

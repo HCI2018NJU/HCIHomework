@@ -5,6 +5,13 @@ $.post("/api/coupon/getUsedCouponTotalNum",{
     "mid":getMid(),
 }).done(function (data) {
     usedCouponTotalNum = parseInt(data);
+    if(usedCouponTotalNum>0){
+        $(".nothing").css("display","none");
+        $("#used-page").css("display","block");
+    }else {
+        $(".nothing").css("display","block");
+        $("#used-page").css("display","none");
+    }
     layui.use(['laypage'],function () {
         let laypage = layui.laypage;
         laypage.render({
@@ -39,17 +46,31 @@ function getUsedCoupons(page) {
 
 //将已使用的优惠券填进界面
 function setUsedCoupons(coupons) {
-    $("#used").find(" tbody").empty();
+
+    $(".coupon-right-part").empty();
+    $(".coupon-left-part").empty();
+    //优惠券
     coupons.map(function (coupon,index) {
-        let coupon_dom =
-            "<tr>" +
-            "<td>"+coupon.cid+"</td>"+
-            "<td>"+coupon.name+"</td>"+
-            "<td>"+"-"+coupon.minus+"</td>"+
-            "<td>"+coupon.order.oid+"</td>"+
-            "<td>"+coupon.consumeTime+"</td>"+
-            "</tr>";
-        $("#unused").find(" tbody").append(coupon_dom);
-    })
+        const coupon_item =
+            "<div class='coupon-item coupon-used'>" +
+            "<div class='coupon-item-left-part'>" +
+            "<div>¥<span class='minus'>" + coupon.minus + "</span></div>" +
+            "<div class='min'>订单金额满<span>" + coupon.min + "</span>可使用</div>" +
+            "<div class='min-credit'>有效期" + coupon.validDateBegin + "&nbsp;-&nbsp;" + coupon.validDateEnd + "</div>" +
+            "</div>" +
+            "<div class='coupon-item-right-part'>" +
+            "<div coupon-type='" + coupon.type + "'>立即使用</div>" +
+            "</div>" +
+            "<div class='used-icon'>" +
+            "<i class='icon-font'>&#xe64d;</i>" +
+            "<div>使用日期："+coupon.consumeTime+"</div>" +
+            "</div>" +
+            "</div>";
+        if(index%2===0){
+            $(".coupon-left-part").append(coupon_item);
+        }else {
+            $(".coupon-right-part").append(coupon_item);
+        }
+    });
 }
 

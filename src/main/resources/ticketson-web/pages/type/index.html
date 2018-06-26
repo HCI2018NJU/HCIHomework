@@ -16,97 +16,109 @@
 </head>
 <body>
 <div id="container" style="font-size: 14px">
-    <div class="header"></div>
+    <div class="top-nav"></div>
     <div id="type-container-div">
-        <!-- 加载城市 start  -->
-        <dl class="type_block" id="city_block">
-            <dt>城　市：</dt>
-            <dd><a class="active" href="javascript:void(0)" onclick="cityfilter('',this)">全部</a></dd>
-            <dd class="search_city_num" id="search_city_num_tj">
-                <ul class="search_city_all clear" id="city-menu">
-                </ul>
-            </dd>
-        </dl>
-        <!-- 加载城市 end -->
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8" style="margin-top: 40px">
+                <!--<div id="crumb-guide">TicketsOn&nbsp;>&nbsp;分类</div>-->
+                <div>
+                    <!-- 加载城市 start  -->
+                    <dl class="type_block" id="father_block">
+                        <dt>分&nbsp;类：</dt>
+                        <dd><a class="all-category" href="javascript:void(0)">全部</a></dd>
+                        <dd>
+                            <ul class="clear father-menu">
+                            </ul>
+                        </dd>
+                    </dl>
+                    <!-- 加载城市 end -->
 
-        <!-- 加载分类 start-->
-        <dl class="type_block" id="category_filter_id">
-            <dt>分　类：</dt>
-            <dd><a class="active" href="javascript:void(0)" onclick="categoryfilter('',this)">全部</a></dd>
-            <dd class="search_city_num">
-                <ul class="clear">
-                </ul>
-            </dd>
-        </dl>
-        <!-- 加载分类 end -->
-    </div>
-    <!--分类结果展示-->
-    <div id="result-part">
-        <div id="result-nav">
-            <div tab="subscribed" class="selected-tab">推荐排序</div>
-        </div>
-        <div class="order" id="subscribed">
-            <ul id="result-menu">
+                    <!-- 加载分类 start-->
+                    <dl class="type_block" id="child_block">
+                        <dt>子&nbsp;类：</dt>
+                        <dd><a class="all-category" href="javascript:void(0)">全部</a></dd>
+                        <dd></dd>
+                    </dl>
+                    <!-- 加载分类 end -->
 
-            </ul>
-            <div class="page" id="subscribed-page"></div>
+                    <dl class="type_block" id="time_block">
+                        <dt>时&nbsp;间：</dt>
+                        <dd><a class="all-category active" href="javascript:void(0)">全部</a></dd>
+                        <dd>
+                            <ul class="clear time-menu">
+                                <li idx="0"><a href='javascript:void(0)'>今天</a></li>
+                                <li idx="1"><a href='javascript:void(0)'>明天</a></li>
+                                <li idx="2"><a href='javascript:void(0)'>一周内</a></li>
+                                <li idx="3"><a href='javascript:void(0)'>一月内</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                    <dl id="sort_block">
+                        <dd>
+                            <ul class="clear time-menu">
+                                <li><a class="active" href='javascript:void(0)'>按热度</a></li>
+                                <li><a href='javascript:void(0)'>按时间</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                </div>
+                <div class="loading">
+                    <img src="../../resources/icons/loading.gif">
+                    <span>努力加载中...</span>
+                </div>
+                <div id="category-lst">
+                    <div class="row">
+                        <div id="category-lst-left" class="col-6">
+                            <!--<div class='left-item category-item'>-->
+                                <!--<div>-->
+                                    <!--<img src='../../resources/temp-post/post1.jpg'>-->
+                                <!--</div>-->
+                                <!--<div class='item-info'>-->
+                                    <!--<h6 class='item-title'>【上海站】 龍FC综合格斗联赛上海站】 龍FC综合格斗联赛上海站】</h6>-->
+                                    <!--<h6 class='item-des'> 中国女排VS塞尔维亚</h6>-->
+                                    <!--&lt;!&ndash;<div class='tag'>售票中</div>&ndash;&gt;-->
+                                    <!--<div class='popularity-info'>-->
+                                        <!--<div>-->
+                                            <!--<div><i class='icon-font-large'>&#xe603;</i> <span>78人已购</span></div>-->
+
+                                        <!--</div>-->
+                                        <!--<div style='margin-left: 12px'>-->
+                                            <!--<div><i class='icon-font-large'>&#xe7fd;</i>  <span>123人浏览 </span></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class='bottom-line'>-->
+                                        <!--<div>2018.06.24 15:30</div>-->
+                                        <!--<div>常熟市体育中心体育场</div>-->
+                                    <!--</div>-->
+                                    <!--<div class='item-price'>¥&nbsp;<span>200</span>&nbsp;起</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        </div>
+                        <div id="category-lst-right" class="col-6"></div>
+                    </div>
+                    <div id="page-display-result"></div>
+                    <div class="nothing">
+                        <div><i class="icon-font">&#xe62c;</i></div>
+                        <div style="margin-top: 30px;color: #9a9a9a">这里没有相关活动 >,<</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2"></div>
         </div>
-        <div id="page-display-result"></div>
-    </div>
+
+</div>
+    <div class='footer'></div>
 </div>
 
-</div>
-<script>
-    let present_province_id = '';
-    function addProvinces() {
-        province.map(function (p) {
-            const province_item = "<li id='" + p.id + "' pname='" + p.name + "'><a><span>" + p.name + "</span></a></li>";
-            $("#province-dropdown-menu").append(province_item);
-        });
-        $("#province-dropdown-menu>li").on({'click': onProvinceMenuClick});
-    }
-    function addCitys() {
-        [{name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'},
-            {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}
-            , {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'},
-            {name: '北京'}, {name: '上海'}, {name: '南京'}, {name: '北京'}, {name: '上海'},
-            {name: '南京'}, {name: '北京'}, {name: '上海'}, {name: '南京'}].map(function (c) {
-            const city_item = "<li id='" + c.id + "' cname='" + c.name + "'><a>" + c.name + "</a></li>";
-            $("#city-menu").append(city_item);
-        });
-        $("#city-menu>li>a").on({'click': addTypeResults});
-    }
-
-    function addTypeResults() {
-        [{title: "千与千寻——久石让·宫崎骏经典作品视听音乐会"}, {title: "“魅力端午”北京交响乐团音乐会"}]
-            .map(function (r) {
-                const result_item = "<li id='" + r.id + "' cname='" + r.title + "'><div class='result-img'> <img " +
-                    "src='../../resources/icons/sample.jpg' /></div>" +
-                    "<div class='result-txt'><h3><a>" + r.title + "</a></h3></div></li>";
-                $("#result-menu").append(result_item);
-            })
-    }
-</script>
-<script>
-    layui.use(['laypage', 'layer'], function(){
-        var laypage = layui.laypage
-            ,layer = layui.layer;
-        laypage.render({
-            elem: 'page-display-result'
-            ,count: 100
-            ,theme: '#FF5722'
-        });
-    });
-</script>
-<script>
-    $(function () {
-        addCitys();
-    })
-</script>
 <script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
 <script type="text/javascript" src="../../js/common/href-helper.js"></script>
 <script type="text/javascript" src="../../js/member/nav.js"></script>
-<script type="text/javascript" src="../../js/common/type-filter.js"></script>
+<!--<script type="text/javascript" src="../../js/common/type-filter.js"></script>-->
 <script type="text/javascript" src="../../js/type/type-result.js"></script>
 </body>
 </html>

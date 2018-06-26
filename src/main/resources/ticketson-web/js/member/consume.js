@@ -61,7 +61,7 @@ function setData(data) {
             {
                 name: '类型',
                 type:'pie',
-                radius: ['30%', '70%'],
+                radius: '55%',
                 center: ['50%', '50%'],
                 data:typeData,
                 itemStyle: {
@@ -83,12 +83,16 @@ function setData(data) {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
-        legend: {},
+        legend: {
+            orient: 'horizontal',
+            x : 'center',
+            y : 'bottom',
+        },
         series: [{
             name: '类型',
             type: 'pie',
-            radius : '55%',
-            center: ['40%', '50%'],
+            radius: '55%',
+            center: ['50%', '50%'],
             data: data.subscribeData,
             itemStyle: {
                 emphasis: {

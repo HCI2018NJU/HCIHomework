@@ -12,6 +12,8 @@ import ticketson.model.*;
 import ticketson.service.ActivityService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class ActivityController {
      * @return
      */
     @PostMapping("/postInfo")
-    public @ResponseBody SpecificActivityModel postInfo(String vid,String name,String type,String description,String periods,String url,String prices){
+    public @ResponseBody SpecificActivityModel postInfo(String vid,String name,String type,String fatherType,String description,String periods,String url,String prices){
         List jsons = JSONArray.parseArray(periods);
         logger.info(periods);
         logger.info(jsons.toString());
@@ -49,7 +51,7 @@ public class ActivityController {
         for(int i=0;i<jsons.size();i++){
             periodsParse[i] = jsons.get(i).toString();
         }
-        return activityService.insertActivity(vid,name,type,description,periodsParse,url,prices);
+        return activityService.insertActivity(vid,name,type,fatherType,description,periodsParse,url,prices);
     }
 
     /**
@@ -123,20 +125,27 @@ public class ActivityController {
      * @return
      */
     @PostMapping("/getActivities")
-    public @ResponseBody List<SimpleActivityModel> getActivities(int page, int perPage){
-        System.out.println("page: " + page + ", perPage: " + perPage);
-        //在activity数据表中找寻符合数目的记录列表
-        return activityService.getActivities(page,perPage);
+    public @ResponseBody List<ActivityModel> getActivities(String type,String fatherType,Integer cityCode,Integer timeType,Integer page, Integer perPage) {
+        System.out.println(type);
+        System.out.println(fatherType);
+        System.out.println(cityCode);
+        System.out.println(timeType);
+        return activityService.getActivities(type,fatherType,cityCode,timeType,page,perPage);
     }
 
     /**
      * 获得正在售票的活动总数 ==
      * @return
      */
-    @GetMapping("/getActivitiesTotalNum")
-    public int getActivitiesTotalNum(){
-        return activityService.getActivitiesTotalNum();
+    @PostMapping("/countActivities")
+    public int getActivitiesTotalNum(String type,String fatherType,Integer cityCode,Integer timeType){
+        System.out.println(type);
+        System.out.println(fatherType);
+        System.out.println(cityCode);
+        System.out.println(timeType);
+        return activityService.countActivities(type,fatherType,cityCode,timeType);
     }
+
 
     /**
      * 根据场馆ID得到活动 ==
@@ -149,6 +158,7 @@ public class ActivityController {
     @PostMapping("/getActivitiesByVid")
     public @ResponseBody List<ActivityModel> getActivitiesByVid(String vid, int type, int page, int perPage){
         List<ActivityModel> activityModels = activityService.getActivitiesByVid(vid,type,page,perPage);
+//        System.out.println(activityModels.get(12));
         return activityModels;
     }
 

@@ -185,6 +185,9 @@ public class SubscribeServiceImpl implements SubscribeService {
         //在activity表中记录线下营业额
         Activity activity = periodRepository.findOne(pid).getActivity();
         activity.setOfflineTurnover(activity.getOfflineTurnover()+payPrice);
+        int tnum = activity.getTnum();
+        tnum += order.getTotalAmount();
+        activity.setTnum(tnum);
         activityRepository.save(activity);
         //把钱划给场馆
         Venue venue = activity.getVenue();
@@ -207,6 +210,7 @@ public class SubscribeServiceImpl implements SubscribeService {
      */
     @Override
     public void pay(long mid, long oid, Long cid, float payPrice, String bankType, long bid, String bankPsw, String couponName,float discount) {
+        System.out.println("cid:"+cid);
         Order order = orderRepository.findOne(oid);
         judgeIscanceled(order);
         long now = System.currentTimeMillis();
@@ -240,6 +244,9 @@ public class SubscribeServiceImpl implements SubscribeService {
             double turnover = activity.getTurnover();
             turnover = turnover + payPrice;
             activity.setTurnover(turnover);
+            int tnum = activity.getTnum();
+            tnum += order.getTotalAmount();
+            activity.setTnum(tnum);
             activityRepository.save(activity);
 
             //将优惠券设为已使用
@@ -317,7 +324,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         }
         //判断有没有超过15分钟
         long now = System.currentTimeMillis();
-        if(now-order.getOrderDate()>1000*60*3){
+        if(now-order.getOrderDate()>1000*60*20){
             //如果订单没有取消，则取消订单
             if(!order.getIsCanceled()){
                 cancelOrder(order);
@@ -330,7 +337,7 @@ public class SubscribeServiceImpl implements SubscribeService {
     @Transactional
     @Modifying
     public void cancelOrders(){
-        long time = System.currentTimeMillis()-1000*60*3;
+        long time = System.currentTimeMillis()-1000*60*20;
         List<Order> orders = orderRepository.findByIsUnSubscribedAndPaySuccessAndIsCanceledAndOrderDateLessThan(false,false,false,time);
         for(Order order:orders){
             cancelOrder(order);
@@ -404,6 +411,9 @@ public class SubscribeServiceImpl implements SubscribeService {
         Activity activity = order.getPeriod().getActivity();
         double turnover = activity.getTurnover()-payPrice;
         activity.setTurnover(turnover);
+        int tnum = activity.getTnum();
+        tnum -= order.getTotalAmount();
+        activity.setTnum(tnum);
         activityRepository.save(activity);
         //从经理账号划出钱
         Manager manager = managerRepository.getOne(ManagerHelper.mmid);

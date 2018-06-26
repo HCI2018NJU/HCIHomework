@@ -1,5 +1,5 @@
 let unSubscribedTotalNum = 0;
-const perPage = 10;
+const perPage = 3;
 
 getOrderTotalNum();
 
@@ -10,6 +10,14 @@ function getOrderTotalNum() {
         "isUnSubscribed":true,
     }).done(function (data) {
         unSubscribedTotalNum = parseInt(data);
+        if(unSubscribedTotalNum>0){
+            $(".nothing").css("display","none");
+            $("#unsubscribed-page").css("display","block");
+        }else {
+            $(".nothing").css("display","block");
+            $("#unsubscribed-page").css("display","none");
+        }
+
         layui.use(['laypage'],function () {
             let laypage = layui.laypage;
             laypage.render({
@@ -36,32 +44,75 @@ function getUnSubscribedList(page) {
         "pageNum":perPage,
         "isUnSubscribed":true,
     }).done(function (data) {
-        setUnSubscribedList(data);
+        // setUnSubscribedList(data);
+        setData(data);
     }).fail(function (data) {
         layer.msg(data.responseText);
     });
 }
 
-//将退订的订单列表填进界面
-function setUnSubscribedList(orders) {
-    $("#unsubscribed").find(" tbody").empty();
-    orders.map(function (order,index) {
-        const city = city_object[order.vCityCode].name;
+function setData(orders) {
+    $(".order-part").empty();
+    orders.map((order,idx)=>{
+        let city = city_object[order.vCityCode].name;
+        if(city==="市辖区"){
+            city = city_object[order.vCityCode].province;
+        }
         const order_dom =
-            "<tr>" +
-            "<td>"+order.oid+"</td>"+
-            "<td>["+order.aType+"]&nbsp;"+order.aName+"-"+city+"<br>"+order.time+"</td>"+
-            "<td>"+order.prices+"</td>"+
-            "<td>"+order.totalAmount+"</td>"+
-            "<td>"+order.couponName+"<br>会员优惠："+order.discountName+"</td>"+
-            "<td>"+order.payPrice.toFixed(2)+"<br><span style='text-decoration: line-through'>"+order.totalPrice.toFixed(2)+"</span>"+"</td>"+
-            "<td>"+order.unSubscribeFees.toFixed(2)+"</td>"+
-            "<td>"+order.state+"</td>"+
-            "<td><span style='cursor: pointer' onclick='toOrderDetail("+order.oid+")'>查看</span></td>"+
-            "</tr>";
-        $("#unsubscribed").find(" tbody").append(order_dom);
+            "<div class='order-item'>" +
+                "<ul class='order-item-title clearfix'>" +
+                    "<li style='float: left'>订单号："+order.oidshow+"</li>" +
+                    "<li style='float: right'>"+order.orderDate+"</li>" +
+                "</ul>" +
+                "<ul class='clearfix'>" +
+                    "<div class='order-item-left'>" +
+                        "<div style='float: left;display: inline-block'>" +
+                            "<a href='../../pages/venue/activity/activity-info.html?aid="+order.aid+"' target='_blank' style='float: left'>" +
+                            "<img src='"+order.aUrl+"'>" +
+                            "</a>" +
+                        "</div>" +
+                        "<div style='float: left;display: inline-block'>" +
+                            "<ul class='order-show-info'>" +
+                                "<li>" +
+                                    "<a href='../../pages/venue/activity/activity-info.html?aid="+order.aid+"' target='_blank'>" +
+                                    "<span class='order-show-info-title'>【"+order.aType+"】"+order.aName+"&nbsp;-&nbsp;"+city+"</span>" +
+                                    "</a>" +
+                                "</li>" +
+                                "<li>票价：" +
+                                    "<span class='order-detail-info'>"+order.prices+"</span>" +
+                                "</li>" +
+                                "<li>数量：" +
+                                    "<span class='order-detail-info'>"+order.totalAmount+"张</span>" +
+                                "</li>" +
+                                "<li>时间：" +
+                                    "<span class='order-detail-info'>"+order.time+"</span>" +
+                                "</li>" +
+                                "<li>场馆：" +
+                                    "<span class='order-detail-info'>"+order.vName+"</span>" +
+                                "</li>" +
+                                "<li>订单金额：" +
+                                    "<span class='order-detail-info'>¥"+order.payPrice.toFixed(2)+"</span>" +
+                                "</li>" +
+                                "<li>退订手续费：" +
+                                    "<span class='order-detail-info'>¥"+order.unSubscribeFees.toFixed(2)+"("+order.state+")</span>" +
+                                "</li>" +
+                            "</ul>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='order-item-right'>" +
+                    "<button class='order-btn-detail order-btn' oid='"+order.oid+"'>订单详情</button>" +
+                    "</div>"+
+                "</ul>" +
+            "</div>";
+        $(".order-part").append(order_dom);
+    });
+    $(".order-btn-detail").on('click',function () {
+        const oid = $(this).attr("oid");
+        toOrderDetail(oid);
     });
 }
+
+
 
 //跳转到订单详情
 function toOrderDetail(oid) {

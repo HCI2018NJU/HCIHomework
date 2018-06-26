@@ -96,6 +96,7 @@ public class ConfirmOrderModel {
      * 活动类型
      */
     public String aType;
+    public String aUrl;
 
 
 
@@ -109,6 +110,8 @@ public class ConfirmOrderModel {
      * 场馆城市
      */
     public int vCityCode;
+
+    public String vLocation;
 
 
     //下面是用户信息
@@ -194,6 +197,7 @@ public class ConfirmOrderModel {
     public void setActivityInfo(Activity activity){
         this.aName = activity.getName();
         this.aType = activity.getType();
+        this.aUrl = activity.getUrl();
         Venue venue = activity.getVenue();
         if(venue!=null){
             setVenueInfo(venue);
@@ -203,6 +207,7 @@ public class ConfirmOrderModel {
     public void setVenueInfo(Venue venue){
         this.vName = venue.getName();
         this.vCityCode = venue.getCityCode();
+        this.vLocation = venue.getLocation();
     }
 
     public void setMemberInfo(Member member){

@@ -6,40 +6,72 @@
     <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="../../css/member/my-ticketson.css">
-    <link href="../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../css/member/nav.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet">
     <script src="../../lib/jquery-3.3.1.js"></script>
     <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script src="../../lib/layui/layui.js"></script>
 </head>
 <body>
 <div id="container">
-    <div id="member-nav"></div>
+    <div id="member-nav" class="top-nav"></div>
     <div id="below-nav">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div id="coupon-header-container"></div>
-                <div id="coupon-part">
-                    <div id="my-ticketson-nav">
-                        <div tab="unused" onclick="toUnusedCoupon()">未使用优惠券</div>
-                        <div tab="expired" onclick="toExpiredCoupon()">已过期优惠券</div>
-                        <div tab="used" class="selected-tab">优惠券使用记录</div>
-                        <a href="#" style="float: right;color: #05757a;margin-top: 10px">TicketsOn优惠券适用细则</a>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="my-ticketson">我的TicketsOn</div>
+                        <div class="left-nav">
+                            <div class="left-tab">
+                                <a href="../../pages/member/order-manage.html">我的订单</a>
+                            </div>
+                            <div class="left-tab active-left">
+                                <a href="../../pages/member/coupon.html">我的优惠券</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/consume.html">我的账单</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="coupon" style="display: none" id="used">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>优惠券号码</th>
-                                <th>名称</th>
-                                <th>优惠说明</th>
-                                <th>订单号码</th>
-                                <th>消费时间</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        <div class="page" id="used-page"></div>
+                    <div class="col-10">
+                        <div class="right-part">
+                            <div id="exchange-part">
+                                <div id="my-ticketson-nav" style="display: inline-block;float: left">
+                                    <div tab="can-exchange" onclick="toCoupon()">可兑换</div>
+                                    <div tab="unused" onclick="toUnusedCoupon()">未使用</div>
+                                    <div tab="used" class="selected-tab">已使用</div>
+                                    <div tab="expired" onclick="toExpiredCoupon()">已过期</div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 58px">
+                                <div class="coupon-left-part col-6">
+                                    <!--<div class='coupon-item coupon-used'>-->
+                                        <!--<div class='coupon-item-left-part'>-->
+                                            <!--<div>¥<span class='minus'>80</span></div>-->
+                                            <!--<div class='min'>订单金额满<span>500</span>可使用</div>-->
+                                            <!--<div class='min-credit'>兑换此优惠券将消耗<span>500</span>积分</div>-->
+                                        <!--</div>-->
+                                        <!--<div class='coupon-item-right-part'>-->
+                                            <!--<div>立即领取</div>-->
+                                        <!--</div>-->
+                                        <!--<div class='used-icon'>-->
+                                            <!--<i class="icon-font">&#xe64d;</i>-->
+                                            <!--<div>使用日期：2018.06.10</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="coupon-right-part col-6">
+                                </div>
+                            </div>
+
+                            <div class="nothing">
+                                <div><i class="icon-font">&#xe62c;</i></div>
+                                <div style="margin-top: 30px;color: #9a9a9a">暂无数据</div>
+                            </div>
+                            <div class="page" id="used-page"></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -55,7 +87,7 @@
     });
 </script>
 <script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
-<script type="text/javascript" src="../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../js/member/nav.js"></script>
 <script type="text/javascript" src="../../js/common/href-helper.js"></script>
 <script type="text/javascript" src="../../js/common/result-helper.js"></script>
 <script type="text/javascript" src="../../js/member/coupon-header.js"></script>

@@ -15,34 +15,47 @@
 </head>
 <body>
 <div id="container">
-    <div id="member-nav" class="header"></div>
+    <div id="member-nav" class="top-nav"></div>
     <div id="below-nav">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div id="coupon-header-container"></div>
-                <div id="coupon-part">
-                    <div id="coupon-nav-container"></div>
-                    <div id="my-ticketson-nav">
-                        <div tab="unused" class="selected-tab">未使用优惠券</div>
-                        <div tab="expired" onclick="toExpiredCoupon()">已过期优惠券</div>
-                        <div tab="used" onclick="toUsedCoupon()">优惠券使用记录</div>
-                        <a href="#" style="float: right;color: #05757a;margin-top: 10px">TicketsOn优惠券适用细则</a>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="my-ticketson">我的TicketsOn</div>
+                        <div class="left-nav">
+                            <div class="left-tab">
+                                <a href="../../pages/member/order-manage.html">我的订单</a>
+                            </div>
+                            <div class="left-tab active-left">
+                                <a href="../../pages/member/coupon.html">我的优惠券</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/consume.html">我的账单</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="coupon" id="unused">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>优惠券号码</th>
-                                <th>名称</th>
-                                <th>优惠说明</th>
-                                <th>适用范围</th>
-                                <th>有效期</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        <div class="page" id="unused-page"></div>
+                    <div class="col-10">
+                        <div class="right-part">
+                            <div id="exchange-part">
+                                <div id="my-ticketson-nav" style="display: inline-block;float: left">
+                                    <div tab="can-exchange" class="selected-tab">可兑换</div>
+                                    <div tab="unused" onclick="toUnusedCoupon()">未使用</div>
+                                    <div tab="used" onclick="toUsedCoupon()">已使用</div>
+                                    <div tab="expired" onclick="toExpiredCoupon()">已过期</div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 58px">
+                                <div class="coupon-left-part col-6"></div>
+                                <div class="coupon-right-part col-6"></div>
+                            </div>
+
+                            <div class="nothing">
+                                <div><i class="icon-font">&#xe62c;</i></div>
+                                <div style="margin-top: 30px;color: #9a9a9a">暂无数据</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

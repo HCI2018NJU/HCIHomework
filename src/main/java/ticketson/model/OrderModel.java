@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class OrderModel {
     public Long oid;
+    public Long oidshow;
 
     /**
      * 订单生成时间，可以用来判断是否支付过期
@@ -98,6 +99,10 @@ public class OrderModel {
      */
     public String aType;
 
+    public String aUrl;
+
+    public long aid;
+
 
     //下面是场馆信息
     /**
@@ -110,6 +115,16 @@ public class OrderModel {
      */
     public int vCityCode;
 
+    public int addCredit;
+
+    /**
+     * 用户信息
+     */
+    public String mName;
+
+    public String mEmail;
+
+    public boolean canUnsubscribe;
 
     //下面是票的信息
 
@@ -120,6 +135,8 @@ public class OrderModel {
 
     public OrderModel(Order order) {
         this.oid = order.getOid();
+        this.oidshow = Long.MAX_VALUE/2-this.oid;
+
         this.orderDate = DateHelper.format(order.getOrderDate());
         this.totalAmount = order.getTotalAmount();
         this.totalPrice = order.getTotalPrice();
@@ -132,24 +149,30 @@ public class OrderModel {
         this.isUnSubscribed = order.getIsUnSubscribed();
         this.unSubscribeFees = order.getUnSubscribeFees();
         this.couponName = order.getCouponName();
+        this.addCredit = CreditHelper.addCredit(this.payPrice);
+        this.canUnsubscribe = true;
         if(this.couponName==null){
             this.couponName = "无优惠券";
         }
         //如果是线下购买
         if(order.getIsOfflinePurchase()){
-            state = "线下购买";
+            state = "预定成功";
+            this.canUnsubscribe = false;
+
         }else {
             //如果已经退订
             if(order.getIsUnSubscribed()){
                 if(order.getIsImmediatePurchase() && order.getIsAllocated() && !order.getAllocateSucceeded()){
                     state = "配票失败";
                 }else {
-                    state = "用户退订";
+                    state = "已退订";
                 }
                 //如果没有退订
             }else {
-                if(!order.getIsImmediatePurchase()){
-                    state = "选座购买";
+                if(!order.getPaySuccess()){
+                    state = "等待支付";
+                }else if(!order.getIsImmediatePurchase()){
+                    state = "预定成功";
                     //如果是直接购买
                 }else if(order.getIsImmediatePurchase()&&!order.getIsAllocated()){
                     state = "未配票";
@@ -170,11 +193,25 @@ public class OrderModel {
             setTicketsInfo(ticketList);
         }
 
+        Member member = order.getMember();
+        if(member!=null){
+            setMemberInfo(member);
+        }
 
+
+    }
+
+    public void setMemberInfo(Member member){
+        this.mName = member.getNickname();
+        this.mEmail = member.getEmail();
     }
 
     public void setPeriodInfo(Period period){
         this.time = DateHelper.format(period.getBegin());
+        //如果已经开场，则不可以退订
+        if(period.getBegin()<System.currentTimeMillis()){
+            this.canUnsubscribe = false;
+        }
         Activity activity = period.getActivity();
         if(activity!=null){
             setActivityInfo(activity);
@@ -184,6 +221,8 @@ public class OrderModel {
     public void setActivityInfo(Activity activity){
         this.aName = activity.getName();
         this.aType = activity.getType();
+        this.aUrl = activity.getUrl();
+        this.aid = activity.getAid();
         Venue venue = activity.getVenue();
         if(venue!=null){
             setVenueInfo(venue);

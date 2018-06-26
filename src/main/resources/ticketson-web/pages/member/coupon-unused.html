@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TicketsOn-订单管理</title>
+    <title>TicketsOn-我的优惠券</title>
     <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/member/nav.css" rel="stylesheet">
     <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
+    <link href="../../css/member/nav.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/member/my-ticketson.css">
-    <link href="../../css/common/common.css" rel="stylesheet" />
+    <link href="../../css/common/common.css" rel="stylesheet">
+
     <script src="../../lib/jquery-3.3.1.js"></script>
     <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script src="../../lib/layui/layui.js"></script>
@@ -23,11 +24,11 @@
                     <div class="col-2">
                         <div class="my-ticketson">我的TicketsOn</div>
                         <div class="left-nav">
-                            <div class="left-tab active-left">
+                            <div class="left-tab">
                                 <a href="../../pages/member/order-manage.html">我的订单</a>
                             </div>
-                            <div class="left-tab">
-                                <a href="../../pages/member/coupon.html">我的优惠券</a>
+                            <div class="left-tab active-left">
+                                <a href="../../pages/member/consume.html">我的优惠券</a>
                             </div>
                             <div class="left-tab">
                                 <a href="../../pages/member/consume.html">我的账单</a>
@@ -38,21 +39,34 @@
                         <div class="right-part">
                             <div id="exchange-part">
                                 <div id="my-ticketson-nav" style="display: inline-block;float: left">
-                                    <div tab="subscribed" class="selected-tab">已预订</div>
-                                    <div tab="unsubscribed" onclick="toUnsubscribed()">已退订</div>
-                                    <div tab="toPay" onclick="toToPay()">未支付</div>
-                                </div>
-                                <div style="display: inline-block;float: right;margin-top: 6px">
-                                    <input id="orderid-input" class='ticketson-input' placeholder="订单编号">
-                                    <button class="ticketson-btn" onclick="toOrderInfo()">查询</button>
+                                    <div tab="can-exchange" onclick="toCoupon()">可兑换</div>
+                                    <div tab="unused" class="selected-tab">未使用</div>
+                                    <div tab="used" onclick="toUsedCoupon()">已使用</div>
+                                    <div tab="expired" onclick="toExpiredCoupon()">已过期</div>
                                 </div>
                             </div>
-                            <div class="order-part"></div>
+                            <div class="row" style="margin-top: 58px">
+                                <div class="coupon-left-part col-6">
+                                    <div class='coupon-item'>
+                                    <div class='coupon-item-left-part'>
+                                    <div>¥<span class='minus'>80</span></div>
+                                    <div class='min'>订单金额满<span>500</span>可使用</div>
+                                    <div class='min-credit'>兑换此优惠券将消耗<span>500</span>积分</div>
+                                    </div>
+                                    <div class='coupon-item-right-part'>
+                                    <div>立即领取</div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="coupon-right-part col-6">
+                                </div>
+                            </div>
+
                             <div class="nothing">
                                 <div><i class="icon-font">&#xe62c;</i></div>
                                 <div style="margin-top: 30px;color: #9a9a9a">暂无数据</div>
                             </div>
-                            <div class="page" id="subscribed-page"></div>
+                            <div class="page" id="unused-page"></div>
                         </div>
 
                     </div>
@@ -73,5 +87,6 @@
 <script type="text/javascript" src="../../js/member/nav.js"></script>
 <script type="text/javascript" src="../../js/common/href-helper.js"></script>
 <script type="text/javascript" src="../../js/common/result-helper.js"></script>
-<script type="text/javascript" src="../../js/member/order-manage.js"></script>
+<script type="text/javascript" src="../../js/member/coupon-header.js"></script>
+<script type="text/javascript" src="../../js/member/coupon-unused.js"></script>
 </html>

@@ -4,6 +4,7 @@ import ticketson.entity.*;
 import ticketson.util.CreditHelper;
 import ticketson.util.DateHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.TreeMap;
  */
 public class SimpleOrderModel {
     public Long oid;
+    public Long oidshow;
 
     /**
      * 订单生成时间，可以用来判断是否支付过期
@@ -90,15 +92,20 @@ public class SimpleOrderModel {
 
     //下面是活动信息
 
+
     /**
      * 活动名称
      */
     public String aName;
 
+    public long aid;
+
     /**
      * 活动类型
      */
     public String aType;
+
+    public String aUrl;
 
 
     //下面是场馆信息
@@ -119,7 +126,9 @@ public class SimpleOrderModel {
 
     public SimpleOrderModel(Order order) {
         this.oid = order.getOid();
-        this.orderDate = DateHelper.format(order.getOrderDate());
+        this.oidshow = Long.MAX_VALUE/2-this.oid;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        this.orderDate = simpleDateFormat.format(order.getOrderDate());
         this.totalAmount = order.getTotalAmount();
         this.totalPrice = order.getTotalPrice();
         this.payPrice = order.getPayPrice();
@@ -145,12 +154,14 @@ public class SimpleOrderModel {
                 if(order.getIsImmediatePurchase() && order.getIsAllocated() && !order.getAllocateSucceeded()){
                     state = "配票失败";
                 }else {
-                    state = "用户退订";
+                    state = "已退订";
                 }
                 //如果没有退订
             }else {
-                if(!order.getIsImmediatePurchase()){
-                    state = "选座购买";
+                if(!order.getPaySuccess()){
+                    state = "等待支付";
+                }if(!order.getIsImmediatePurchase()){
+                    state = "预定成功";
                     //如果是直接购买
                 }else if(order.getIsImmediatePurchase()&&!order.getIsAllocated()){
                     state = "未配票";
@@ -182,6 +193,8 @@ public class SimpleOrderModel {
     private void setActivityInfo(Activity activity){
         this.aName = activity.getName();
         this.aType = activity.getType();
+        this.aUrl = activity.getUrl();
+        this.aid = activity.getAid();
         Venue venue = activity.getVenue();
         if(venue!=null){
             setVenueInfo(venue);

@@ -10,6 +10,8 @@ import ticketson.model.CouponModel;
 import ticketson.service.CouponService;
 import ticketson.model.CouponTypeModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,7 +64,7 @@ public class CouponController {
      */
     @PostMapping("/getUnusedCoupons")
     public @ResponseBody List<CouponModel> getUnusedCoupons(long mid,long date,int page,int pageNum){
-        return couponService.getUnusedCoupons(mid,date,page,pageNum);
+        return couponService.getUnusedCoupons(mid,System.currentTimeMillis(),page,pageNum);
     }
 
     /**
@@ -72,7 +74,7 @@ public class CouponController {
      */
     @PostMapping("/getUnusedCouponTotalNum")
     public int getUnusedCouponTotalNum(long mid,long date){
-        return couponService.getUnusedCouponTotalNum(mid,date);
+        return couponService.getUnusedCouponTotalNum(mid,System.currentTimeMillis());
     }
 
 
@@ -84,7 +86,8 @@ public class CouponController {
      */
     @PostMapping("/getExpiredCouponTotalNum")
     public int getExpiredCouponTotalNum(long mid,long date){
-        return couponService.getExpiredCouponTotalNum(mid,date);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(date));
+        return couponService.getExpiredCouponTotalNum(mid,System.currentTimeMillis());
     }
 
     /**
@@ -96,7 +99,7 @@ public class CouponController {
      */
     @PostMapping("/getExpiredCoupons")
     public @ResponseBody List<CouponModel> getExpiredCoupons(long mid,long date,int page,int pageNum){
-        return couponService.getExpiredCoupons(mid,date,page,pageNum);
+        return couponService.getExpiredCoupons(mid,System.currentTimeMillis(),page,pageNum);
     }
 
     /**
@@ -105,6 +108,7 @@ public class CouponController {
      * @param type
      * @return
      */
+
     @PostMapping("/exchangeCoupon")
     public void exchangeCoupon(long mid,int type){
         couponService.exchangeCoupon(mid,type);

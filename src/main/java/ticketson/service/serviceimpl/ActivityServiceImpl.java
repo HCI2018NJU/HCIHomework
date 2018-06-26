@@ -28,6 +28,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -94,16 +95,19 @@ public class ActivityServiceImpl implements ActivityService{
      * @return
      */
     @Override
-    public SpecificActivityModel insertActivity(String vid,String name,String type,String description,String[] periods, String url, String prices) {
+    public SpecificActivityModel insertActivity(String vid,String name,String type,String fatherType,String description,String[] periods, String url, String prices) {
         Venue venue = venueRepository.findOne(vid);
         //创建并保存一条活动记录
         Activity activity = new Activity();
         activity.setVenue(venue);
         activity.setName(name);
         activity.setType(type);
+        activity.setFatherType(fatherType);
         activity.setDescription(description);
         activity.setUrl(url);
         activity.setPrices(prices);
+        activity.setVname(venue.getName());
+        activity.setCityCode(venue.getCityCode());
         activity = activityRepository.saveAndFlush(activity);
         //保存场次
         List<Period> periodList = new ArrayList<>();
@@ -161,6 +165,8 @@ public class ActivityServiceImpl implements ActivityService{
      */
     public SpecificActivityModel getActivity(long aid){
         Activity activity = activityRepository.findOne(aid);
+        activity.setPageView(activity.getPageView()+1);
+        activityRepository.save(activity);
         return new SpecificActivityModel(activity);
     }
 
@@ -237,25 +243,126 @@ public class ActivityServiceImpl implements ActivityService{
      * @return 正在卖票的活动
      */
     @Override
-    public List<SimpleActivityModel> getActivities(int page, int perPage) {
+    public List<ActivityModel> getActivities(String type,String fatherType,Integer cityCode,Integer timeType,Integer page, Integer perPage) {
         Sort sort = new Sort(Sort.Direction.DESC,"endSell");
         PageRequest pageRequest = new PageRequest(page,perPage,sort);
-        List<Activity> activities = activityRepository.findByEndSellGreaterThan(
-                System.currentTimeMillis(),pageRequest).getContent();
+        List<Activity> activities = filter(type,fatherType,cityCode,timeType,pageRequest);
         System.out.println("activitySize:"+activities.size());
-        List<SimpleActivityModel> result = new ArrayList<>();
+        List<ActivityModel> result = new ArrayList<>();
         Activity activity = null;
         for (int i = 0; i < activities.size(); i++) {
             activity = activities.get(i);
-            SimpleActivityModel simpleActivityModel = new SimpleActivityModel(activity);
-            result.add(simpleActivityModel);
+            ActivityModel activityModel = new ActivityModel(activity);
+            result.add(activityModel);
         }
         return result;
     }
 
+    private List<Activity> filter(String type,String fatherType,Integer cityCode,Integer timeType,PageRequest pageRequest){
+        long now = System.currentTimeMillis();
+        System.out.println(type.equals(""));
+        System.out.println(fatherType.equals(""));
+        System.out.println(cityCode==0);
+        //所有时间
+        if(timeType==null||timeType==0){
+            if(cityCode==0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.findByEndSellGreaterThan(now,pageRequest).getContent();
+            }else if(cityCode==0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.findByFatherTypeAndEndSellGreaterThan(fatherType,now,pageRequest).getContent();
+            }else if(cityCode==0&&!type.equals("")){
+                return activityRepository.findByTypeAndEndSellGreaterThan(type,now,pageRequest).getContent();
+            }if(cityCode!=0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.findByCityCodeAndEndSellGreaterThan(cityCode,now,pageRequest).getContent();
+            }else if(cityCode!=0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.findByCityCodeAndFatherTypeAndEndSellGreaterThan(cityCode,fatherType,now,pageRequest).getContent();
+            }else if(cityCode!=0&&!type.equals("")){
+                return activityRepository.findByCityCodeAndTypeAndEndSellGreaterThan(cityCode,type,now,pageRequest).getContent();
+            }
+        }else {
+            long time = getTime(timeType);
+            if(cityCode==0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.findByEndSellGreaterThanAndEndSellLessThanEqual(now,time,pageRequest).getContent();
+            }else if(cityCode==0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.findByFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(fatherType,now,time,pageRequest).getContent();
+            }else if(cityCode==0&&!type.equals("")){
+                return activityRepository.findByTypeAndEndSellGreaterThanAndEndSellLessThanEqual(type,now,time,pageRequest).getContent();
+            }if(cityCode!=0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.findByCityCodeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,now,time,pageRequest).getContent();
+            }else if(cityCode!=0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.findByCityCodeAndFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,fatherType,now,time,pageRequest).getContent();
+            }else if(cityCode!=0&&!type.equals("")){
+                return activityRepository.findByCityCodeAndTypeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,type,now,time,pageRequest).getContent();
+            }
+
+
+        }
+
+        return activityRepository.findByEndSellGreaterThan(now,pageRequest).getContent();
+
+    }
+    
+    private long getTime(int timeType){
+        Calendar calendar = Calendar.getInstance();
+        long time = System.currentTimeMillis();
+        if(timeType==1){
+            //today
+            calendar.set(calendar.get(Calendar.YEAR),Calendar.MONTH,Calendar.DATE);
+            time = calendar.getTimeInMillis();
+        }else if(timeType==2){
+            //tomorrow
+            calendar.set(calendar.get(Calendar.YEAR),Calendar.MONTH,Calendar.DATE+1);
+            time = calendar.getTimeInMillis();
+        }else if(timeType==3){
+            //within a week
+            calendar.set(calendar.get(Calendar.YEAR),Calendar.MONTH,Calendar.DATE+7);
+            time = calendar.getTimeInMillis();
+        }else if(timeType==4){
+            //within a month
+            calendar.set(calendar.get(Calendar.YEAR),Calendar.MONTH+1,Calendar.DATE);
+            time = calendar.getTimeInMillis();
+        }
+        return time;
+    }
+
     @Override
-    public int getActivitiesTotalNum() {
-        return activityRepository.countByEndSellGreaterThan(System.currentTimeMillis());
+    public int countActivities(String type,String fatherType,Integer cityCode,Integer timeType) {
+        long now = System.currentTimeMillis();
+        //所有时间
+        if(timeType==null||timeType==0){
+            if(cityCode==0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.countByEndSellGreaterThan(now);
+            }else if(cityCode==0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.countByFatherTypeAndEndSellGreaterThan(fatherType,now);
+            }else if(cityCode==0&&!type.equals("")){
+                return activityRepository.countByTypeAndEndSellGreaterThan(type,now);
+            }if(cityCode!=0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.countByCityCodeAndEndSellGreaterThan(cityCode,now);
+            }else if(cityCode!=0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.countByCityCodeAndFatherTypeAndEndSellGreaterThan(cityCode,fatherType,now);
+            }else if(cityCode!=0&&!type.equals("")){
+                return activityRepository.countByCityCodeAndTypeAndEndSellGreaterThan(cityCode,type,now);
+            }
+        }else {
+            long time = getTime(timeType);
+            if(cityCode==0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.countByEndSellGreaterThanAndEndSellLessThanEqual(now,time);
+            }else if(cityCode==0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.countByFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(fatherType,now,time);
+            }else if(cityCode==0&&!type.equals("")){
+                return activityRepository.countByTypeAndEndSellGreaterThanAndEndSellLessThanEqual(type,now,time);
+            }if(cityCode!=0&&type.equals("")&&fatherType.equals("")){
+                return activityRepository.countByCityCodeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,now,time);
+            }else if(cityCode!=0&&type.equals("")&&!fatherType.equals("")){
+                return activityRepository.countByCityCodeAndFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,fatherType,now,time);
+            }else if(cityCode!=0&&!type.equals("")){
+                return activityRepository.countByCityCodeAndTypeAndEndSellGreaterThanAndEndSellLessThanEqual(cityCode,type,now,time);
+            }
+
+
+        }
+
+        return activityRepository.countByEndSellGreaterThan(now);
+
     }
 
     /**

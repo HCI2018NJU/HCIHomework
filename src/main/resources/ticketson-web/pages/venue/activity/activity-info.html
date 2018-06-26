@@ -16,366 +16,338 @@
 </head>
 <body>
 <div id="container">
-    <div id="member-nav" class="header"></div>
-    <div id="crumb-guide">TicketsOn&nbsp;>&nbsp;<span id="city-guide"></span>&nbsp;>&nbsp;<span id="type-guide"></span></div>
-    <div id="activity-container">
-        <div id="activity-info">
-            <div id="activity-pic-wrapper">
-                <img id="activity-pic">
+    <div id="member-nav" class="top-nav"></div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div id="crumb-guide">TicketsOn&nbsp;>&nbsp;<span id="city-guide"></span>&nbsp;>&nbsp;<span id="type-guide"></span></div>
+            <div id="activity-container">
+                <div id="activity-info">
+                    <div id="activity-pic-wrapper">
+                        <img id="activity-pic">
+                    </div>
+                    <div id="activity-info-container">
+                        <div id="activity-info-wrapper">
+                            <div class="paragraph activity-title">
+                                <span id="type">演唱会·流行</span>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span id="title">[A CLASSIC TOUR 学友·经典]世界巡回演唱会</span>
+                                <span>-</span>
+                                <span id="city">佛山站</span>
+                            </div>
+                            <div style="overflow: auto" id="activity-description">
+                                根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +
+                                "每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。
+                            </div>
+                            <div class="paragraph"><a id="more-description" onclick="unfold()" folded="fold">展开</a></div>
+                            <!--<div class="paragraph" id="progress-bar">-->
+                            <!--<span><label></label></span>-->
+                            <!--</div>-->
+                            <div class="paragraph">
+                                <div id="period-label">
+                                    <label>演出时间：</label>
+                                </div>
+                                <div id="period-part">
+                                    <!--<label>2018-09-17 09:00:00</label>-->
+                                    <!--<label>2018-09-17 09:00:00</label>-->
+                                    <!--<label>2018-09-17 09:00:00</label>-->
+                                </div>
+                            </div>
+                            <div class="paragraph">
+                                <div id="price-label">
+                                    <label>选择票价：</label>
+                                </div>
+                                <div id="price-part">
+                                    <!--<label>80</label>-->
+                                </div>
+                            </div>
+                            <button class="ticketson-btn-primary" style="margin-left: 10%" onclick="toChooseSeat()">选座购买
+                            </button>
+                            <button class="ticketson-btn" style="margin-left: 20px" onclick="showSubscribeCard()">立即预订</button>
+                        </div>
+                        <div id="venue-info-wrapper">
+                            <div class="paragraph">
+                                <span class="activity-title" id="venue-name">星光剧院</span>
+                                <span id="venue-city">江苏省·南京市·栖霞区</span>
+                            </div>
+                            <div class="paragraph" style="color: #7a7a7a;"><i class="icon-font">&#xe617;</i><span
+                                    id="venue-location"></span></div>
+                            <!--<div class="paragraph" style="text-indent: 28px" id="venue-description">-->
+                            <!--根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +-->
+                            <!--"每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div id="subscribe-wrapper" class="disappear">
+                        <div id="subscribe-title">¥<span>80</span>&nbsp;&nbsp;每张
+                            <button class="ticketson-btn-gray" onclick="cancelBuyImmediately()">取消</button>
+                        </div>
+                        <div id="subscribe-period-part">
+                            <div class="subscribe-label">场次</div>
+                            <div id="period-choice">2018-09-17 09:00:00</div>
+                        </div>
+                        <div id="sum-part" class="layui-form">
+                            <div class="subscribe-label">张数</div>
+                            <div class="layui-form-item">
+                                <div id="subscribe-number-wrapper" class="layui-input-inline" style="width: 100%">
+                                    <select id="subscribe-number" name="number"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="submit-part">
+                            <button style="width: 100%" class="ticketson-btn-primary" onclick="immediatePurchase()">立即支付
+                            </button>
+                            <div class="message" style="padding-top: 10px;text-align: center">演出开场前两周将会为您配票</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="activity-info-container">
-                <div id="activity-info-wrapper">
-                    <div class="paragraph activity-title">
-                        <span id="type">演唱会·流行</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span id="title">[A CLASSIC TOUR 学友·经典]世界巡回演唱会</span>
-                        <span>-</span>
-                        <span id="city">佛山站</span>
-                    </div>
-                    <div style="overflow: auto" id="activity-description">
-                        根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +
-                        "每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。
-                    </div>
-                    <div class="paragraph"><a id="more-description" onclick="unfold()" folded="fold">展开</a></div>
-                    <!--<div class="paragraph" id="progress-bar">-->
-                    <!--<span><label></label></span>-->
-                    <!--</div>-->
-                    <div class="paragraph">
-                        <div id="period-label">
-                            <label>演出时间：</label>
-                        </div>
-                        <div id="period-part">
-                            <!--<label>2018-09-17 09:00:00</label>-->
-                            <!--<label>2018-09-17 09:00:00</label>-->
-                            <!--<label>2018-09-17 09:00:00</label>-->
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <div id="price-label">
-                            <label>选择票价：</label>
-                        </div>
-                        <div id="price-part">
-                            <!--<label>80</label>-->
-                        </div>
-                    </div>
-                    <button class="ticketson-btn-primary" style="margin-left: 10%" onclick="toChooseSeat()">选座购买
-                    </button>
-                    <button class="ticketson-btn" style="margin-left: 20px" onclick="showSubscribeCard()">立即预订</button>
-                </div>
-                <div id="venue-info-wrapper">
-                    <div class="paragraph">
-                        <span class="activity-title" id="venue-name">星光剧院</span>
-                        <span id="venue-city">江苏省·南京市·栖霞区</span>
-                    </div>
-                    <div class="paragraph" style="color: #7a7a7a;"><i class="icon-font">&#xe617;</i><span
-                            id="venue-location"></span></div>
-                    <!--<div class="paragraph" style="text-indent: 28px" id="venue-description">-->
-                    <!--根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +-->
-                    <!--"每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。-->
-                    <!--</div>-->
-                </div>
-            </div>
-            <div id="subscribe-wrapper" class="disappear">
-                <div id="subscribe-title">¥<span>80</span>&nbsp;&nbsp;每张
-                    <button class="ticketson-btn-gray" onclick="cancelBuyImmediately()">取消</button>
-                </div>
-                <div id="subscribe-period-part">
-                    <div class="subscribe-label">场次</div>
-                    <div id="period-choice">2018-09-17 09:00:00</div>
-                </div>
-                <div id="sum-part" class="layui-form">
-                    <div class="subscribe-label">张数</div>
-                    <div class="layui-form-item">
-                        <div id="subscribe-number-wrapper" class="layui-input-inline" style="width: 100%">
-                            <select id="subscribe-number" name="number"></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="submit-part">
-                    <button style="width: 100%" class="ticketson-btn-primary" onclick="immediatePurchase()">立即支付
-                    </button>
-                    <div class="message" style="padding-top: 10px;text-align: center">演出开场前两周将会为您配票</div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="added-info" class="row">
-        <div class="col-9">
-            <div class="mn">
-                <!-- 项目详情 begin -->
-                <div class="m-detail">
-                    <!-- 项目详情选项卡 begin -->
-                    <div class="m-infonav" id="m-infonav">
+            <div id="added-info" class="row">
+                <div class="col-9">
+                    <div class="mn">
+                        <!-- 项目详情 begin -->
+                        <div class="m-detail">
+                            <!-- 项目详情选项卡 begin -->
+                            <div class="m-infonav" id="m-infonav">
+                                <div class="hd">
+                                    <div class="nav">
+                                        <ul class="tab1">
+                                            <li><a data-href="#m-infonav" href="javascript:;" class="itm itm-tab first z-crt" id="tabProjectDescn" data-show="1,2" data-idx="0"><i></i><span class="txt">演出信息</span></a></li>
+                                            <li><a data-href="#m-infonav" href="javascript:;" class="itm itm-tab" data-idx="1"><i></i><span class="txt">购买说明</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bd">
+                                    <div class="itm-tab z-show" rel="0">
+                                        <!-- 演出信息 begin -->
+                                        <div class="m-infobase m-liveinfo">
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">基本信息</span></dt>
+                                                <dd class="ct">
+                                                    <div class="table-info1">
+                                                        <table class="m-table2">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td width="90" class="bg">演出时间</td><td>2018.08.30-09.02</td>  							                                  <td width="90" class="bg">演出场馆</td><td width="200">保利剧院</td>                                 </tr><tr> 							  							   </tr><tr> 							                                  <td width="90" class="bg">入场时间</td><td width="200">约 演出前30-60分钟</td> 							                                							                                                              							                                							  								<td class="bg">限购</td><td>选座购买每单限6张，立即购买每单限20张。</td>                                </tr><tr> 							  							   </tr><tr> 							                                 </tr><tr> 							                                  <td class="bg">儿童入场提示</td><td>1.2米以下儿童谢绝入场（儿童项目除外），1.2米以上儿童需持票入场。</td> 							  							  							  							    							  							    								<td class="bg">禁止携带物品</td>
+                                                                <td data-spm-anchor-id="a2o6e.project.0.i4.23346f2aHJXcdZ">食品、饮料、相机、充电宝、打火机等。</td>
+                                                            </tr>  <tr>  															  							    								<td class="bg">付款时效提醒</td>
+                                                                <td>购票下单成功后需在15分钟内完成支付，未支付成功的订单，将在下单15分钟后系统自动取消，所选价位将自动释放后重新点亮，大家可及时刷新购票页面进行购买。</td>
+                                                                <td class="bg">缺货登记提醒</td>
+                                                                <td>所需票价若为灰色，说明已经售完。您可以在当前页面进行缺货登记，后期如果有票会以短信形式及时通知。</td>
+                                                            </tr>  <tr>  															  							    								<td class="bg">发票说明</td>
+                                                                <td>如需发票，请您在演出前通过订单页补开，发票将在演出结束后1个月左右，统一由主办方提供。<br></td>
+                                                                <td class="bg">座位类型</td>
+                                                                <td><br>对号入座</td>
+                                                            </tr>  <tr>  															  							    							  							    							  							    							  							    								<td class="bg">不支持退换</td>
+                                                                <td>本项目不支持退换票。如无法正常观看，还请自行处理。给您带来不便敬请谅解！ </td>
+
+                                                                <td class="bg"></td><td></td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+
+
+
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">温馨提示</span></dt>
+                                                <dd class="ct">
+                                                    <div class="table-info1">
+                                                        <table class="m-table2">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="bg">发票说明</td><td>如需发票，请您在演出前通过订单页补开，发票将在演出结束后1个月左右，统一由主办方提供。<br></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+
+                                        </div>
+                                        <!-- 演出信息 end -->
+                                    </div>
+                                    <!-- 1 -->
+
+                                    <div class="itm-tab" rel="1">
+                                        <!-- 购票说明 begin -->
+                                        <div class="m-infobase m-buydesc">
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">特别提示</span></dt>
+                                                <dd>
+                                                    <h3 class="stt">售前提示</h3>
+                                                    <p>1.为避免快递配送不能及时送达，演出距开场时间少于3天时不提供【快递配送】服务，请您谅解！您可以选择电子票或在线支付后上门自取纸质票。 <a href="//help.damai.cn/damai/contents/277/5966.html" target="_blank" title="点击查看上门取票地址">点击查看上门取票地址&gt;&gt;</a></p></dd>
+                                                <dd>
+                                                    <p>2.凡演出票类商品，开票时间一般为演出前二到四周，正式开票后会第一时间短信通知您，请注意接收。</p>
+                                                </dd>
+                                                <dd>
+                                                    <p>3.如您不是通过“选座购买”通道进行的票品购买，最终票品数量视项目主办方及场馆情况而定，正式开票后大麦网将根据用户付款先后顺序依次配票，可能存在票品不足不能为您配票的风险，如最终未能配票，大麦网承诺全额退款，但不承担其他损失。</p>
+                                                </dd>
+                                                <dd>
+                                                    <h3 class="stt">支付方式</h3>
+                                                    <p>网上银行（招商银行等） 支付平台（支付宝等） 转账汇款(招商银行等)　<a href="//help.damai.cn/damai/contents/281/5740.html" target="_blank" title="查看详情">查看详情&gt;&gt;</a></p>
+                                                </dd>
+                                                <dd>
+                                                    <h3 class="stt">退/换货说明</h3>
+                                                    <p>针对不可抗力和非不可抗力的退/换票情况和处理，请点击查阅<a title="大麦网退换货说明" target="_blank" href="//help.damai.cn/damai/contents/299/2228.html">大麦网退换货说明&gt;&gt;</a></p>
+                                                </dd>
+                                            </dl>
+                                        </div>
+
+                                        <!-- 购票说明 end -->
+                                        <div class="m-infobase m-paymode" style="display: block;">
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">在线支付</span></dt>
+                                                <dd><p>支持多家网上银行、支付平台（支付宝、快钱、银联、微信支付等）在线支付，<a href="//help.damai.cn/damai/channels/281.html" target="_blank">查看详情&gt;&gt;</a></p></dd>
+                                                <dd style="overflow: auto;display: block">
+                                                    <h3 class="stt">支付平台：</h3>
+                                                    <ul class="lst">
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/2.jpg" alt="支付宝" style="display: inline;" src="//static.dmcdn.cn/PayLogo/2.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/57.jpg" alt="微信扫码支付" style="display: inline;" src="//static.dmcdn.cn/PayLogo/57.jpg"></li>
+                                                    </ul>
+                                                </dd>
+                                                <dd style="display: block;overflow: auto">
+                                                    <h3 class="stt">网上银行：</h3>
+                                                    <ul class="lst">
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/10.jpg" alt="招商银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/10.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/11.jpg" alt="中国建设银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/11.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/12.jpg" alt="中国工商银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/12.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/13.jpg" alt="交通银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/13.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/14.jpg" alt="中国农业银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/14.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/15.jpg" alt="广东发展银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/15.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/17.jpg" alt="中国银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/17.jpg"></li>
+                                                        <li><img original="//static.dmcdn.cn/PayLogo/23.jpg" alt="上海浦东发展银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/23.jpg"></li>
+                                                    </ul>
+                                                </dd>
+                                            </dl>
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">柜台付款</span></dt>
+                                                <dd><p>您也可以选择就近的公司网点，到柜台直接付款购买，<a href="//help.damai.cn/damai/channels/284.html" target="_blank">查看分公司上门地址&gt;&gt;</a></p></dd>
+                                            </dl>
+                                            <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">电子钱包</span></dt>
+                                                <dd><p>电子钱包是由大麦网自主研发的第三方支付平台，为每一个用户在购票过程中提供"简单、安全、快速"的在线支付解决方案；<a href="//sale.damai.cn/2017dzqb/index.html" target="_blank">查看详情&gt;&gt;</a></p></dd>
+                                            </dl>
+                                        </div>
+                                        <!-- 付款方式 end -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- 项目详情选项卡 end -->
+                        </div>
+                        <!-- 项目详情 end -->
+                    </div>
+
+                </div>
+                <div class="sd col-3">
+
+                    <!-- 热门推荐 begin -->
+                    <div class="m-sdbox2-first m-sdbox2 m-hot" id="hotProjects">
                         <div class="hd">
-                            <div class="nav">
-                                <ul class="tab1">
-                                    <li><a data-href="#m-infonav" href="javascript:;" class="itm itm-tab first z-crt" id="tabProjectDescn" data-show="1,2" data-idx="0"><i></i><span class="txt">演出信息</span></a></li>
-                                    <li><a data-href="#m-infonav" href="javascript:;" class="itm itm-tab" data-idx="1"><i></i><span class="txt">购买说明</span></a></li>
-                                </ul>
-                            </div>
+                            <h2 class="tt">热门推荐</h2>
                         </div>
-                        <div class="bd">
-                            <div class="itm-tab z-show" rel="0">
-                                <!-- 演出信息 begin -->
-                                <div class="m-infobase m-liveinfo">
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">基本信息</span></dt>
-                                        <dd class="ct">
-                                            <div class="table-info1">
-                                                <table class="m-table2">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td width="90" class="bg">演出时间</td><td>2018.08.30-09.02</td>  							                                  <td width="90" class="bg">演出场馆</td><td width="200">保利剧院</td>                                 </tr><tr> 							  							   </tr><tr> 							                                  <td width="90" class="bg">入场时间</td><td width="200">约 演出前30-60分钟</td> 							                                							                                                              							                                							  								<td class="bg">限购</td><td>选座购买每单限6张，立即购买每单限20张。</td>                                </tr><tr> 							  							   </tr><tr> 							                                 </tr><tr> 							                                  <td class="bg">儿童入场提示</td><td>1.2米以下儿童谢绝入场（儿童项目除外），1.2米以上儿童需持票入场。</td> 							  							  							  							    							  							    								<td class="bg">禁止携带物品</td>
-                                                        <td data-spm-anchor-id="a2o6e.project.0.i4.23346f2aHJXcdZ">食品、饮料、相机、充电宝、打火机等。</td>
-                                                    </tr>  <tr>  															  							    								<td class="bg">付款时效提醒</td>
-                                                        <td>购票下单成功后需在15分钟内完成支付，未支付成功的订单，将在下单15分钟后系统自动取消，所选价位将自动释放后重新点亮，大家可及时刷新购票页面进行购买。</td>
-                                                        <td class="bg">缺货登记提醒</td>
-                                                        <td>所需票价若为灰色，说明已经售完。您可以在当前页面进行缺货登记，后期如果有票会以短信形式及时通知。</td>
-                                                    </tr>  <tr>  															  							    								<td class="bg">发票说明</td>
-                                                        <td>如需发票，请您在演出前通过订单页补开，发票将在演出结束后1个月左右，统一由主办方提供。<br></td>
-                                                        <td class="bg">座位类型</td>
-                                                        <td><br>对号入座</td>
-                                                    </tr>  <tr>  															  							    							  							    							  							    							  							    								<td class="bg">不支持退换</td>
-                                                        <td>本项目不支持退换票。如无法正常观看，还请自行处理。给您带来不便敬请谅解！ </td>
-
-                                                        <td class="bg"></td><td></td></tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </dd>
-                                    </dl>
-
-
-
-
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">项目介绍</span></dt>
-                                        <dd class="ct">
-                                            <div class="pre">
-                                                <h4>活动简介</h4>
-                                                <p id="added-description"></p>
-                                                <p class="infoitm-img">
-                                                    <img id="added-img" alt="" src="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/456d2d82-4f0f-4708-9ea9-b36cb7f018fd">
-                                                </p>
-                                                <h4>
-                                                    演员介绍
-                                                </h4>
-                                                <p>
-                                                    金士杰
-                                                </p>
-                                                <p class="infoitm-img">
-                                                    <img original="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/62e79be6-9574-45fc-bf7d-5ec98c671c2e" alt="" src="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/62e79be6-9574-45fc-bf7d-5ec98c671c2e">
-                                                </p>
-                                                "兰陵剧坊"创始团员，也是台湾剧场界的核心创作者，多年来一直从事于舞台剧编导与演出，并参与演出电视剧与电影，曾任教于台北艺术大学。他最为剧场观众所熟知的剧场形象，当属《暗恋桃花源》中的江滨柳一角。近年，影视作品有电视剧《我可能不会爱你》的白叔，电影《胜者为王》赚人热泪的盛父，《绣春刀》中的魏忠贤。<br>
-                                                2012凭借在《最后14堂星期二的课》中饰演的莫利一角，获得第二十二届上海白玉兰戏剧表演艺术奖主角奖、现代戏剧谷2012壹戏剧大赏年度最 佳男主角。<br>
-                                                <p>
-                                                    卜学亮
-                                                </p>
-                                                <p class="infoitm-img">
-                                                    <img original="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/eb7f7740-6c7c-4d28-8ef6-5bd8de7f232c" alt="" src="https://damaipimg.oss-cn-beijing.aliyuncs.com/cfs/src/eb7f7740-6c7c-4d28-8ef6-5bd8de7f232c">
-                                                </p>
-                                                外号阿亮，他在主持、歌唱均有杰出表现，其所出专辑《子曰》广为国内所熟知。近年来演出电视剧、舞台剧作品頗多。<br>
-                                                卜学亮所主持的节目是《超级星期天》；主持该节目的其中一个单元〈超级任务〉，为特别来宾寻人，口号是"凡走过，必留下痕迹"、"凡住过，必留下邻居"与"千金难买早知道，万般无奈想不到"。<br>
-                                            </div>
-                                        </dd>
-                                    </dl>
-
-
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">温馨提示</span></dt>
-                                        <dd class="ct">
-                                            <div class="table-info1">
-                                                <table class="m-table2">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td class="bg">发票说明</td><td>如需发票，请您在演出前通过订单页补开，发票将在演出结束后1个月左右，统一由主办方提供。<br></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </dd>
-                                    </dl>
-
-                                </div>
-                                <!-- 演出信息 end -->
-                            </div>
-                            <!-- 1 -->
-
-                            <div class="itm-tab" rel="1">
-                                <!-- 购票说明 begin -->
-                                <div class="m-infobase m-buydesc">
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">特别提示</span></dt>
-                                        <dd>
-                                            <h3 class="stt">售前提示</h3>
-                                            <p>1.为避免快递配送不能及时送达，演出距开场时间少于3天时不提供【快递配送】服务，请您谅解！您可以选择电子票或在线支付后上门自取纸质票。 <a href="//help.damai.cn/damai/contents/277/5966.html" target="_blank" title="点击查看上门取票地址">点击查看上门取票地址&gt;&gt;</a></p></dd>
-                                        <dd>
-                                            <p>2.凡演出票类商品，开票时间一般为演出前二到四周，正式开票后会第一时间短信通知您，请注意接收。</p>
-                                        </dd>
-                                        <dd>
-                                            <p>3.如您不是通过“选座购买”通道进行的票品购买，最终票品数量视项目主办方及场馆情况而定，正式开票后大麦网将根据用户付款先后顺序依次配票，可能存在票品不足不能为您配票的风险，如最终未能配票，大麦网承诺全额退款，但不承担其他损失。</p>
-                                        </dd>
-                                        <dd>
-                                            <h3 class="stt">支付方式</h3>
-                                            <p>网上银行（招商银行等） 支付平台（支付宝等） 转账汇款(招商银行等)　<a href="//help.damai.cn/damai/contents/281/5740.html" target="_blank" title="查看详情">查看详情&gt;&gt;</a></p>
-                                        </dd>
-                                        <dd>
-                                            <h3 class="stt">退/换货说明</h3>
-                                            <p>针对不可抗力和非不可抗力的退/换票情况和处理，请点击查阅<a title="大麦网退换货说明" target="_blank" href="//help.damai.cn/damai/contents/299/2228.html">大麦网退换货说明&gt;&gt;</a></p>
-                                        </dd>
-                                    </dl>
-                                </div>
-
-                                <!-- 购票说明 end -->
-                                <div class="m-infobase m-paymode" style="display: block;">
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">在线支付</span></dt>
-                                        <dd><p>支持多家网上银行、支付平台（支付宝、快钱、银联、微信支付等）在线支付，<a href="//help.damai.cn/damai/channels/281.html" target="_blank">查看详情&gt;&gt;</a></p></dd>
-                                        <dd style="overflow: auto;display: block">
-                                            <h3 class="stt">支付平台：</h3>
-                                            <ul class="lst">
-                                                <li><img original="//static.dmcdn.cn/PayLogo/2.jpg" alt="支付宝" style="display: inline;" src="//static.dmcdn.cn/PayLogo/2.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/57.jpg" alt="微信扫码支付" style="display: inline;" src="//static.dmcdn.cn/PayLogo/57.jpg"></li>
-                                            </ul>
-                                        </dd>
-                                        <dd style="display: block;overflow: auto">
-                                            <h3 class="stt">网上银行：</h3>
-                                            <ul class="lst">
-                                                <li><img original="//static.dmcdn.cn/PayLogo/10.jpg" alt="招商银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/10.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/11.jpg" alt="中国建设银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/11.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/12.jpg" alt="中国工商银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/12.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/13.jpg" alt="交通银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/13.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/14.jpg" alt="中国农业银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/14.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/15.jpg" alt="广东发展银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/15.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/17.jpg" alt="中国银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/17.jpg"></li>
-                                                <li><img original="//static.dmcdn.cn/PayLogo/23.jpg" alt="上海浦东发展银行" style="display: inline;" src="//static.dmcdn.cn/PayLogo/23.jpg"></li>
-                                            </ul>
-                                        </dd>
-                                    </dl>
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">柜台付款</span></dt>
-                                        <dd><p>您也可以选择就近的公司网点，到柜台直接付款购买，<a href="//help.damai.cn/damai/channels/284.html" target="_blank">查看分公司上门地址&gt;&gt;</a></p></dd>
-                                    </dl>
-                                    <dl class="infoitm">
-                                        <dt class="tt"><span class="txt">电子钱包</span></dt>
-                                        <dd><p>电子钱包是由大麦网自主研发的第三方支付平台，为每一个用户在购票过程中提供"简单、安全、快速"的在线支付解决方案；<a href="//sale.damai.cn/2017dzqb/index.html" target="_blank">查看详情&gt;&gt;</a></p></dd>
-                                    </dl>
-                                </div>
-                                <!-- 付款方式 end -->
-                            </div>
-
+                        <div class="bd" data-spm-anchor-id="a2o6e.project.0.i3.23346f2aXCz5U7">
+                            <ul class="m-sdlst" id="gexhTuijian">
+                                <li class="itm z-crt">
+                                    <div class="hot">
+                                        <a class="thumb" target="_blank"
+                                           title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站">
+                                            <img src="//pimg.dmcdn.cn/perform/project/1503/150363_n.jpg" alt="">
+                                        </a>
+                                        <h3 class="tt">
+                                            <a target="_blank"
+                                               title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站">2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站</a>
+                                        </h3>
+                                    </div>
+                                    <div class="info">
+                                        <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                            href="//piao.damai.cn/150363.html" target="_blank"
+                                                            title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站" data-idx="1"
+                                                            data-projectid="150363">2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站</a></div>
+                                        <div class="row"><span class="datetime">2018-06-30 19:30:00</span></div>
+                                    </div>
+                                </li>
+                                <li class="itm z-crt">
+                                    <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                        href="//piao.damai.cn/152515.html" class="thumb" target="_blank"
+                                                        data-idx="2" data-projectid="152515" title="国潮音乐嘉年华"><img
+                                            src="//pimg.dmcdn.cn/perform/project/1525/152515_n.jpg" alt=""></a>
+                                        <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                          href="//piao.damai.cn/152515.html" target="_blank" data-idx="2"
+                                                          data-projectid="152515" title="国潮音乐嘉年华">国潮音乐嘉年华</a></h3></div>
+                                    <div class="info">
+                                        <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                            href="//piao.damai.cn/152515.html" target="_blank" title="国潮音乐嘉年华"
+                                                            data-idx="2" data-projectid="152515">国潮音乐嘉年华</a></div>
+                                        <div class="row"><span class="datetime">2018-06-16 09:30:00</span></div>
+                                    </div>
+                                </li>
+                                <li class="itm z-crt">
+                                    <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                        href="//piao.damai.cn/152513.html" class="thumb" target="_blank"
+                                                        data-idx="3" data-projectid="152513" title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会"><img
+                                            src="//pimg.dmcdn.cn/perform/project/1525/152513_n.jpg" alt=""></a>
+                                        <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                          href="//piao.damai.cn/152513.html" target="_blank" data-idx="3"
+                                                          data-projectid="152513" title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会">真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会</a>
+                                        </h3></div>
+                                    <div class="info">
+                                        <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                            href="//piao.damai.cn/152513.html" target="_blank"
+                                                            title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会" data-idx="3"
+                                                            data-projectid="152513">真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会</a></div>
+                                        <div class="row"><span class="datetime">2018-08-04 19:30:00</span></div>
+                                    </div>
+                                </li>
+                                <li class="itm z-crt">
+                                    <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                        href="//piao.damai.cn/153146.html" class="thumb" target="_blank"
+                                                        data-idx="4" data-projectid="153146" title="2018南京星巢音乐节"><img
+                                            src="//pimg.dmcdn.cn/perform/project/1531/153146_n.jpg" alt=""></a>
+                                        <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                          href="//piao.damai.cn/153146.html" target="_blank" data-idx="4"
+                                                          data-projectid="153146" title="2018南京星巢音乐节">2018南京星巢音乐节</a></h3></div>
+                                    <div class="info">
+                                        <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
+                                                            href="//piao.damai.cn/153146.html" target="_blank"
+                                                            title="2018南京星巢音乐节" data-idx="4"
+                                                            data-projectid="153146">2018南京星巢音乐节</a></div>
+                                        <div class="row"><span class="datetime">2018-06-18 14:35:00</span></div>
+                                    </div>
+                                </li>
+                                <li class="itm z-crt">
+                                    <div class="hot"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
+                                                        href="//piao.damai.cn/153001.html" class="thumb" target="_blank"
+                                                        data-idx="5" data-projectid="153001" title="2018世界女排联赛总决赛"><img
+                                            src="//pimg.dmcdn.cn/perform/project/1530/153001_n.jpg" alt=""></a>
+                                        <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
+                                                          href="//piao.damai.cn/153001.html" target="_blank" data-idx="5"
+                                                          data-projectid="153001" title="2018世界女排联赛总决赛">2018世界女排联赛总决赛</a></h3>
+                                    </div>
+                                    <div class="info">
+                                        <div class="row"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
+                                                            href="//piao.damai.cn/153001.html" target="_blank"
+                                                            title="2018世界女排联赛总决赛" data-idx="5" data-projectid="153001">2018世界女排联赛总决赛</a>
+                                        </div>
+                                        <div class="row"><span class="datetime">2018-06-27 15:00:00</span></div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- 项目详情选项卡 end -->
-                </div>
-                <!-- 项目详情 end -->
-            </div>
+                    <!--&lt;!&ndash; 热门推荐 end&ndash;&gt;-->
 
-        </div>
-        <div class="sd col-3">
 
-            <!-- 热门推荐 begin -->
-            <div class="m-sdbox2-first m-sdbox2 m-hot" id="hotProjects">
-                <div class="hd">
-                    <h2 class="tt">热门推荐</h2>
-                </div>
-                <div class="bd" data-spm-anchor-id="a2o6e.project.0.i3.23346f2aXCz5U7">
-                    <ul class="m-sdlst" id="gexhTuijian">
-                        <li class="itm z-crt">
-                            <div class="hot">
-                                <a class="thumb" target="_blank"
-                                   title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站">
-                                    <img src="//pimg.dmcdn.cn/perform/project/1503/150363_n.jpg" alt="">
-                                </a>
-                                <h3 class="tt">
-                                    <a target="_blank"
-                                       title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站">2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站</a>
-                                </h3>
-                            </div>
-                            <div class="info">
-                                <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                    href="//piao.damai.cn/150363.html" target="_blank"
-                                                    title="2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站" data-idx="1"
-                                                    data-projectid="150363">2018陈慧娴［Priscilla－ism］中国巡回演唱会 南京站</a></div>
-                                <div class="row"><span class="datetime">2018-06-30 19:30:00</span></div>
-                            </div>
-                        </li>
-                        <li class="itm z-crt">
-                            <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                href="//piao.damai.cn/152515.html" class="thumb" target="_blank"
-                                                data-idx="2" data-projectid="152515" title="国潮音乐嘉年华"><img
-                                    src="//pimg.dmcdn.cn/perform/project/1525/152515_n.jpg" alt=""></a>
-                                <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                  href="//piao.damai.cn/152515.html" target="_blank" data-idx="2"
-                                                  data-projectid="152515" title="国潮音乐嘉年华">国潮音乐嘉年华</a></h3></div>
-                            <div class="info">
-                                <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                    href="//piao.damai.cn/152515.html" target="_blank" title="国潮音乐嘉年华"
-                                                    data-idx="2" data-projectid="152515">国潮音乐嘉年华</a></div>
-                                <div class="row"><span class="datetime">2018-06-16 09:30:00</span></div>
-                            </div>
-                        </li>
-                        <li class="itm z-crt">
-                            <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                href="//piao.damai.cn/152513.html" class="thumb" target="_blank"
-                                                data-idx="3" data-projectid="152513" title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会"><img
-                                    src="//pimg.dmcdn.cn/perform/project/1525/152513_n.jpg" alt=""></a>
-                                <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                  href="//piao.damai.cn/152513.html" target="_blank" data-idx="3"
-                                                  data-projectid="152513" title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会">真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会</a>
-                                </h3></div>
-                            <div class="info">
-                                <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                    href="//piao.damai.cn/152513.html" target="_blank"
-                                                    title="真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会" data-idx="3"
-                                                    data-projectid="152513">真的爱你—致敬BEYOND·黄家驹25周年纪念演唱会</a></div>
-                                <div class="row"><span class="datetime">2018-08-04 19:30:00</span></div>
-                            </div>
-                        </li>
-                        <li class="itm z-crt">
-                            <div class="hot"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                href="//piao.damai.cn/153146.html" class="thumb" target="_blank"
-                                                data-idx="4" data-projectid="153146" title="2018南京星巢音乐节"><img
-                                    src="//pimg.dmcdn.cn/perform/project/1531/153146_n.jpg" alt=""></a>
-                                <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                  href="//piao.damai.cn/153146.html" target="_blank" data-idx="4"
-                                                  data-projectid="153146" title="2018南京星巢音乐节">2018南京星巢音乐节</a></h3></div>
-                            <div class="info">
-                                <div class="row"><a id="newitem_recom_1007.16925.95435.;i2i#desc"
-                                                    href="//piao.damai.cn/153146.html" target="_blank"
-                                                    title="2018南京星巢音乐节" data-idx="4"
-                                                    data-projectid="153146">2018南京星巢音乐节</a></div>
-                                <div class="row"><span class="datetime">2018-06-18 14:35:00</span></div>
-                            </div>
-                        </li>
-                        <li class="itm z-crt">
-                            <div class="hot"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
-                                                href="//piao.damai.cn/153001.html" class="thumb" target="_blank"
-                                                data-idx="5" data-projectid="153001" title="2018世界女排联赛总决赛"><img
-                                    src="//pimg.dmcdn.cn/perform/project/1530/153001_n.jpg" alt=""></a>
-                                <h3 class="tt"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
-                                                  href="//piao.damai.cn/153001.html" target="_blank" data-idx="5"
-                                                  data-projectid="153001" title="2018世界女排联赛总决赛">2018世界女排联赛总决赛</a></h3>
-                            </div>
-                            <div class="info">
-                                <div class="row"><a id="newitem_recom_1007.16925.95435.;citypopular#desc"
-                                                    href="//piao.damai.cn/153001.html" target="_blank"
-                                                    title="2018世界女排联赛总决赛" data-idx="5" data-projectid="153001">2018世界女排联赛总决赛</a>
-                                </div>
-                                <div class="row"><span class="datetime">2018-06-27 15:00:00</span></div>
-                            </div>
-                        </li>
-                    </ul>
+                    <!--</div>-->
+
+
                 </div>
             </div>
-            <!--&lt;!&ndash; 热门推荐 end&ndash;&gt;-->
-
-
-            <!--</div>-->
-
-
         </div>
+        <div class="col-2"></div>
     </div>
 
 
@@ -389,8 +361,8 @@
 </script>
 
 <script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
-<script type="text/javascript" src="../../../js/member/nav.js"></script>
 <script type="text/javascript" src="../../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../../js/member/nav.js"></script>
 <script type="text/javascript" src="../../../js/venue/activity/activity-info.js"></script>
 <script type="text/javascript" src="../../../js/common/util/info-manager.js"></script>
 </body>

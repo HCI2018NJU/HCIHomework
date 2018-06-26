@@ -25,7 +25,8 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         console.log(field);
         let vid = window.localStorage.getItem("vid");
         let name = field.name;
-        let type = field.type;
+        let type = field.type.split("&")[0];
+        let father_type = field.type.split("&")[1];
         let description = field.description;
         let periods = [];
         $("#period-part>label").each(function () {
@@ -42,6 +43,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             "vid":vid,
             "name":name,
             "type":type,
+            "fatherType":father_type,
             "description":description,
             "periods":JSON.stringify(periods),
             "url":window.localStorage.getItem("url"),//上传图片之后将图片url保存在localstorage中

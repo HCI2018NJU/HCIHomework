@@ -19,6 +19,9 @@ public class Activity {
     @Column(name = "`name`")
     private String name;
 
+    @Column(name= "`father_type`")
+    private String fatherType;
+
     @Column(name = "`type`")
     private String type;
 
@@ -84,6 +87,18 @@ public class Activity {
 
     @OneToMany(mappedBy = "activity",cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Period> periods;
+
+    @Column(name="`vname`")
+    private String vname;
+
+    @Column(name="`tnum`")
+    private int tnum;
+
+    @Column(name = "`city_code`")
+    private int cityCode;
+
+    @Column(name = "`page_view`")
+    private int pageView;
 
     public Long getAid() {
         return aid;
@@ -203,5 +218,45 @@ public class Activity {
 
     public void setOfflineTurnover(double offlineTurnover) {
         this.offlineTurnover = offlineTurnover;
+    }
+
+    public String getVname() {
+        return vname;
+    }
+
+    public void setVname(String vname) {
+        this.vname = vname;
+    }
+
+    public int getTnum() {
+        return tnum;
+    }
+
+    public void setTnum(int tnum) {
+        this.tnum = tnum;
+    }
+
+    public int getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(int cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public String getFatherType() {
+        return fatherType;
+    }
+
+    public void setFatherType(String fatherType) {
+        this.fatherType = fatherType;
+    }
+
+    public int getPageView() {
+        return pageView;
+    }
+
+    public void setPageView(int pageView) {
+        this.pageView = pageView;
     }
 }

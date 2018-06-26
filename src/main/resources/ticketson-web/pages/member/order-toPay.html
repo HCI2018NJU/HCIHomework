@@ -6,47 +6,56 @@
     <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="../../css/member/my-ticketson.css">
-    <link href="../../css/member/member-nav.css" rel="stylesheet">
+    <link href="../../css/member/nav.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet" />
+
     <script src="../../lib/jquery-3.3.1.js"></script>
     <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script src="../../lib/layui/layui.js"></script>
 </head>
 <body>
 <div id="container">
-    <div id="member-nav"></div>
+    <div id="member-nav" class="top-nav"></div>
     <div id="below-nav">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div id="header">我的ticketson&nbsp;>&nbsp;订单管理</div>
-                <div id="exchange-part">
-                    <div>
-                        <input id="orderid-input" class='ticketson-input' placeholder="订单编号">
-                        <button class="ticketson-btn" onclick="toOrderInfo()">查询</button>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="my-ticketson">我的TicketsOn</div>
+                        <div class="left-nav">
+                            <div class="left-tab active-left">
+                                <a href="../../pages/member/order-manage.html">我的订单</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/coupon.html">我的优惠券</a>
+                            </div>
+                            <div class="left-tab">
+                                <a href="../../pages/member/consume.html">我的账单</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="order-part">
-                    <div id="my-ticketson-nav">
-                        <div tab="subscribed" onclick="toSubscribed()">已预订</div>
-                        <div tab="unsubscribed" onclick="toUnsubscribed()">已退订</div>
-                        <div tab="toPay" class="selected-tab">未支付</div>
-                    </div>
-                    <div class="order" id="toPay">
-                        <table class="layui-table">
-                            <thead>
-                            <tr>
-                                <th>订单编号</th>
-                                <th>商品名称</th>
-                                <th>票价</th>
-                                <th>数量</th>
-                                <th>下单时间</th>
-                                <th>订单原价</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        <div class="page" id="toPay-page"></div>
+                    <div class="col-10">
+                        <div class="right-part">
+                            <div id="exchange-part">
+                                <div id="my-ticketson-nav" style="display: inline-block;float: left">
+                                    <div tab="subscribed" onclick="toSubscribed()">已预订</div>
+                                    <div tab="unsubscribed" onclick="toUnsubscribed()">已退订</div>
+                                    <div tab="toPay" class="selected-tab">未支付</div>
+                                </div>
+                                <div style="display: inline-block;float: right;margin-top: 6px">
+                                    <input id="orderid-input" class='ticketson-input' placeholder="订单编号">
+                                    <button class="ticketson-btn" onclick="toOrderInfo()">查询</button>
+                                </div>
+                            </div>
+                            <div class="order-part"></div>
+                            <div class="nothing">
+                                <div><i class="icon-font">&#xe62c;</i></div>
+                                <div style="margin-top: 30px;color: #9a9a9a">暂无数据</div>
+                            </div>
+                            <div class="page" id="toPay-page"></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -63,7 +72,7 @@
     });
 </script>
 <script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
-<script type="text/javascript" src="../../js/member/member-nav.js"></script>
+<script type="text/javascript" src="../../js/member/nav.js"></script>
 <script type="text/javascript" src="../../js/common/href-helper.js"></script>
 <script type="text/javascript" src="../../js/common/result-helper.js"></script>
 <script type="text/javascript" src="../../js/member/order-toPay.js"></script>

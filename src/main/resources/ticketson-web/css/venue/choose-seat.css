@@ -1,9 +1,13 @@
 
 /*choose-seat*/
+#below-nav {
+    margin-top: 80px;
+}
 #right-nav {
     width: 20%;
     border: 1px solid #e6e6e6;
     height: 820px;
+    position: relative;
 }
 #ticket-header {
     text-align: center;
@@ -63,3 +67,113 @@
     opacity: 0.2;
     cursor: not-allowed;
 }
+/*#state-part{*/
+    /*position: absolute;*/
+    /*bottom: 120px;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*border-top: 1px solid #e6e6e6;*/
+    /*padding: 20px 10px;*/
+    /*overflow: hidden;*/
+/*}*/
+/*#level-part {*/
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*border-top: 1px solid #e6e6e6;*/
+    /*padding: 20px 10px;*/
+    /*overflow: hidden;*/
+/*}*/
+/*#level-part .level-block {*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+/*}*/
+/*#level-part label {*/
+    /*float: left;*/
+    /*font-size: 12px;*/
+
+/*}*/
+/*#level-part .price-block {*/
+    /*padding: 7px;*/
+    /*border: 1px solid #f6f6f6;*/
+    /*!*margin-left: 5px;*!*/
+    /*margin-right: 10px;*/
+/*}*/
+/*.state-color-block {*/
+    /*height: 30px;*/
+    /*width: 30px;*/
+    /*float: left;*/
+/*}*/
+/*.state-block {*/
+    /*font-size: 12px;*/
+    /*padding: 6px;*/
+    /*border: 1px solid #f6f6f6;*/
+    /*!*margin-left: 5px;*!*/
+    /*margin-right: 20px;*/
+    /*float: left;*/
+/*}*/
+
+.color-part {
+    position: absolute;
+    bottom: 20px;
+    left: 52px;
+    border-top: 1px solid #f6f6f6;
+    border-right: 1px solid #f6f6f6;
+    padding: 26px 10px 20px 20px;
+    z-index: 1000;
+}
+.color-part label {
+    float: left;
+}
+#state-part {
+   display: inline-block;
+    float: left;
+    width: 100px;
+    overflow: hidden;
+}
+#price-part {
+   display: inline-block;
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    border-top: 1px solid #e6e6e6;
+}
+#state-part .state-color-block{
+    height: 31px;
+    width: 31px;
+}
+#level-part .level-block{
+     height: 30px;
+     width: 30px;
+ }
+#state-part .state-block {
+    font-size: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 60px;
+    text-align: center;
+    border: 1px solid #f6f6f6;
+}
+
+#level-part .price-block {
+    font-size: 12px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border: 1px solid #f6f6f6;
+    margin-right: 10px;
+    width: 60px;
+    text-align: center;
+}
+
+#canvases {
+    position: relative;
+
+}
+
+.give-up,.give-up:hover {
+    font-size: 12px;
+    color: #9b9b9b !important;
+    text-decoration: underline !important;
+}
+

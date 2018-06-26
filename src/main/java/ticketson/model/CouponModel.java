@@ -3,6 +3,8 @@ package ticketson.model;
 import ticketson.entity.Coupon;
 import ticketson.util.DateHelper;
 
+import java.text.SimpleDateFormat;
+
 
 /**
  * Created by shea on 2018/3/14.
@@ -52,11 +54,15 @@ public class CouponModel {
         this.type = coupon.getType();
         this.name = coupon.getName();
         this.minus = coupon.getMinus();
-        this.consumeTime = DateHelper.format(coupon.getConsumeTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        if(coupon.getConsumeTime()!=null){
+            long consume = coupon.getConsumeTime();
+            this.consumeTime = simpleDateFormat.format(consume);
+        }
         this.min = coupon.getMin();
         this.minCredit = coupon.getMinCredit();
-        this.validDateBegin = DateHelper.format(coupon.getValidDateBegin());
-        this.validDateEnd = DateHelper.format(coupon.getValidDateEnd());
+        this.validDateBegin = simpleDateFormat.format(coupon.getValidDateBegin());
+        this.validDateEnd = simpleDateFormat.format(coupon.getValidDateEnd());
     }
 
     @Override

@@ -52,9 +52,12 @@ function changeCouponType() {
     $("#credit-cost").text(credit_cost);
 }
 
+function toCoupon() {
+    forward("/pages/member/coupon.html");
+}
 
 function toUnusedCoupon() {
-    forward("/pages/member/coupon.html");
+    forward("/pages/member/coupon-unused.html");
 }
 
 function toUsedCoupon() {

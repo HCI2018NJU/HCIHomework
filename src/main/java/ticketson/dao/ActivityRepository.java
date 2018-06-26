@@ -21,6 +21,18 @@ public interface ActivityRepository extends JpaRepository<Activity,Long> {
      * @return
      */
     Page<Activity> findByEndSellGreaterThan(long now,Pageable pageable);
+    Page<Activity> findByEndSellGreaterThanAndEndSellLessThanEqual(long now,long time,Pageable pageable);
+    Page<Activity> findByFatherTypeAndEndSellGreaterThan(String fatherType,long now,Pageable pageable);
+    Page<Activity> findByFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(String fatherType,long now,long time,Pageable pageable);
+    Page<Activity> findByTypeAndEndSellGreaterThan(String type,long now,Pageable pageable);
+    Page<Activity> findByTypeAndEndSellGreaterThanAndEndSellLessThanEqual(String type,long now,long time,Pageable pageable);
+
+    Page<Activity> findByCityCodeAndEndSellGreaterThan(int cityCode,long now,Pageable pageable);
+    Page<Activity> findByCityCodeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,long now,long time,Pageable pageable);
+    Page<Activity> findByCityCodeAndFatherTypeAndEndSellGreaterThan(int cityCode,String fatherType,long now,Pageable pageable);
+    Page<Activity> findByCityCodeAndFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,String fatherType,long now,long time,Pageable pageable);
+    Page<Activity> findByCityCodeAndTypeAndEndSellGreaterThan(int cityCode,String type,long now,Pageable pageable);
+    Page<Activity> findByCityCodeAndTypeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,String type,long now,long time,Pageable pageable);
 
     /**
      * 寻找正在售票的活动数目
@@ -28,6 +40,19 @@ public interface ActivityRepository extends JpaRepository<Activity,Long> {
      * @return
      */
     int countByEndSellGreaterThan(long now);
+    int countByEndSellGreaterThanAndEndSellLessThanEqual(long now,long time);
+    int countByFatherTypeAndEndSellGreaterThan(String fatherType,long now);
+    int countByFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(String fatherType,long now,long time);
+    int countByTypeAndEndSellGreaterThan(String type,long now);
+    int countByTypeAndEndSellGreaterThanAndEndSellLessThanEqual(String type,long now,long time);
+
+    int countByCityCodeAndEndSellGreaterThan(int cityCode,long now);
+    int countByCityCodeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,long now,long time);
+    int countByCityCodeAndFatherTypeAndEndSellGreaterThan(int cityCode,String fatherType,long now);
+    int countByCityCodeAndFatherTypeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,String fatherType,long now,long time);
+    int countByCityCodeAndTypeAndEndSellGreaterThan(int cityCode,String type,long now);
+    int countByCityCodeAndTypeAndEndSellGreaterThanAndEndSellLessThanEqual(int cityCode,String type,long now,long time);
+
 
     List<Activity> findAll();
 

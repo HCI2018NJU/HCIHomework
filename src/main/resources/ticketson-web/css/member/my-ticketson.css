@@ -11,7 +11,7 @@
     color: #9f9f9f;
 }
 .ticketson-select,.ticketson-input {
-    width: 360px;
+    width: 200px;
     height: 30px;
     color: #333;
     font-size: 14px;
@@ -36,13 +36,16 @@ input:focus {
     border-radius: 5px;
 }
 #exchange-part {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    border: 1px solid #f6f6f6;
+    padding-top: 6px;
+    /*padding-bottom: 15px;*/
+    /*padding-left: 10px;*/
+    /*border: 1px solid #f6f6f6;*/
+}
+#exchange-part>div {
+    display: inline-block;
 }
 #order-part {
-    margin-top: 40px;
+    margin-top: 60px;
     overflow: auto;
 }
 #ticket-part {
@@ -50,23 +53,32 @@ input:focus {
 }
 #my-ticketson-nav {
     height: 40px;
-    border-bottom: 2px solid #ff5a5f;
+    border-bottom: 2px solid #f5f5f5;
+    /*border-top: 1px solid #e6e6e6;*/
+    /*border-left: 1px solid #e6e6e6;*/
+    /*border-right: 1px solid #e6e6e6;*/
 }
 #my-ticketson-nav>div {
     height: 40px;
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
     width: auto;
-    color: #333;
+    color: #505050;
+    font-size: 17px;
+    /*font-weight: 600;*/
     display: inline;
     float: left;
     background-color: inherit;
     cursor: pointer;
+
 }
 #my-ticketson-nav .selected-tab{
-    background-color: #ff5a5f;
-    color: white;
+    /*background-color: #ff5a5f;*/
+    color: #ff5a5f;
+    border-bottom: 2px solid #ff5a5f;
 }
 .layui-table {
     margin-top: 0;
@@ -87,3 +99,383 @@ input:focus {
     font-style: normal;
     font-size: 20px;
 }
+
+/*th {*/
+    /*background-color: #ff5a5f;*/
+    /*color: white;*/
+    /*border: 1px solid #ff5a5f;*/
+/*}*/
+
+.nothing {
+    display: none;
+}
+
+.left-nav {
+    border: 1px solid #e6e6e6;
+    padding: 40px 0px 360px 0px;
+}
+.left-tab {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.left-nav a {
+    font-size: 17px;
+    padding-left: 20px;
+    border-left: 4px solid #ffffff;
+
+
+}
+.left-nav .active-left a {
+    color: #ff5a5f !important;
+    border-left: 4px solid #ff5a5f;
+}
+
+.my-ticketson {
+    /*height: 40px;*/
+    color: white;
+    background-color: #ff5a5f;
+    padding: 20px 24px;
+    font-size: 17px;
+}
+.col-2 {
+    padding: 0;
+}
+
+.right-part {
+    margin-left: 30px;
+    overflow: hidden;
+}
+.order-part {
+    border-bottom: 1px solid #e6e6e6;
+    margin-top: 58px;
+}
+.coupon-part {
+    margin-top: 58px;
+}
+.coupon-item {
+    color: white;
+    background-color: #e9af4b;
+    display: inline-block;
+    width: 95%;
+    padding: 10px;
+    border-left: 2px dashed white;
+    border-right: 2px dashed white;
+    margin-bottom: 30px;
+}
+
+.coupon-left-part .coupon-item {
+    float: left;
+}
+.coupon-right-part .coupon-item {
+    float: right;
+}
+.coupon-item-left-part {
+    padding: 12px;
+    /*padding-right: 66px;*/
+    width: 231px;
+    display: inline-block;
+    float: left;
+    border-right: 1px dashed white
+
+}
+
+.coupon-item-left-part .minus {
+    font-size: 24px;
+    font-weight: 600;
+}
+.coupon-item-left-part .min {
+    margin-top: 20px;
+    font-size: 12px;
+}
+.coupon-item-left-part .min-credit {
+    margin-top: 4px;
+    font-size: 12px;
+}
+.coupon-item-right-part {
+    display: inline-block;
+    text-align: center;
+    float: left;
+
+}
+
+.coupon-item-right-part>div {
+    cursor: pointer;
+    padding: 45px 40px;
+    font-size: 16px;
+}
+.order-item {
+    background: #fff;
+    padding: 20px 20px 30px;
+    border: 1px solid #eee;
+    border-bottom: none
+}
+.order-item-title {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    border-bottom: 1px dotted #e5e7ed;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    /*margin-left: -5px;*/
+    padding-right: 5px;
+    /*overflow: hidden;*/
+}
+.order-item-title .order-span, .order-item_-itle li {
+    float: left;
+    font-size: 13px;
+    color: #3c3d00;
+    padding-left: 5px
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table
+}
+.clearfix:after {
+    clear: both
+}
+.order-item-left {
+    display: inline-block;
+    float: left;
+    width: 80%;
+    /*background: red;*/
+    overflow: hidden;
+}
+.order-item-right {
+    display: inline-block;
+    float: right;
+    width: 20%;
+    overflow: hidden;
+}
+.order-item-left a img {
+    border-radius: 3px;
+    float: left;
+    width: 103px;
+    height: 132px;
+}
+.order-item-left .order-show-info {
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+    /*margin-top: 4px;*/
+    /*width: 500px*/
+}
+
+.order-show-info li {
+    font-size: 12px;
+    color: #747576;
+    letter-spacing: 0;
+    line-height: 19px
+}
+.order-show-info .order-show-info-title {
+    font-size: 13px;
+    color: #505050;
+    font-weight: bold;
+    line-height: 18px;
+    display: block;
+    margin-left: -5px;
+    margin-bottom: 5px;
+}
+.order-detail-info {
+    color: #202020;
+}
+.order-money {
+    font-size: 14px;
+    color: #ff5a5f;
+    line-height: 19px
+}
+.order-btn {
+    display: block;
+    border-radius: 3px;
+    width: 100%;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0 auto;
+    /*float: right;*/
+    cursor: pointer;
+    border: 1px solid #ff5a5f;
+
+}
+.order-btn-detail {
+    background: white;
+    border: 1px solid #ff5a5f;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #ff5a5f;
+    bottom: 0;
+    /*box-shadow: 2px 2px 6px rgba(51, 51, 51, 0.26);*/
+    margin-bottom: 4px;
+    margin-top: 6px;
+    width: 120px;
+    height: 32px;
+    float: right;
+    cursor: pointer;
+
+}
+.order-info-btn-topay {
+    background: #ff5a5f;
+    border: 1px solid #ff5a5f;
+    border-radius: 3px;
+    font-size: 12px;
+    color: white;
+    width: 120px;
+    height: 32px;
+    box-shadow: 2px 2px 6px rgba(51, 51, 51, 0.26);
+    margin-bottom: 4px;
+    margin-top: 4px;
+    float: right;
+    cursor: pointer;
+    display: none;
+
+}
+.order-info-btn-unsub{
+    background: #f6f6f6;
+    border: 1px solid #f6f6f6;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #333;
+    width: 120px;
+    height: 32px;
+    box-shadow: 2px 2px 6px rgba(51, 51, 51, 0.26);
+    margin-bottom: 4px;
+    margin-top: 4px;
+    float: right;
+    cursor: pointer;
+    display: none;
+}
+
+.order-btn-unsub,.order-btn-topay {
+    margin-top: 20px;
+    color: #ff5a5f;
+
+}
+.order-info-btn-topay:hover,.order-info-btn-unsub:hover {
+    box-shadow: none;
+}
+
+.order-btn-detail:hover,.order-btn-unsub:hover,.order-btn-topay:hover {
+    color: white;
+    background-color: #ff5a5f;
+
+}
+
+.order-part-title {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    color: #505050;
+}
+.orderDet_show_wrap {
+    padding: 30px;
+    border: 1px solid #e6e6e6;
+    border-bottom: none;
+    overflow: hidden;
+}
+.order-info-part {
+    border-bottom: 1px solid #e6e6e6;
+
+}
+
+.orderDet_msg_warp {
+    display: inline-block;
+    float: left;
+    width: 70%;
+    padding: 0px 30px 0px 96px;
+}
+.operation-part {
+    float: right;
+    width: 30%;
+    display: inline-block;
+    padding-right: 30px;
+
+}
+#order-state {
+    font-size: 18px;
+    color: #ff5a5f;
+}
+.orderDet_msg_warp .orderDet_msg_info {
+    padding-top: 6px;
+    font-size: 13px;
+    color: #999;
+    line-height: 16px
+}
+
+#order-info-wrapper {
+    padding: 0 30px 30px 96px;
+
+}
+
+#order-info-container .order-item-left {
+    margin-bottom: 40px;
+    border-left: 1px dotted #f6f6f6;
+}
+.buyer-info {
+    margin-left: 96px;
+    line-height:22px;
+    padding-bottom:10px;
+    border-bottom: 1.5px dotted #E5E7ED;
+
+}
+
+.orderDet-addr-title {
+    color: #6a717a
+}
+.above {
+    line-height:22px;
+    /*border-bottom: 1.5px dotted #E5E7ED;*/
+    overflow: hidden;
+}
+.orderDet-sum-wrap {
+    display: none;
+    float: right;
+    padding: 10px 0;
+    width: 200px;
+    font-size: 13px;
+    color: #272536;
+    line-height: 24px;
+    position: relative;
+}
+
+
+.coupon-used {
+    position: relative;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.coupon-used-wrapper {
+
+
+}
+.used-icon {
+    position: absolute;
+    top: 20px;
+    bottom: 0;
+    left: 220px;
+    right: 0;
+    text-align: center;
+}
+.used-icon i {
+    font-size: 72px;
+    color: #000000;
+}
+
+.used-icon >div {
+    color: #000;
+    font-size: 14px;
+}
+
+
+
+
+

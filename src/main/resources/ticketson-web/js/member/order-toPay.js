@@ -10,6 +10,16 @@ function getOrderTotalNum() {
         "mid":getMid(),
     }).done(function (data) {
         totalNum = parseInt(data);
+        if(totalNum>0){
+            $(".nothing").css("display","none");
+            $("#toPay-page").css("display","block");
+
+        }else {
+            $(".nothing").css("display","block");
+            $("#toPay-page").css("display","none");
+
+        }
+
         layui.use(['laypage'],function () {
             let laypage = layui.laypage;
             laypage.render({
@@ -35,31 +45,78 @@ function getOrderList(page) {
         "page":page,
         "perPage":perPage,
     }).done(function (data) {
-        setOrderList(data);
+        // setOrderList(data);
+        setData(data);
     }).fail(function (data) {
         layer.msg(data.responseText);
     });
 }
 
-//将预订的订单列表的数据填进界面
-function setOrderList(orders) {
-    $("#toPay").find(" tbody").empty();
-    orders.map(function (order,index) {
-        const city = city_object[order.vCityCode].name;
+function setData(orders) {
+    $(".order-part").empty();
+    orders.map((order,idx)=>{
+        let city = city_object[order.vCityCode].name;
+        if(city==="市辖区"){
+            city = city_object[order.vCityCode].province;
+        }
         const order_dom =
-            "<tr>" +
-            "<td>"+order.oid+"</td>"+
-            "<td>["+order.aType+"]&nbsp;"+order.aName+"-"+city+"<br>"+order.time+"</td>"+
-            "<td>"+order.prices+"</td>"+
-            "<td>"+order.totalAmount+"</td>"+
-            "<td>"+order.orderDate+"</td>"+
-            "<td>"+order.totalPrice.toFixed(2)+"</td>"+
-            "<td>" +
-                "<span style='cursor: pointer' onclick='toConfirmOrder("+order.oid+")'>去支付</span>"+
-            "</td>"+
-            "</tr>";
-        $("#toPay").find(" tbody").append(order_dom);
+            "<div class='order-item'>" +
+            "<ul class='order-item-title clearfix'>" +
+            "<li style='float: left'>订单号："+order.oidshow+"</li>" +
+            "<li style='float: right'>"+order.orderDate+"</li>" +
+            "</ul>" +
+            "<ul class='clearfix'>" +
+            "<div class='order-item-left'>" +
+            "<div style='float: left;display: inline-block'>" +
+            "<a href='../../pages/venue/activity/activity-info.html?aid="+order.aid+"' target='_blank' style='float: left'>" +
+            "<img src='"+order.aUrl+"'>" +
+            "</a>" +
+            "</div>" +
+            "<div style='float: left;display: inline-block'>" +
+            "<ul class='order-show-info'>" +
+            "<li>" +
+            "<a href='../../pages/venue/activity/activity-info.html?aid="+order.aid+"' target='_blank'>" +
+            "<span class='order-show-info-title'>【"+order.aType+"】"+order.aName+"&nbsp;-&nbsp;"+city+"</span>" +
+            "</a>" +
+            "</li>" +
+            "<li>票价：" +
+            "<span class='order-detail-info'>"+order.prices+"</span>" +
+            "</li>" +
+            "<li>数量：" +
+            "<span class='order-detail-info'>"+order.totalAmount+"张</span>" +
+            "</li>" +
+            "<li>时间：" +
+            "<span class='order-detail-info'>"+order.time+"</span>" +
+            "</li>" +
+            "<li>场馆：" +
+            "<span class='order-detail-info'>"+order.vName+"</span>" +
+            "</li>" +
+            "<li>订单原价：" +
+            "<span class='order-detail-info'>¥"+order.totalPrice.toFixed(2)+"</span>" +
+            "</ul>" +
+            "</div>" +
+            "</div>" +
+            "<div class='order-item-right'>" +
+            "<button class='order-info-btn-topay' style='display: block' oid='"+order.oid+"'>去支付</button>" +
+            "<button class='order-btn-detail' oid='"+order.oid+"'>订单详情</button>" +
+            "</div>"+
+            "</ul>" +
+            "</div>";
+        $(".order-part").append(order_dom);
     });
+    $(".order-btn-detail").on('click',function () {
+        const oid = $(this).attr("oid");
+        toOrderDetail(oid);
+    });
+    $(".order-info-btn-topay").on('click',function () {
+        const oid = $(this).attr("oid");
+        toConfirmOrder(oid);
+    });
+}
+
+//跳转到订单详情
+function toOrderDetail(oid) {
+    forward(`/pages/member/order-info.html?oid=${oid}`);
 }
 
 

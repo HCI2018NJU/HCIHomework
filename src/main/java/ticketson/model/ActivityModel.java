@@ -63,6 +63,14 @@ public class ActivityModel {
 
     public List<SimplePeriodModel> periods = new ArrayList<>();
 
+    public String vname;
+
+    public int tnum;
+
+    public String fatherType;
+    public int pageView;
+    public int cityCode;
+
 
     public ActivityModel() {
     }
@@ -79,8 +87,14 @@ public class ActivityModel {
         this.turnover = activity.getTurnover();
         this.offlineTurnover = activity.getOfflineTurnover();
         this.endSell = activity.getEndSell();
-        this.begin = DateHelper.format(activity.getBegin());
-        this.end = DateHelper.format(activity.getEnd());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+        this.begin = dateFormat.format(activity.getBegin());
+        this.end = dateFormat.format(activity.getEnd());
+        this.vname = activity.getVname();
+        this.tnum = activity.getTnum();
+        this.fatherType = activity.getFatherType();
+        this.cityCode = activity.getCityCode();
+        this.pageView = activity.getPageView();
         
         List<Period> periodList = activity.getPeriods();
         for(Period period:periodList){
@@ -88,5 +102,24 @@ public class ActivityModel {
             periods.add(simplePeriodModel);
         }
     }
-    
+
+    @Override
+    public String toString() {
+        return "ActivityModel{" +
+                "aid=" + aid +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", lowestPrice=" + lowestPrice +
+                ", prices='" + prices + '\'' +
+                ", turnoverSettled=" + turnoverSettled +
+                ", turnover=" + turnover +
+                ", offlineTurnover=" + offlineTurnover +
+                ", endSell=" + endSell +
+                ", begin='" + begin + '\'' +
+                ", end='" + end + '\'' +
+                ", periods=" + periods +
+                '}';
+    }
 }

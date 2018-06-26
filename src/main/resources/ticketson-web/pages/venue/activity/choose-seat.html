@@ -18,14 +18,25 @@
 </head>
 <body>
 <div id="container">
-    <div id="member-nav" class="header"></div>
-    <div id="venue-nav"></div>
+    <!--<div id="member-nav" class="header"></div>-->
+    <!--<div id="venue-nav"></div>-->
     <div id="below-nav">
         <div id="canvases" style="text-align: center">
             <div id="venue-header"></div>
             <div id="gs-header">
                 <button class='ticketson-select' style='float: left;margin-top: 5px;cursor: pointer' onclick="changeCanvasPointer(0)">选择区域</button>
                 <img src="../../../resources/shapes/stage.svg" style="width: 40px;height: 40px">
+            </div>
+            <div class="color-part">
+                <div id="state-part">
+                    <label class="state-color-block" style="background-color: #CCCCFF"></label>
+                    <label class="state-block">已选择</label>
+                    <label class="state-color-block" style="background-color: rgba(255,90,95,0.11)"></label>
+                    <label class="state-block">不可售</label>
+                </div>
+                <div id="level-part">
+
+                </div>
             </div>
         </div>
         <div id="right-nav">
@@ -35,7 +46,10 @@
             <div id="ticket-part"></div>
             <div style="text-align: center;padding: 10px;vertical-align: middle">
                 <button id="orderTicktets" class="ticketson-btn" onclick="submitOrder()">结账¥<span id="total-price">0</span></button>
+                <div style="margin-top: 10px"><a class="give-up" href="javascript:void(0)">放弃购买，返回活动详情页</a></div>
             </div>
+
+
         </div>
     </div>
 </div>

@@ -8,8 +8,11 @@ import ticketson.entity.Coupon;
 public class CouponTypeModel {
     public int type;
     public String name;
+    //兑换将消耗多少积分
     public int minCredit;
+    //订单金额满多少可以使用
     public float min;
+    //优惠多少
     public float minus;
 
     public CouponTypeModel() {

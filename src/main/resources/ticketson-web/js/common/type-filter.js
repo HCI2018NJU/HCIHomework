@@ -4,11 +4,12 @@
 let type_choices = [
     ['演唱会','流行','民族','摇滚','音乐节'],
     ['音乐会','声乐','古乐','独奏','管弦乐'],
-    ['曲苑杂坛','戏曲','杂技','相声','马戏','魔术'],
+    ['歌舞剧','儿童剧','歌剧','话剧','音乐剧'],
+    ['曲艺类','戏曲','杂技','相声','马戏','魔术'],
     ['舞蹈','舞剧','舞蹈','芭蕾'],
-    ['话剧歌剧','儿童剧','歌剧','歌舞剧','话剧','音乐剧'],
     ['体育比赛','冰雪','排球','搏击运动','格斗','球类运动','篮球','赛车','足球']
 ];
+
 let type_filter =
     "<div id='type-wrapper' onmouseleave='hideTypeChoice()'>"+
         "<div id='type-container'>"+
@@ -51,7 +52,8 @@ type_choices.map(function (array,i) {
     $("#activity-type").append(opt_group);
     array.map(function (type,j) {
         if(j===0)return;
-        let type_dom = "<option value='"+type+"'>"+type+"</option>";
+        tmp_type = type+"&"+array[0];
+        let type_dom = "<option value='"+tmp_type+"'>"+type+"</option>";
         $("#activity-type").children().eq(i+1).append(type_dom);
     })
 });

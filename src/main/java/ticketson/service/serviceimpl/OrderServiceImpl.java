@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public int getOrderTotalNum(long mid, boolean isUnSubscribed) {
-        int total = orderRepository.countByMember_MidAndIsUnSubscribed(mid,isUnSubscribed);
+        int total = orderRepository.countByMember_MidAndIsUnSubscribedAndPaySuccess(mid,isUnSubscribed,true);
         return total;
     }
 

@@ -36,7 +36,7 @@ public interface ActivityService {
      * @param description 活动描述
      * @return
      */
-    public SpecificActivityModel insertActivity(String vid,String name,String type,String description,String[] periods, String url, String prices);
+    public SpecificActivityModel insertActivity(String vid,String name,String type,String fatherType,String description,String[] periods, String url, String prices);
 
     /**
      * 获得活动详情
@@ -64,9 +64,15 @@ public interface ActivityService {
      * @param perPage 每页几个活动
      * @return 正在卖票的活动
      */
-    public List<SimpleActivityModel> getActivities(int page, int perPage);
+    public List<ActivityModel> getActivities(String type,String fatherType,Integer cityCode,Integer timeType,Integer page, Integer perPage);
+//    public List<ActivityModel> getActivitiesByCategory(String type,int cityCode,long time,int page, int perPage);
+//    public List<ActivityModel> getActivitiesByFatherType(String fatherType,int cityCode,long time,int page, int perPage);
+//    public List<ActivityModel> getActivitiesByCity(int cityCode,long time,int page, int perPage);
 
-    public int getActivitiesTotalNum();
+    public int countActivities(String type,String fatherType,Integer cityCode,Integer timeType);
+//    public int getActivitiesByCategoryTotalNum(String type,int cityCode,long time);
+//    public int getActivitiesByFatherTypeTotalNum(String fatherType,int cityCode,long time);
+//    public int getActivitiesByCityTotalNum(int cityCode,long time);
 
     /**
      根据场馆ID得到活动

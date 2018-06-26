@@ -6,6 +6,7 @@ let selected_level;
 let full_desctioption;
 let brief_desctioption;
 const aid = getUrlParam("aid");
+let aobj = {};
 
 
 layui.use(['form'],function () {
@@ -69,6 +70,7 @@ $(function () {
 
 //将活动详情填进界面
 function initActivityInfo(activity) {
+    aobj = activity;
     $("#container").attr('aid',activity.aid);
     $("#type").text(activity.type);
     $("#type-guide").text(activity.type);
@@ -173,6 +175,7 @@ function toChooseSeat() {
         layer.msg("请选择场次");
         return;
     }
+    window.localStorage.setItem("a_choose_seat_prices",aobj.prices);
     forward("/pages/venue/activity/choose-seat.html?way=online&aid="+aid+"&pid="+selected_pid);
 }
 
