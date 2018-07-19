@@ -21,7 +21,10 @@ public interface CouponRepository extends JpaRepository<Coupon,Long> {
     /**
      * 寻找未使用且未过期的优惠券
      */
-    Page<Coupon> findByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNull(long mid, long date, Pageable pageable);
+    Page<Coupon> findByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNullAndTypeLessThan(long mid, long date,int typeBoundary, Pageable pageable);
+
+
+    Page<Coupon> findByTypeAndValidDateEndGreaterThanAndConsumeTimeIsNull(int type, long date, Pageable pageable);
 
     /**
      * 寻找未使用且未过期的优惠券数目
@@ -29,7 +32,7 @@ public interface CouponRepository extends JpaRepository<Coupon,Long> {
      * @param date
      * @return
      */
-    int countByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNull(long mid, long date);
+    int countByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNullAndTypeLessThan(long mid, long date,int typeBoundary);
 
     /**
      * 寻找未使用但已过期的优惠券

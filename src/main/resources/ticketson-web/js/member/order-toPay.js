@@ -10,29 +10,31 @@ function getOrderTotalNum() {
         "mid":getMid(),
     }).done(function (data) {
         totalNum = parseInt(data);
-        if(totalNum>0){
-            $(".nothing").css("display","none");
-            $("#toPay-page").css("display","block");
-
-        }else {
+        if(totalNum<=0){
             $(".nothing").css("display","block");
             $("#toPay-page").css("display","none");
-
+        }else {
+            if(totalNum<=perPage){
+                getOrderList(0);
+            }else {
+                $("#toPay-page").css("display","block");
+                layui.use(['laypage'],function () {
+                    let laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'toPay-page',
+                        count: totalNum,
+                        limit: perPage,
+                        layout: ['prev', 'page', 'next'],
+                        theme: '#f5c026',
+                        jump: function(obj){
+                            getOrderList(obj.curr-1);
+                        }
+                    });
+                });
+            }
         }
 
-        layui.use(['laypage'],function () {
-            let laypage = layui.laypage;
-            laypage.render({
-                elem: 'toPay-page',
-                count: totalNum,
-                limit: perPage,
-                layout: ['prev', 'page', 'next'],
-                theme: '#f5c026',
-                jump: function(obj){
-                    getOrderList(obj.curr-1);
-                }
-            });
-        });
+
     }).fail(function (data) {
         layer.msg(data.responseText);
     })
@@ -97,8 +99,8 @@ function setData(orders) {
             "</div>" +
             "</div>" +
             "<div class='order-item-right'>" +
+            "<button class='order-btn-detail' oid='"+order.oidshow+"'>订单详情</button>" +
             "<button class='order-info-btn-topay' style='display: block' oid='"+order.oid+"'>去支付</button>" +
-            "<button class='order-btn-detail' oid='"+order.oid+"'>订单详情</button>" +
             "</div>"+
             "</ul>" +
             "</div>";

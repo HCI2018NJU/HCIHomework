@@ -8,7 +8,10 @@ $.post("/api/order/getConfirmOrder",{
     order = data;
     initConfirmOrder(order);
 }).fail(function (data) {
-    layer.msg(data.responseText);
+    layer.alert(data.responseText,function (index) {
+        layer.close(index);
+        forward(`/pages/type/index.html`);
+    });
 });
 
 //将数据填进界面
@@ -75,6 +78,7 @@ function initConfirmOrder(order) {
     if(order.coupons.length>0){
         $("#coupon-select").empty();
     }
+    // $("#coupon-select").empty();
     order.coupons.map(function (coupon,index) {
         let coupon_dom = "<option value='"+coupon.cid+"' minus='"+coupon.minus+"' name='"+coupon.name+"'>"+coupon.name+"</option>";
         $("#coupon-select").append(coupon_dom);
@@ -84,6 +88,7 @@ function initConfirmOrder(order) {
     let after_discount = order.totalPrice*order.discount-minus;
     $("#after-discount").text(after_discount.toFixed(2));
     $("#pay-price").text(after_discount.toFixed(2));
+    $("#acquire-credit").text(parseInt(after_discount/8));
     $("#member-discount").text("(会员优惠："+order.discountName+")");
 
 }
@@ -91,8 +96,10 @@ function initConfirmOrder(order) {
 //选择优惠券
 function changeCoupon() {
     let minus = $("#coupon-select option:selected").attr("minus") || 0;
-    $("#after-discount").text(order.totalPrice*order.discount-minus);
-    $("#pay-price").text(order.totalPrice*order.discount-minus);
+    const temp = order.totalPrice*order.discount-minus;
+    $("#after-discount").text(temp);
+    $("#pay-price").text(temp);
+    $("#acquire-credit").text(parseInt(temp/8));
 }
 
 //支付订单
@@ -110,6 +117,10 @@ function pay() {
         layer.msg("请填写支付账号和密码");
         return;
     }
+    if(!(bid==="1"||bid==="2"||bid==="3")){
+        layer.msg("账号或密码错误");
+        return;
+    }
     $.post("/api/subscribe/pay",{
         "mid":getMid(),
         "oid":oid,
@@ -125,7 +136,10 @@ function pay() {
     }).fail(function (data) {
         layer.alert(data.responseText,function (index) {
             layer.close(index);
-            forward("/pages/member/home.html");
+            if(data.responseText!=="余额不足"&&data.responseText!=="请检查账号和密码是否正确"){
+                const aid = order.aid;
+                forward(`/pages/venue/activity/activity-info.html?aid=${aid}`)
+            }
         });
     });
 }

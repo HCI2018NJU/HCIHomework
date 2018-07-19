@@ -331,23 +331,41 @@ function setSeatsPrice(group) {
 }
 
 function rangePrice() {
+    // let select_level = parseInt($("#level-select").val().substring(0,$("#level-select").val().length-1));
+    // console.log($("#level-select").val().substring(0,$("#level-select").val().length-1));
+    // let lowestPrice = levelPrices[canvases[canvas_pointer].lowestPriceLevel-1];
+    // let highestPrice = levelPrices[canvases[canvas_pointer].highestPriceLevel-1];
+    // let selectPrice = levelPrices[select_level-1];
+    // if(parseInt(lowestPrice)>parseInt(selectPrice)){
+    //     console.log("lowestPrice>selectPrice");
+    //     canvases[canvas_pointer].lowestPriceLevel = select_level;
+    //     lowestPrice = selectPrice;
+    // }
+    // if(parseInt(highestPrice)<parseInt(selectPrice)){
+    //     console.log("selecthhh:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
+    //     console.log("highestPrice<selectPrice");
+    //     canvases[canvas_pointer].highestPriceLevel = select_level;
+    //     highestPrice = selectPrice;
+    // }
+    // console.log("select:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
+
+
     let select_level = parseInt($("#level-select").val().substring(0,$("#level-select").val().length-1));
-    console.log($("#level-select").val().substring(0,$("#level-select").val().length-1));
-    let lowestPrice = levelPrices[canvases[canvas_pointer].lowestPriceLevel-1];
-    let highestPrice = levelPrices[canvases[canvas_pointer].highestPriceLevel-1];
     let selectPrice = levelPrices[select_level-1];
-    if(parseInt(lowestPrice)>parseInt(selectPrice)){
-        console.log("lowestPrice>selectPrice");
-        canvases[canvas_pointer].lowestPriceLevel = select_level;
-        lowestPrice = selectPrice;
-    }
-    if(parseInt(highestPrice)<parseInt(selectPrice)){
-        console.log("selecthhh:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
-        console.log("highestPrice<selectPrice");
-        canvases[canvas_pointer].highestPriceLevel = select_level;
-        highestPrice = selectPrice;
-    }
-    console.log("select:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
+    canvases[canvas_pointer].lowestPriceLevel = select_level;
+    canvases[canvas_pointer].highestPriceLevel = select_level;
+
+    // if(parseInt(lowestPrice)>parseInt(selectPrice)){
+    //     console.log("lowestPrice>selectPrice");
+    //
+    //     lowestPrice = selectPrice;
+    // }
+    // if(parseInt(highestPrice)<parseInt(selectPrice)){
+    //     console.log("selecthhh:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
+    //     console.log("highestPrice<selectPrice");
+    //     highestPrice = selectPrice;
+    // }
+    // console.log("select:"+selectPrice+"lowest:"+lowestPrice+"----highest:"+highestPrice);
 }
 
 function setSeatPrice(object) {
@@ -356,6 +374,7 @@ function setSeatPrice(object) {
     object.set('price',selectPrice);
     object.set('level',select_level);
     object.set('fill',level[select_level-1]);
+    object.set('origin_fill',level[select_level-1]);
     object.set('state','可售');
 }
 

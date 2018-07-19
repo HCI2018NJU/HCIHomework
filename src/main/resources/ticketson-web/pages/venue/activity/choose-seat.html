@@ -20,18 +20,20 @@
 <div id="container">
     <!--<div id="member-nav" class="header"></div>-->
     <!--<div id="venue-nav"></div>-->
+    <div id="crumb-guide" style="cursor: pointer"><a href="/pages/member/home.html" style="color: #9f9f9f">TicketsOn</a>&nbsp;>&nbsp;<span id="activity-guide" cid="0"></span>&nbsp;>&nbsp;<span id="period-guide" father="0" child="0"></span></div>
     <div id="below-nav">
         <div id="canvases" style="text-align: center">
-            <div id="venue-header"></div>
-            <div id="gs-header">
-                <button class='ticketson-select' style='float: left;margin-top: 5px;cursor: pointer' onclick="changeCanvasPointer(0)">选择区域</button>
-                <img src="../../../resources/shapes/stage.svg" style="width: 40px;height: 40px">
+            <div id="venue-header" style="padding-left: 30%;padding-right: 30%;padding-top: 0;padding-bottom: 0"><label style="border: 1px solid #eaeaea;background-color: #f6f6f6;width: 100%;height: inherit;padding-top: 15px">舞台</label></div>
+            <div id="gs-header" style="padding-top:0;padding-bottom:0">
+                <button class='ticketson-select' style='float: left;margin-top: 15px;cursor: pointer' onclick="changeCanvasPointer(0)">选择区域</button>
+                <!--<img src="../../../resources/shapes/stage.svg" style="width: 40px;height: 40px">-->
+                <label style="border: 1px solid #eaeaea;width: 40.7%;height: inherit;padding-top:15px;margin-left:-80px;background-color: #f6f6f6">舞台</label>
             </div>
-            <div class="color-part">
+            <div class="color-part" style="display: none">
                 <div id="state-part">
-                    <label class="state-color-block" style="background-color: #CCCCFF"></label>
+                    <label id="chosen-color" class="state-color-block"></label>
                     <label class="state-block">已选择</label>
-                    <label class="state-color-block" style="background-color: rgba(255,90,95,0.11)"></label>
+                    <label id="unavailable-color" class="state-color-block" ></label>
                     <label class="state-block">不可售</label>
                 </div>
                 <div id="level-part">

@@ -72,7 +72,7 @@
                             <div>选择优惠券</div>
                         </div>
                         <div class="order-content">
-                            <select id="coupon-select" class='ticketson-select' onchange="changeCoupon()">
+                            <select id="coupon-select" class='ticketson-select' onchange="changeCoupon()" style="width: 300px">
                                 <option style="color: #b4b4b4">暂无优惠券</option>
                             </select>
                             <a href="#" style="color: #05757a">[ticketson优惠方案]</a>
@@ -127,7 +127,8 @@
                         <hr style="background-color: #f6f6f6;height: 2px">
                         <div class="order-content">
                             <div style="overflow: auto;font-size: 12px;color: #9f9f9f">
-                                <div style="float: left"><input type="checkbox">我已阅读并同意<a href="#" style="color: #05757a">《退订条款》</a></div>
+                                <!--<div style="float: right;display: inline"><input type="checkbox">我已阅读并同意<a href="#" style="color: #05757a">《退订条款》</a></div>-->
+                                <div style="float: left;display: inline">此交易成功，您将获得<span style="color: #ff5a5f" id="acquire-credit"></span>积分 </div>
                             </div>
                             <!--<div style="overflow: auto;font-size: 16px;margin-top: 4px;">-->
                                 <!--<div style="float: right">待支付总额：-->

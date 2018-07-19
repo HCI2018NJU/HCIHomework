@@ -6,26 +6,30 @@ $.post("/api/coupon/getExpiredCouponTotalNum",{
     "date":now,
 }).done(function (data) {
     expiredCouponTotalNum = data;
-    if(expiredCouponTotalNum>0){
-        $(".nothing").css("display","none");
-        $("#expired-page").css("display","block");
-    }else {
+    if(expiredCouponTotalNum<=0){
         $(".nothing").css("display","block");
         $("#expired-page").css("display","none");
+    }else {
+        if(expiredCouponTotalNum<=perPage){
+            getExpiredCoupons(0);
+        }else {
+            $("#expired-page").css("display", "block");
+            layui.use(['laypage'],function () {
+                let laypage = layui.laypage;
+                laypage.render({
+                    elem: 'expired-page',
+                    count: expiredCouponTotalNum,
+                    limit: perPage,
+                    layout: ['prev', 'page', 'next'],
+                    theme: '#f5c026',
+                    jump: function(obj){
+                        getExpiredCoupons(obj.curr-1);
+                    }
+                });
+            });
+        }
     }
-    layui.use(['laypage'],function () {
-        let laypage = layui.laypage;
-        laypage.render({
-            elem: 'expired-page',
-            count: expiredCouponTotalNum,
-            limit: perPage,
-            layout: ['prev', 'page', 'next'],
-            theme: '#f5c026',
-            jump: function(obj){
-                getExpiredCoupons(obj.curr-1);
-            }
-        });
-    });
+
 }).fail(function (data) {
     layer.msg(data.responseText);
 });

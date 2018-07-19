@@ -10,27 +10,29 @@ function getOrderTotalNum() {
         "isUnSubscribed":true,
     }).done(function (data) {
         unSubscribedTotalNum = parseInt(data);
-        if(unSubscribedTotalNum>0){
-            $(".nothing").css("display","none");
-            $("#unsubscribed-page").css("display","block");
-        }else {
+        if(unSubscribedTotalNum<=0){
             $(".nothing").css("display","block");
-            $("#unsubscribed-page").css("display","none");
+        }else {
+            $(".nothing").css("display","none");
+            if(unSubscribedTotalNum<=perPage){
+                getUnSubscribedList(0);
+            }else {
+                $("#unsubscribed-page").css("display","block");
+                layui.use(['laypage'],function () {
+                    let laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'unsubscribed-page',
+                        count: unSubscribedTotalNum,
+                        limit: perPage,
+                        layout: ['prev', 'page', 'next'],
+                        theme: '#f5c026',
+                        jump: function(obj){
+                            getUnSubscribedList(obj.curr-1);
+                        }
+                    });
+                });
+            }
         }
-
-        layui.use(['laypage'],function () {
-            let laypage = layui.laypage;
-            laypage.render({
-                elem: 'unsubscribed-page',
-                count: unSubscribedTotalNum,
-                limit: perPage,
-                layout: ['prev', 'page', 'next'],
-                theme: '#f5c026',
-                jump: function(obj){
-                    getUnSubscribedList(obj.curr-1);
-                }
-            });
-        });
     }).fail(function (data) {
         layer.msg(data.responseText);
     });
@@ -100,7 +102,7 @@ function setData(orders) {
                         "</div>" +
                     "</div>" +
                     "<div class='order-item-right'>" +
-                    "<button class='order-btn-detail order-btn' oid='"+order.oid+"'>订单详情</button>" +
+                    "<button class='order-btn-detail order-btn' oid='"+order.oidshow+"'>订单详情</button>" +
                     "</div>"+
                 "</ul>" +
             "</div>";

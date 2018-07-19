@@ -92,6 +92,12 @@ public interface ActivityService {
      */
     public int getActivitiesTotalNumByVid(String vid,int type);
 
+
+    public List<ActivityModel> getActivitiesByKeyword(String keyword, int page, int pageNum);
+
+
+    public int getActivitiesTotalNumByKeyword(String keyword);
+
     public int getStatisticsTotalNum(String vid);
 
     public List<ActivityStatisticsModel> getStatistics(String vid, int page, int perPage);

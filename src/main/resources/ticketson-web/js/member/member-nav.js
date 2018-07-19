@@ -150,12 +150,5 @@ function getMid() {
     }
 }
 
-function toOrderInfo() {
-    const oid = $("#orderid-input").val();
-    if(oid===""){
-        layer.msg("请输入订单编号");
-        return;
-    }
-    forward(`/pages/member/order-info.html?oid=${oid}`);
-}
+
 

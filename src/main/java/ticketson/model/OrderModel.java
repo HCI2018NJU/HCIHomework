@@ -135,7 +135,7 @@ public class OrderModel {
 
     public OrderModel(Order order) {
         this.oid = order.getOid();
-        this.oidshow = Long.MAX_VALUE/2-this.oid;
+        this.oidshow = Integer.MAX_VALUE-this.oid;
 
         this.orderDate = DateHelper.format(order.getOrderDate());
         this.totalAmount = order.getTotalAmount();
@@ -175,7 +175,7 @@ public class OrderModel {
                     state = "预定成功";
                     //如果是直接购买
                 }else if(order.getIsImmediatePurchase()&&!order.getIsAllocated()){
-                    state = "未配票";
+                    state = "等待配票";
                 }else if(order.getIsImmediatePurchase() && order.getIsAllocated() && order.getAllocateSucceeded()){
                     state = "已配票";
                 }

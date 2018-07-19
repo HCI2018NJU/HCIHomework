@@ -126,8 +126,8 @@ public class SimpleOrderModel {
 
     public SimpleOrderModel(Order order) {
         this.oid = order.getOid();
-        this.oidshow = Long.MAX_VALUE/2-this.oid;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        this.oidshow = Integer.MAX_VALUE-this.oid;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         this.orderDate = simpleDateFormat.format(order.getOrderDate());
         this.totalAmount = order.getTotalAmount();
         this.totalPrice = order.getTotalPrice();

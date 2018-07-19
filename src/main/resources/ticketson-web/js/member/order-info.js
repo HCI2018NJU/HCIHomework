@@ -7,7 +7,9 @@ $.post("/api/order/getOrder",{
     console.log(data);
     initOrderInfo(data);
 }).fail(function (data) {
-    layer.msg(data.responseText);
+    // layer.msg(data.responseText);
+    $(".nothing").css("display","block");
+    $('.order-info-part').css("display","none");
 });
 
 
@@ -46,12 +48,12 @@ function initOrderInfo(order) {
     }
     //初始化票据信息
     if(order.tickets.length===0){
-        $("#ticket-part").css("display","none");
+        $("#order-info-wrapper").find(".layui-table").css("display","none");
     }else {
         order.tickets.map(function (ticket,index) {
             const ticket_dom =
                 "<tr>" +
-                "<td>"+ticket.tid+"</td>"+
+                "<td>"+ticket.tidshow+"</td>"+
                 "<td>"+ticket.floor+ticket.gs+","+ticket.row+"排"+ticket.column+"座"+"</td>"+
                 "<td>"+ticket.price+"</td>"+
                 "<td>"+ticket.state+"</td>"+

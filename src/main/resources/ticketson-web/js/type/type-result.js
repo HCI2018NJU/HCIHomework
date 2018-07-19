@@ -10,7 +10,7 @@ let type_choices = [
     ['体育比赛','冰雪','排球','搏击运动','格斗','球类运动','篮球','赛车','足球']
 ];
 let totalNum;//todo 如果已经获得了这个数目，但此时又发布了新的活动？
-const perPage = 10;
+const perPage = 8;
 
 
 type_choices.map(function (father,i) {
@@ -136,23 +136,28 @@ function getActivitiesTotalNum() {
             $("#category-lst-right").empty();
             $(".loading").css("display","none");
         }else {
-            $("#page-display-result").css("display","block");
             $(".nothing").css("display","none");
-            layui.use(['laypage'], function () {
-                let laypage = layui.laypage;
-                laypage.render({
-                    elem: 'page-display-result',
-                    count: totalNum,
-                    limit: perPage,
-                    layout: ['prev', 'page', 'next'],
-                    theme: '#ff5a5f',
-                    jump: function (obj) {
-                        console.log(obj);
-                        $(".loading").css("display","block");
-                        getActivities(obj.curr-1);
-                    }
+            if(totalNum<=perPage){
+                getActivities(0);
+                $("#page-display-result").css("display","none");
+            }else {
+                $("#page-display-result").css("display","block");
+                layui.use(['laypage'], function () {
+                    let laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'page-display-result',
+                        count: totalNum,
+                        limit: perPage,
+                        layout: ['prev', 'page', 'next'],
+                        theme: '#f5c026',
+                        jump: function (obj) {
+                            console.log(obj);
+                            $(".loading").css("display","block");
+                            getActivities(obj.curr-1);
+                        }
+                    });
                 });
-            });
+            }
         }
     }).fail(function (data) {
         $(".loading").css("display","none");

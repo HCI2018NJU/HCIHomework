@@ -2,10 +2,26 @@
  * Created by shea on 2018/6/9.
  */
 let is_login = window.localStorage.getItem("member")!==null;
+
 let city_code = window.localStorage.getItem("nav_city_code")?window.localStorage.getItem("nav_city_code"):0;
+// console.log(getUrlParam("cidtype"));
+// console.log(getUrlParam("cidtype")==='null');
+// if(getUrlParam("cidtype")!==null){
+//     city_code = getUrlParam("cidtype");
+//     window.localStorage.setItem("nav_city_code",city_code);
+// }
 
 initNav();
-
+initFooter();
+function initFooter() {
+    const footer =
+        "<div class='row' style='margin-top:60px;background-color: #f6f6f6;padding: 20px'>" +
+            "<div class='col-2'></div> "+
+            "<div class='col-8' style='font-size: 12px;text-align: center'>Copyright©2017-2018 By HCIGroup</div> "+
+            "<div class='col-2'></div> "+
+        "</div>";
+    $(" body").append(footer);
+}
 
 function initNav() {
     const top_nav =
@@ -13,7 +29,7 @@ function initNav() {
         "<div class='col-2'></div>" +
         "<div class='col-8'>" +
         "<div class='row'>" +
-        "<div class='col-3'>" +
+        "<div class='col-4'>" +
         "<div class='logo-container'>" +
         "<a class='logo' href='/pages/member/home.html'>" +
         "<img src='/resources/icons/logo.png' style='height: 40px'>" +
@@ -24,14 +40,15 @@ function initNav() {
         "</div>" +
         "<div class='splitor'></div>" +
         "<div class='tab' id='region'>" +
-        "<span class='user-site' cid='0'>全国</span>" +
+        "<span class='user-site' cid='0'></span>" +
         "<i class='icon-font'>&#xe612</i>" +
         "<div id='region-dropdown-menu'></div>" +
         "</div>" +
         "</div>" +
-        "<div class='col-7' style='overflow: hidden'>" +
+        "<div class='col-6' style='overflow: hidden'>" +
         "<div class='search-tab'>" +
-        "<input type='text' placeholder='活动、地点、明星'/>" +
+        "<input type='text' placeholder='搜索活动和明星'/>" +
+            "<i class='icon-font' id='clear-input'>&#xe602;</i> "+
         "<button><i class='icon-font' style='color: white'>&#xe779;</i>搜索</button>" +
         "</div>" +
         "</div>" +
@@ -43,6 +60,24 @@ function initNav() {
         "<div class='col-2'></div>" +
     "</div>";
     $(".top-nav").append(top_nav);
+    $("#clear-input").on('click',function () {
+        $(".search-tab input").val("");
+        $("#clear-input").css("display","none");
+    });
+    $(".search-tab input").on('input',function () {
+        if($(this).val()!==""){
+            $("#clear-input").css("display","inline");
+        }else {
+            $("#clear-input").css("display","none");
+
+        }
+    });
+    $(".search-tab input").on('keydown',function (event) {
+        if(event.keyCode===13){
+            search();
+        }
+    });
+    $(".search-tab button").on('click',search);
 
     $("#region").on('mouseenter',function () {
         $("#region-dropdown-menu").css("display","block");
@@ -72,7 +107,9 @@ function initNav() {
             if(city_name==="市辖区"){
                 city_name = city_object[city_code].province;
             }
+            console.log(city_name);
             $("#region>span").text(city_name);
+            $("#region>span").attr("cid",city_code);
             $("#region-dropdown-menu").css("display","none");
             forward("/pages/type/index.html");
         });
@@ -82,9 +119,12 @@ function initNav() {
         let city_name = city_object[city_code].name;
         if(city_name==="市辖区"){
             city_name = city_object[city_code].province;
-            $("#region>span").text(city_name);
-            $("#region>span").attr("cid",city_code);
         }
+        $("#region>span").text(city_name);
+        $("#region>span").attr("cid",city_code);
+    }else {
+        $("#region>span").text('全国');
+        $("#region>span").attr("cid",city_code);
     }
 
     if(is_login){
@@ -218,6 +258,26 @@ function getMid() {
         layer.msg("您尚未登陆");
         return null;
     }
+}
+
+function search() {
+    const keyword = $(".search-tab input").val();
+    console.log("k"+keyword);
+    forward("/pages/type/search-result.html?keyword="+keyword);
+}
+
+$("#orderid-input").on('keydown',function (event) {
+    if(event.keyCode===13){
+        toOrderInfo();
+    }
+});
+function toOrderInfo() {
+    const oid = $("#orderid-input").val();
+    if(oid===""){
+        layer.msg("请输入订单编号");
+        return;
+    }
+    forward(`/pages/member/order-info.html?oid=${oid}`);
 }
 
 

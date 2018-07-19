@@ -1,6 +1,7 @@
 package ticketson.model;
 
 import ticketson.entity.*;
+import ticketson.util.CouponHelper;
 import ticketson.util.CreditHelper;
 import ticketson.util.DateHelper;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class ConfirmOrderModel {
     public Long oid;
+    public Long oidshow;
 
     /**
      * 订单生成时间，可以用来判断是否支付过期
@@ -97,6 +99,7 @@ public class ConfirmOrderModel {
      */
     public String aType;
     public String aUrl;
+    public long aid;
 
 
 
@@ -132,8 +135,31 @@ public class ConfirmOrderModel {
     public List<TicketModel> tickets = new ArrayList<>();
 
 
+    public ConfirmOrderModel(Order order, Coupon coupon){
+        System.out.println(coupon);
+        if(order.getIsImmediatePurchase()){
+            System.out.println(coupons.size()+"---");
+            long now = System.currentTimeMillis();
+            if(coupon.getConsumeTime() == null &&
+                    coupon.getMin() < order.getTotalPrice() &&
+                    coupon.getValidDateBegin()<now &&
+                    coupon.getValidDateEnd() >now){
+                CouponModel couponModel = new CouponModel(coupon);
+                coupons.add(couponModel);
+            }
+            System.out.println(coupons.size()+"  ---   ");
+        }
+        init(order);
+
+    }
+
     public ConfirmOrderModel(Order order) {
+        init(order);
+        
+    }
+    public void init(Order order){
         this.oid = order.getOid();
+        this.oidshow = Long.MAX_VALUE-this.oid;
         this.orderDate = DateHelper.format(order.getOrderDate());
         this.totalAmount = order.getTotalAmount();
         this.totalPrice = order.getTotalPrice();
@@ -183,7 +209,6 @@ public class ConfirmOrderModel {
             setTicketsInfo(ticketList);
         }
 
-        
     }
 
     public void setPeriodInfo(Period period){
@@ -198,6 +223,7 @@ public class ConfirmOrderModel {
         this.aName = activity.getName();
         this.aType = activity.getType();
         this.aUrl = activity.getUrl();
+        this.aid = activity.getAid();
         Venue venue = activity.getVenue();
         if(venue!=null){
             setVenueInfo(venue);
@@ -223,12 +249,13 @@ public class ConfirmOrderModel {
                 if(cpn.getConsumeTime() == null &&
                         cpn.getMin() < totalPrice &&
                         cpn.getValidDateBegin()<now &&
-                        cpn.getValidDateEnd() >now){
+                        cpn.getValidDateEnd() >now&&cpn.getType()< CouponHelper.getPersonalCouponTypeSize()){
                     CouponModel couponModel = new CouponModel(cpn);
                     coupons.add(couponModel);
                 }
             }
         }
+
     }
 
     public void setTicketsInfo(List<Ticket> ticketList){

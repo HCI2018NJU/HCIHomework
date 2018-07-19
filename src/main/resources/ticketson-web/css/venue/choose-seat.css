@@ -1,8 +1,44 @@
 
 /*choose-seat*/
-#below-nav {
+#content-wrapper{
     margin-top: 80px;
+    overflow: hidden;
+    padding-left: 100px;
+    padding-right: 100px;
+    position: relative;
+    /*margin-bottom: 40px;*/
 }
+#below-nav{
+    margin-top: 10px;
+    /*box-shadow: 0 0 20px 0 #eee;*/
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 10px;
+}
+#crumb-guide {
+    /*margin-top: 40px;*/
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 40px;
+    height: 40px;
+    /*border-bottom: 2px solid #f6f6f6;*/
+    /*background-color: #f6f6f6;*/
+    padding-top: 10px;
+    /*padding-left: 10px;*/
+    color: #9f9f9f;
+    display: block;
+    /*border: 1px solid #eaeceb;*/
+}
+#crumb-guide>span:hover,#crumb-guide>a:hover{
+    color: #ff5a5f !important;
+}
+
+#canvases>div{
+    background-color: white;
+}
+
 #right-nav {
     width: 20%;
     border: 1px solid #e6e6e6;

@@ -15,6 +15,7 @@ import ticketson.model.CouponModel;
 import ticketson.service.CouponService;
 import ticketson.util.CouponHelper;
 import ticketson.model.CouponTypeModel;
+import ticketson.util.CreditHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public List<CouponModel> getUsedCoupons(long mid, int page, int pageNum) {
-        Pageable pageable = new PageRequest(page,pageNum, Sort.Direction.ASC,"validDateEnd");
+        Pageable pageable = new PageRequest(page,pageNum, Sort.Direction.DESC,"consumeTime");
         Page<Coupon> couponPage = couponRepository.findByMember_MidAndConsumeTimeIsNotNull(mid,pageable);
         List<Coupon> couponList = couponPage.getContent();
         List<CouponModel> couponModels = new ArrayList<>();
@@ -85,8 +86,9 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public List<CouponModel> getUnusedCoupons(long mid, long date, int page, int pageNum) {
-        Pageable pageable = new PageRequest(page,pageNum, Sort.Direction.ASC,"validDateEnd");
-        Page<Coupon> couponPage = couponRepository.findByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNull(mid,date,pageable);
+        Pageable pageable = new PageRequest(page,pageNum, Sort.Direction.DESC,"cid");
+        int boundary = CouponHelper.getPersonalCouponTypeSize();
+        Page<Coupon> couponPage = couponRepository.findByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNullAndTypeLessThan(mid,date,boundary,pageable);
         List<Coupon> couponList = couponPage.getContent();
         List<CouponModel> couponModels = new ArrayList<>();
         for(Coupon coupon:couponList){
@@ -105,7 +107,8 @@ public class CouponServiceImpl implements CouponService {
      */
     @Override
     public int getUnusedCouponTotalNum(long mid, long date) {
-        return couponRepository.countByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNull(mid,date);
+        int boundary = CouponHelper.getPersonalCouponTypeSize();
+        return couponRepository.countByMember_MidAndValidDateEndGreaterThanAndConsumeTimeIsNullAndTypeLessThan(mid,date,boundary);
     }
 
     /**

@@ -16,6 +16,7 @@ import ticketson.model.ConfirmOrderModel;
 import ticketson.model.OrderModel;
 import ticketson.model.SimpleOrderModel;
 import ticketson.service.OrderService;
+import ticketson.util.CouponHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
-    OrderService orderService;
+    CouponRepository couponRepository;
+
+    @Autowired
+    MemberRepository memberRepository;
 
     private static final Logger logger = LoggerFactory.getLogger("OrderServiceImpl");
 
@@ -43,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderModel getOrder(long oid) {
         Order order = orderRepository.findOne(oid);
         if(order==null){
-            throw new ResourceNotFoundException("此订单不存在");
+            throw new InvalidRequestException("此订单不存在");
         }
         return new OrderModel(order);
     }
@@ -51,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ConfirmOrderModel getConfirmOrder(long oid){
         Order order = orderRepository.findOne(oid);
+        System.out.println(order.getTotalPrice()*order.getDiscount());
         if(order==null){
             throw new InvalidRequestException("此订单不存在");
         }
@@ -60,7 +65,38 @@ public class OrderServiceImpl implements OrderService {
         if(order.getIsCanceled()){
             throw new InvalidRequestException("超时支付，订单已自动取消");
         }
-        return new ConfirmOrderModel(order);
+        //如果是立即购买（团体购票）
+        if(order.getIsImmediatePurchase()){
+            Coupon coupon;
+            //首先寻找是否已经有符合要求的未使用的优惠券
+            int type = CouponHelper.judgeCouponType(order.getTotalPrice());
+            System.out.println(type+"----type");
+            if(type!=-1){
+                Pageable pageable = new PageRequest(0,1, Sort.Direction.ASC,"validDateEnd");
+                System.out.println(System.currentTimeMillis());
+                Page<Coupon> couponPage = couponRepository.findByTypeAndValidDateEndGreaterThanAndConsumeTimeIsNull(type,System.currentTimeMillis(),pageable);
+                List<Coupon> couponList = couponPage.getContent();
+                System.out.println(couponList.size()+"   -------");
+                if(couponList.size()>=1){
+                    coupon = couponList.get(0);
+                }else {
+                    coupon = CouponHelper.makeCoupon(type);
+                    Member member = order.getMember();
+                    coupon.setMember(member);
+                    //从用户里减去积分
+                    member.setCredit(member.getCredit()-coupon.getMinCredit());
+                    coupon = couponRepository.save(coupon);
+                    memberRepository.save(member);
+                }
+                return new ConfirmOrderModel(order,coupon);
+            }else {
+                return new ConfirmOrderModel(order);
+            }
+
+        }else {
+            return new ConfirmOrderModel(order);
+
+        }
     }
 
 

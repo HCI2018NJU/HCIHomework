@@ -20,63 +20,88 @@
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <div id="crumb-guide">TicketsOn&nbsp;>&nbsp;<span id="city-guide"></span>&nbsp;>&nbsp;<span id="type-guide"></span></div>
+            <div id="crumb-guide" style="cursor: pointer"><a href="/pages/member/home.html" style="color: #9f9f9f">TicketsOn</a>&nbsp;>&nbsp;<span id="city-guide" cid="0"></span>&nbsp;>&nbsp;<span id="type-guide" father="0" child="0"></span></div>
             <div id="activity-container">
                 <div id="activity-info">
                     <div id="activity-pic-wrapper">
-                        <img id="activity-pic">
+                        <img id="activity-pic" style="background-color: #f6f6f6">
                     </div>
                     <div id="activity-info-container">
                         <div id="activity-info-wrapper">
-                            <div class="paragraph activity-title">
+                            <div class="activity-title">
                                 <span id="type">演唱会·流行</span>
                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <span id="title">[A CLASSIC TOUR 学友·经典]世界巡回演唱会</span>
                                 <span>-</span>
                                 <span id="city">佛山站</span>
                             </div>
-                            <div style="overflow: auto" id="activity-description">
-                                根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +
-                                "每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。
+                            <div class="paragraph" style="color: #666;margin-bottom: 40px">
+                                <span id="venue-name">星光剧院</span>
+                                <span id="venue-city">江苏省·南京市·栖霞区</span>
                             </div>
-                            <div class="paragraph"><a id="more-description" onclick="unfold()" folded="fold">展开</a></div>
+
+                            <!--<div class="paragraph"><a id="more-description" onclick="unfold()" folded="fold">展开</a></div>-->
                             <!--<div class="paragraph" id="progress-bar">-->
                             <!--<span><label></label></span>-->
                             <!--</div>-->
-                            <div class="paragraph">
+                            <div class="paragraph" style="font-size: 16px">
                                 <div id="period-label">
-                                    <label>演出时间：</label>
+                                    <label>演出时间</label>
                                 </div>
                                 <div id="period-part">
-                                    <!--<label>2018-09-17 09:00:00</label>-->
-                                    <!--<label>2018-09-17 09:00:00</label>-->
-                                    <!--<label>2018-09-17 09:00:00</label>-->
+                                    <!--<label>2018-07-01 星期日 14:30</label>-->
+                                    <!--<label>2018-07-01 星期日 14:30</label>-->
+                                    <!--<label>2018-07-01 星期日 14:30</label>-->
                                 </div>
                             </div>
                             <div class="paragraph">
                                 <div id="price-label">
-                                    <label>选择票价：</label>
+                                    <label>选择票价</label>
                                 </div>
                                 <div id="price-part">
                                     <!--<label>80</label>-->
                                 </div>
                             </div>
-                            <button class="ticketson-btn-primary" style="margin-left: 10%" onclick="toChooseSeat()">选座购买
-                            </button>
-                            <button class="ticketson-btn" style="margin-left: 20px" onclick="showSubscribeCard()">立即预订</button>
-                        </div>
-                        <div id="venue-info-wrapper">
-                            <div class="paragraph">
-                                <span class="activity-title" id="venue-name">星光剧院</span>
-                                <span id="venue-city">江苏省·南京市·栖霞区</span>
+                            <div class="" style="overflow: hidden">
+                                <div id="number-label">
+                                    <label>团购数量</label>
+                                </div>
+                                <div id="number-part">
+                                    <div>
+                                        <button class="operation" id="minus">-</button>
+                                        <input style="color: #ff5a5f" id="number" value="3" type="number" onblur="setNumber()" oninput="calculate()"/>
+                                        <button class="operation" id="plus">+</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="paragraph" style="color: #7a7a7a;"><i class="icon-font">&#xe617;</i><span
-                                    id="venue-location"></span></div>
-                            <!--<div class="paragraph" style="text-indent: 28px" id="venue-description">-->
-                            <!--根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +-->
-                            <!--"每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。-->
-                            <!--</div>-->
+                            <div class="message paragraph">演出开场前两周将会为您配票</div>
+                            <div class="paragraph">
+                                <div id="totalprice-label">
+                                    <label>合计</label>
+                                </div>
+                                <div id="totalprice-part">
+                                    <label><span id="totalprice">80</span><span style="font-size: 14px">&nbsp;&nbsp;元</span></label>
+
+                                </div>
+                            </div>
+                            <button class="ticketson-btn-primary" style="" onclick="toChooseSeat()">选座购买
+                            </button>
+                            <button  class="ticketson-btn" style="margin-left: 10px" onclick="immediatePurchase()">团体购买
+                            </button>
+                            <!--<button class="ticketson-btn" style="margin-left: 20px" onclick="showSubscribeCard()">立即预订</button>-->
                         </div>
+                        <!--<div id="venue-info-wrapper">-->
+                            <!--&lt;!&ndash;<div class="paragraph">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="activity-title" id="venue-name">星光剧院</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span id="venue-city">江苏省·南京市·栖霞区</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="paragraph" style="color: #7a7a7a;"><i class="icon-font">&#xe617;</i><span-->
+                                    <!--id="venue-location"></span></div>-->
+                            <!--&lt;!&ndash;<div class="paragraph" style="text-indent: 28px" id="venue-description">&ndash;&gt;-->
+                            <!--&lt;!&ndash;根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +&ndash;&gt;-->
+                            <!--&lt;!&ndash;"每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
                     </div>
                     <div id="subscribe-wrapper" class="disappear">
                         <div id="subscribe-title">¥<span>80</span>&nbsp;&nbsp;每张
@@ -123,6 +148,16 @@
                                         <!-- 演出信息 begin -->
                                         <div class="m-infobase m-liveinfo">
                                             <dl class="infoitm">
+                                                <dt class="tt"><span class="txt">项目简介</span></dt>
+                                                <dd class="ct">
+                                                    <div class="table-info1" id="activity-description">
+                                                        根据经典安徒生童话故事改编，让孩子通过舞台剧接触经典。从娱乐中传达给孩子：" +
+                                                        "每一个想变成自己理想的样子的人，都要经过不懈的努力和艰苦的蜕变，善良、努力、坚持，是金子总会发光的。
+                                                    </div>
+                                                </dd>
+                                            </dl>
+
+                                            <dl class="infoitm">
                                                 <dt class="tt"><span class="txt">基本信息</span></dt>
                                                 <dd class="ct">
                                                     <div class="table-info1">
@@ -148,6 +183,7 @@
                                                     </div>
                                                 </dd>
                                             </dl>
+
 
 
 
@@ -363,6 +399,7 @@
 <script type="text/javascript" src="../../../js/common/regions_master/region.js"></script>
 <script type="text/javascript" src="../../../js/common/href-helper.js"></script>
 <script type="text/javascript" src="../../../js/member/nav.js"></script>
+<script type="text/javascript" src="../../../js/common/type-filter.js"></script>
 <script type="text/javascript" src="../../../js/venue/activity/activity-info.js"></script>
 <script type="text/javascript" src="../../../js/common/util/info-manager.js"></script>
 </body>

@@ -432,6 +432,27 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
+    public List<ActivityModel> getActivitiesByKeyword(String keyword, int page, int pageNum) {
+        Sort sort = new Sort(Sort.Direction.DESC,"endSell");
+        PageRequest pageRequest = new PageRequest(page,pageNum,sort);
+        List<Activity> activities = activityRepository.findByNameLikeAndBeginGreaterThan("%"+keyword+"%",System.currentTimeMillis(),pageRequest).getContent();
+        System.out.println("activitySize:"+activities.size());
+        List<ActivityModel> result = new ArrayList<>();
+        Activity activity = null;
+        for (int i = 0; i < activities.size(); i++) {
+            activity = activities.get(i);
+            ActivityModel activityModel = new ActivityModel(activity);
+            result.add(activityModel);
+        }
+        return result;
+    }
+
+    @Override
+    public int getActivitiesTotalNumByKeyword(String keyword) {
+        return activityRepository.countByNameLikeAndBeginGreaterThan("%"+keyword+"%",System.currentTimeMillis());
+    }
+
+    @Override
     public int getStatisticsTotalNum(String vid) {
         return activityRepository.countByVenue_Vid(vid);
     }

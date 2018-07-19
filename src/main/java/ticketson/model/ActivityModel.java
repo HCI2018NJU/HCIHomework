@@ -87,7 +87,7 @@ public class ActivityModel {
         this.turnover = activity.getTurnover();
         this.offlineTurnover = activity.getOfflineTurnover();
         this.endSell = activity.getEndSell();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
         this.begin = dateFormat.format(activity.getBegin());
         this.end = dateFormat.format(activity.getEnd());
         this.vname = activity.getVname();

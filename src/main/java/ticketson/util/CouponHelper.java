@@ -17,31 +17,40 @@ public class CouponHelper {
     /**
      * 优惠券需满足的金额
      */
-    private static final float[] min = {100,500,1000,2000,3000};
+    private static final float[] min = {100,500,1000,2000,3000,
+    600,1200,2400,3600};
     /**
      * 优惠额度
      */
-    private static final float[] minus = {5,30,80,180,280};
+    private static final float[] minus = {3,30,100,300,600,
+    40,200,450,720};
     /**
      * 兑换优惠券需要的积分
      */
-    private static final int[] minCredits = {500,2500,5000,10000,15000};
+    private static final int[] minCredits = {500,1500,3000,5000,8000,0,0,0,0};
     /**
      * 优惠券名称
      */
-    private static final String[] name = {"TicketsOn满百减五","TicketsOn满五百减三十","TicketsOn满一千减八十","TicketsOn满两千减一百八","TicketsOn满三千减二百八"};
+    private static final String[] name = {"TicketsOn满百减三","TicketsOn满五百减三十","TicketsOn满一千减一百","TicketsOn满两千减三百","TicketsOn满三千减六百",
+    "TicketsOn团购满六百减四十","TicketsOn团购满一千二减二百","TicketsOn团购满二千四减四百五","TicketsOn团购满三千六减七百二"};
 
+
+    public static int getPersonalCouponTypeSize(){
+        return 5;
+    }
     /**
      * 根据现有积分返回可以兑换的优惠券
      * @param credit 现有积分
      * @return
      */
     public static List<CouponTypeModel> judgeCoupon(int credit){
+        int left = credit;
         List<CouponTypeModel> couponTypeModels = new ArrayList<>();
-        for(int i=0;i<minCredits.length;i++){
-            if(credit>minCredits[i]){
+        for(int i=minCredits.length-5;i>=0;i--){
+            if(left>=minCredits[i]){
                 CouponTypeModel couponTypeModel = new CouponTypeModel(i,name[i],minCredits[i],min[i],minus[i]);
                 couponTypeModels.add(couponTypeModel);
+                left-=minCredits[i];
             }
         }
         return couponTypeModels;
@@ -64,5 +73,23 @@ public class CouponHelper {
         coupon.setValidDateBegin(validBegin);
         coupon.setValidDateEnd(validEnd);
         return coupon;
+    }
+
+    public static Coupon makeCoupon(double price){
+        for(int i=min.length-1;i>=min.length-4;i--){
+            if(price>min[i]){
+                return makeCoupon(i);
+            }
+        }
+        return null;
+    }
+
+    public static int judgeCouponType(double price){
+        for(int i=min.length-1;i>=min.length-4;i--){
+            if(price>min[i]){
+                return i;
+            }
+        }
+        return -1;
     }
 }

@@ -64,8 +64,10 @@ public interface ActivityRepository extends JpaRepository<Activity,Long> {
      * @return
      */
     Page<Activity> findByVenue_VidAndBeginGreaterThan(String vid,long now,Pageable pageable);
+    Page<Activity> findByNameLikeAndBeginGreaterThan(String keyword,long now,Pageable pageable);
 
     int countByVenue_VidAndBeginGreaterThan(String vid,long now);
+    int countByNameLikeAndBeginGreaterThan(String keyword,long now);
 
     /**
      * 寻找正在进行的活动

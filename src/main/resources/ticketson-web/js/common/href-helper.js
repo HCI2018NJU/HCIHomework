@@ -12,3 +12,14 @@ function getUrlParam(name) {
     let r = window.location.search.substr(1).match(reg);  //匹配目标参数
     if (r !== null) return unescape(r[2]); return null; //返回参数值
 }
+
+//获取参数方法
+function getUrlParam2(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = encodeURI(window.location.search).substr(1).match(reg);
+    if(r!==null)return unescape(r[2]); return null;
+}
+// //使用获取参数方法
+// var id= GetUrlParam("id");
+// var name = decodeURI(GetUrlParam("name"));
+// console.log("id:"+id+"  name:"+name);

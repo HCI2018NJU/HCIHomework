@@ -58,6 +58,12 @@ function setGalleryActivities(data) {
         activity.periods.map(function (period) {
             activity_period_content = activity_period_content+"<label class='period' beginTime='"+period.beginTime+"' pid='"+period.pid+"' onclick='choosePeriod(this)'>"+period.begin+"</label>";
         });
+        let city_name = city_object[activity.cityCode].name;
+        if(city_name === '市辖区'){
+            city_name = city_object[activity.cityCode].province;
+        }
+        const default_pid = activity.periods[0].pid;
+        const default_period = activity.periods[0].begin;
         const gallery_item  =
             "<div class='gallery-item'>" +
                 "<img src='"+activity.url+"' class='blur back-img'>" +
@@ -65,17 +71,18 @@ function setGalleryActivities(data) {
                     "<div class='row'>" +
                         "<div class='col-2'></div>" +
                         "<div class='col-3'>" +
-                            "<img src='"+activity.url+"'>" +
+                            "<img class='promo-post' src='"+activity.url+"' style='width: 340px;height: 458px;cursor: pointer' aid='"+activity.aid+"'>" +
                         "</div>" +
                         "<div class='col-5'>" +
                             "<div class='promo-info'>" +
-                                "<label class='promo-title'>"+activity.name+"</label>" +
-                                "<label class='promo-price'>¥&nbsp;"+activity.lowestPrice+"<sub class='promo-price-tail'>起</sub></label>" +
+                                "<label class='promo-title'>【"+activity.type+"】"+activity.name+" - "+city_name+"</label>" +
+                                // "<label class='promo-price'>¥&nbsp;"+activity.lowestPrice+"<sub class='promo-price-tail'>起</sub></label>" +
+                                // "<label class='promo-price'>¥&nbsp;"+activity.lowestPrice+"<sub class='promo-price-tail'>起</sub></label>" +
                             "</div>" +
                             "<div class='promo-period'>" +activity_period_content +"</div>" +
                             "<div class='promo-button'>" +
-                                "<button class='promo-choose-seat'>选座购买</button>" +
-                                "<button class='promo-more' onclick='toActivityDetail("+activity.aid+")'>查看详情</button>" +
+                                "<button class='promo-choose-seat' pid='"+default_pid+"' period='"+default_period+"' aid='"+activity.aid+"' vname='"+activity.vname+"' aname='"+activity.name+"' prices='"+activity.prices+"'>选座购买</button>" +
+                                // "<button class='promo-more' onclick='toActivityDetail("+activity.aid+")'>查看详情</button>" +
                             "</div>" +
                         "</div>" +
                     "</div>" +
@@ -84,6 +91,22 @@ function setGalleryActivities(data) {
         $(".carousel-container").append(gallery_item);
 
     }
+    $(".promo-choose-seat").on('click',function () {
+        const aid = $(this).attr("aid");
+        const pid = $(this).attr("pid");
+        const period = $(this).attr("period");
+        const vname = $(this).attr("vname");
+        const aname = $(this).attr("aname");
+        const prices = $(this).attr("prices");
+        // window.localStorage.setItem("v_name",vname);
+        // window.localStorage.setItem("a_period",period);
+        // window.localStorage.setItem("a_name",aname);
+        forward("/pages/venue/activity/choose-seat.html?way=online&aid="+aid+"&pid="+pid+"&aperiod="+period+"&vname="+vname+"&aname="+aname+"&prices="+prices);
+    });
+    $(".promo-post").on('click',function () {
+        const aid = $(this).attr("aid");
+        forward(`/pages/venue/activity/activity-info.html?aid=${aid}`);
+    });
     layui.use(['carousel'],function () {
         var carousel = layui.carousel;
         carousel.render({
@@ -119,6 +142,32 @@ function setActivities(data) {
     }
 
 }
+
+//选择场次
+function choosePeriod(dom) {
+    const beginTime = $(dom).attr("beginTime");
+    const now = new Date().getTime();
+    if(beginTime<=now){
+        layer.msg("此场次结束售票");
+        return;
+    }
+    $(".promo-period label").css({
+        "border":"dotted 1px white",
+        "color":"white",
+        "background-color":"inherit",
+    });
+    $(dom).css({
+        "border":"1px solid #ff5a5f",
+        // "color":"#333",
+        // "background-color":"rgba(255,255,255,0.9)",
+    });
+    const period = $(dom).attr("period");
+    const pid = $(dom).attr("pid");
+    console.log($(dom).parent());
+    // console.log($(dom).parent());
+    $(dom).parent().parent().find(".promo-choose-seat").attr("pid",pid);
+}
+
 
 //跳转到活动详情
 function toActivityDetail(aid) {

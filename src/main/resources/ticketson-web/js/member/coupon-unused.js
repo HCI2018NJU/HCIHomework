@@ -19,27 +19,30 @@ $.post("/api/coupon/getUnusedCouponTotalNum",{
     "date":now,
 }).done(function (data) {
     unusedCouponTotalNum = data;
-    if(unusedCouponTotalNum>0){
-        $(".nothing").css("display","none");
-        $("#unused-page").css("display","block");
-    }else {
+    if(unusedCouponTotalNum<=0){
         $(".nothing").css("display","block");
         $("#unused-page").css("display","none");
+    }else {
+        if(unusedCouponTotalNum<=perPage){
+            $("#unused-page").css("display","none");
+            getUnusedCoupons(0);
+        }else {
+            $("#unused-page").css("display","block");
+            layui.use(['laypage'],function () {
+                let laypage = layui.laypage;
+                laypage.render({
+                    elem: 'unused-page',
+                    count: unusedCouponTotalNum,
+                    limit: perPage,
+                    layout: ['prev', 'page', 'next'],
+                    theme: '#f5c026',
+                    jump: function(obj){
+                        getUnusedCoupons(obj.curr-1);
+                    }
+                });
+            });
+        }
     }
-
-    layui.use(['laypage'],function () {
-        let laypage = layui.laypage;
-        laypage.render({
-            elem: 'unused-page',
-            count: unusedCouponTotalNum,
-            limit: perPage,
-            layout: ['prev', 'page', 'next'],
-            theme: '#ff5a5f',
-            jump: function(obj){
-                getUnusedCoupons(obj.curr-1);
-            }
-        });
-    });
 }).fail(function (data) {
     layer.msg(data.responseText);
 });

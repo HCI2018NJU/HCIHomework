@@ -5,26 +5,30 @@ $.post("/api/coupon/getUsedCouponTotalNum",{
     "mid":getMid(),
 }).done(function (data) {
     usedCouponTotalNum = parseInt(data);
-    if(usedCouponTotalNum>0){
-        $(".nothing").css("display","none");
-        $("#used-page").css("display","block");
-    }else {
+    if(usedCouponTotalNum<=0){
         $(".nothing").css("display","block");
         $("#used-page").css("display","none");
+    }else {
+        if(usedCouponTotalNum<=perPage){
+            getUsedCoupons(0);
+        }else {
+            $("#used-page").css("display","block");
+            layui.use(['laypage'],function () {
+                let laypage = layui.laypage;
+                laypage.render({
+                    elem: 'used-page',
+                    count: usedCouponTotalNum,
+                    limit: perPage,
+                    layout: ['prev', 'page', 'next'],
+                    theme: '#f5c026',
+                    jump: function(obj){
+                        getUsedCoupons(obj.curr-1);
+                    }
+                });
+            });
+        }
     }
-    layui.use(['laypage'],function () {
-        let laypage = layui.laypage;
-        laypage.render({
-            elem: 'used-page',
-            count: usedCouponTotalNum,
-            limit: perPage,
-            layout: ['prev', 'page', 'next'],
-            theme: '#f5c026',
-            jump: function(obj){
-                getUsedCoupons(obj.curr-1);
-            }
-        });
-    });
+
 }).fail(function (data) {
     layer.msg(data.responseText);
 });

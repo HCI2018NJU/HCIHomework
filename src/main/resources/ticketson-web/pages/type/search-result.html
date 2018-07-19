@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicketsOn-专属你的票务网站</title>
+    <link href="../../lib/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css" media="all">
+    <link href="../../lib/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="../../css/member/nav.css" rel="stylesheet">
+    <link href="../../css/common/common.css" rel="stylesheet" />
+    <link href="../../css/type/style.css" rel="stylesheet">
+    <script src="../../lib/jquery-3.3.1.js"></script>
+    <script src="../../lib/jquery-ui.min.js"></script>
+    <script src="../../lib/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/layui/layui.js"></script>
+</head>
+<body>
+<div id="container" style="font-size: 14px;min-height: 860px">
+    <div class="top-nav"></div>
+    <div id="type-container-div">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8" style="margin-top: 60px">
+                <!--<div id="crumb-guide">TicketsOn&nbsp;>&nbsp;分类</div>-->
+                <div style="font-size: 14px;color: #969696;font-weight: 400">共为您找到了<span id="total-num">1</span>条结果</div>
+                <div class="loading">
+                    <img src="../../resources/icons/loading.gif">
+                    <span>努力加载中...</span>
+                </div>
+                <div id="category-lst" style="margin-top: 20px">
+                    <div class="row">
+                        <div id="category-lst-left" class="col-6">
+
+                        </div>
+                        <div id="category-lst-right" class="col-6"></div>
+                    </div>
+                    <div id="page-display-result"></div>
+                    <div class="nothing">
+                        <div><i class="icon-font">&#xe62c;</i></div>
+                        <div style="margin-top: 30px;color: #9a9a9a">这里没有相关活动 >,<</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/common/regions_master/region.js"></script>
+<script type="text/javascript" src="../../js/common/href-helper.js"></script>
+<script type="text/javascript" src="../../js/member/nav.js"></script>
+<!--<script type="text/javascript" src="../../js/common/type-filter.js"></script>-->
+<script type="text/javascript" src="../../js/type/search-result.js"></script>
+</body>
+</html>

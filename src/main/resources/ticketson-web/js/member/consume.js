@@ -32,7 +32,9 @@ function setData(data) {
             // x:'center'
         },
         tooltip: {},
-        legend: {},
+        legend: {
+            x:'right'
+        },
         xAxis: {
             data: data.months
         },

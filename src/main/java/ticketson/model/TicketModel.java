@@ -7,7 +7,8 @@ import ticketson.entity.Ticket;
  * Created by shea on 2018/3/14.
  */
 public class TicketModel {
-    public long tid;
+    public Long tid;
+    public Long tidshow;
     /**
      * 座位状态：销售中，已售出，已预订
      */
@@ -37,6 +38,7 @@ public class TicketModel {
 
     public TicketModel(Ticket ticket){
         this.tid = ticket.getTid();
+        this.tidshow = Integer.MAX_VALUE-this.tid;
         Seat seat = ticket.getSeat();
         if(seat!=null){
             setSeatInfo(seat);

@@ -146,6 +146,29 @@ public class ActivityController {
         return activityService.countActivities(type,fatherType,cityCode,timeType);
     }
 
+    /**
+     * 获得正在卖票的活动(activity中endsell之前的) ==
+     * @param page 第几页
+     * @param perPage 每页几个活动
+     * @return
+     */
+    @PostMapping("/getActivitiesByKeyword")
+    public @ResponseBody List<ActivityModel> getActivitiesByKeyword(String keyword,Integer page, Integer perPage) {
+
+        System.out.println(keyword);
+        return activityService.getActivitiesByKeyword(keyword,page,perPage);
+    }
+
+    /**
+     * 获得正在售票的活动总数 ==
+     * @return
+     */
+    @PostMapping("/countActivitiesByKeyword")
+    public int getActivitiesTotalNumByKeyword(String keyword){
+        System.out.println("countActivitiesByKeyword======"+keyword);
+        return activityService.getActivitiesTotalNumByKeyword(keyword);
+    }
+
 
     /**
      * 根据场馆ID得到活动 ==

@@ -178,6 +178,7 @@ fabric.SeatRect = fabric.util.createClass(fabric.Rect, {
         this.set('price', options.price) &&
         this.set('level', options.level) &&
         this.set('state', options.state) &&
+        this.set('origin_fill', options.origin_fill) &&
         this.set('seatid', options.seatid);
     },
 
@@ -191,7 +192,7 @@ fabric.SeatRect = fabric.util.createClass(fabric.Rect, {
                 price: this.price,
                 level: this.level,
                 state: this.state,
-                // origin_fill: this.origin_fill,
+                origin_fill: this.origin_fill,
                 seatid: this.seatid
             });
     }

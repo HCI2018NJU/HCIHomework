@@ -40,7 +40,7 @@ public class OrderController {
      */
     @PostMapping("/getOrder")
     public @ResponseBody OrderModel getOrder(Long oid){
-        return orderService.getOrder(oid);
+        return orderService.getOrder(Integer.MAX_VALUE-oid);
     }
 
     /**

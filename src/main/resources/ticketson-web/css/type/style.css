@@ -116,10 +116,11 @@
     margin-bottom: 60px;
     cursor: pointer;
 }
-.left-item {
+
+#category-lst-left .category-item {
     float: left;
 }
-.right-item {
+#category-lst-right .category-item {
     float: right;
 }
 .category-item img{

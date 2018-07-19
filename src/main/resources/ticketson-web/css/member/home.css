@@ -1,6 +1,7 @@
 .back-img {
     width: 100% !important;
     height: auto;
+    opacity: 0.7;
 }
 
 .gallery-item {
@@ -20,7 +21,7 @@
     right: 0;
     top: 0;
     bottom: -8px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     /*z-index: 2000;*/
     padding-top: 60px;
     /*padding-left: 40px;*/
@@ -51,22 +52,24 @@
     border: none;
     color: white;
     font-size: 14px;
-    width: 300px;
+    /*width: 300px;*/
     height: 36px;
     border-radius: 5px;
     cursor: pointer;
+    width: 210px;
 }
 
 .gallery-item .mask .promo-button .promo-more {
-    background-color: #4f9864;
+    background-color: #fd6857;
     border: none;
     color: white;
     font-size: 14px;
-    width: 300px;
+    /*width: 300px;*/
     height: 36px;
     border-radius: 5px;
     cursor: pointer;
-    float: right;
+    /*float: right;*/
+    width: 210px;
 }
 
 .gallery-item .mask .promo-button .promo-choose-seat:hover {
@@ -74,19 +77,34 @@
 }
 
 .gallery-item .mask .promo-button .promo-more:hover {
-    background-color: #5bb073;
+    background-color: #ee6554;
 }
 
 .gallery-item .mask .promo-period label {
     background-color: inherit;
-    padding: 4px 6px;
-    border: 1px dotted #76d48f;
-    font-size: 14px;
-    width: 200px;
-    text-align: center;
-    margin-right: 12px;
-    color: white;
+    /*padding: 4px 6px;*/
+    /*border: 1px dotted #76d48f;*/
+    /*font-size: 14px;*/
+    /*width: 200px;*/
+    /*text-align: center;*/
+    /*margin-right: 12px;*/
+    /*color: white;*/
+    /*border-radius: 5px;*/
+
     border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 24px;
+    white-space: nowrap;
+    margin-right: 10px;
+    border: dotted 1px white;
+    max-width: 100%;
+    color: white;
+    /*display: inline;*/
+    /*float: left;*/
+    width: 210px;
+    cursor: pointer;
 }
 
 .gallery-item .mask .promo-title {
@@ -103,7 +121,7 @@
     letter-spacing: .1em;
     /*margin-top: 100px;*/
     float: right;
-    color: #76d48f;
+    color: #ff7633;
     /*display: inline;*/
 }
 .gallery-item .mask .promo-price .promo-price-tail {

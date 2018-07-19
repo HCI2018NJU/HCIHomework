@@ -47,7 +47,7 @@ a:hover {
 }
 .top-nav .search-tab {
     position: relative;
-    width: 80%;
+    width: 85%;
     margin-left: 10%;
     display: inline-block;
     float: left;
@@ -84,6 +84,15 @@ a:hover {
     background-color: #ff5a5f;
     vertical-align: middle;
     border: none;
+}
+.top-nav .search-tab>i{
+    position: absolute;
+    top: 10px;
+    font-size: 18px;
+    right: 96px;
+    color: #c6c6c6;
+    cursor: pointer;
+    display: none;
 }
 .top-nav .login-tab,.top-nav .member-tab {
     margin-top: 18px;

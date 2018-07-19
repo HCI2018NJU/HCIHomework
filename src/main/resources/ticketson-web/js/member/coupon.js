@@ -48,7 +48,7 @@ function exchangeCoupon(type) {
         "type": type,
     }).done(function () {
         //刷新页面
-        forward("/pages/member/coupon.html");
+        forward("/pages/member/coupon-unused.html");
     }).fail(function (data) {
         layer.msg(data.responseText);
     });

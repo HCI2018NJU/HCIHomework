@@ -2,9 +2,6 @@ const aid = getUrlParam("aid");
 const pid = getUrlParam("pid");
 const way = getUrlParam("way");
 
-const chosen = "#CCCCFF";
-const unavailable = "#CCCCCC";
-
 
 
 if(way==="online"){
@@ -12,10 +9,11 @@ if(way==="online"){
 }else {
     $('#member-nav').css("display","none");
 }
-
+console.log(aid);
 $.post("/api/activity/getLayouts",{
     "aid": aid,
 }).done(function (data) {
+    console.log(data);
     data.map(function (layout,index) {
         createCanvas(layout,index);
     });
@@ -32,6 +30,9 @@ let gs_tooltip = null;
 let gs_tooltip_rect = null;
 let gs_tooltip_width = 120;
 let gs_tooltip_height = 100;
+let area_name_single_width = 40;
+let area_name_height = 60;
+
 
 let seat_tooltip = null;
 let seat_tooltip_rect = null;
@@ -39,7 +40,21 @@ let seat_tooltip_width = 120;
 let seat_tooltip_height = 200;
 let seat_size = 40;
 
-const prices = window.localStorage.getItem("a_choose_seat_prices").split("_");
+let added_obj = [];
+
+// const prices = window.localStorage.getItem("a_choose_seat_prices").split("_");
+const prices = decodeURI(getUrlParam2("prices")).split("_");
+
+//初始化标题
+// let v_name = window.localStorage.getItem("v_name");
+let v_name = decodeURI(getUrlParam2("vname"));
+// let a_period = window.localStorage.getItem("a_period");
+let a_period = decodeURI(getUrlParam2("aperiod"));
+// let a_name = window.localStorage.getItem("a_name");
+let a_name = decodeURI(getUrlParam2("aname"));
+
+$("#chosen-color").css("background-color",chosen);
+$("#unavailable-color").css("background-color",unavailable);
 prices.map((price,idx)=>{
     if(idx===0){
         return;
@@ -51,6 +66,12 @@ prices.map((price,idx)=>{
     "</div>";
     $("#level-part").append(level_span);
 });
+function findPriceColor(price) {
+    for(let i=1;i<prices.length;i++){
+        if(price===prices[i])return level[i-1];
+    }
+    return level[0];
+}
 
 
 // let hoverTimer = null;
@@ -67,10 +88,12 @@ if(canvases_width>1120){
     })
 }
 
-//初始化标题
-let v_name = window.localStorage.getItem("v_name");
+
+
 $("#venue-header").css("display","block");
-$("#venue-header").text(v_name);
+// $("#venue-header").text(v_name);
+$("#activity-guide").text(a_name);
+$("#period-guide").text(a_period);
 $("#gs-header").css("display","none");
 
 function createCanvas(layout,index){
@@ -86,25 +109,20 @@ function createCanvas(layout,index){
         "height":720,
     });
     canvas.loadFromJSON(layout);
-    let added_obj = [];
     canvas.forEachObject(function (obj) {
         obj.hasControls = false;
         obj.lockMovementX = true;
         obj.lockMovementY = true;
         if(obj.type.split('-')[0]==="grandstand"){
-            if(obj.hasCanvas){
-                console.log(obj);
-                added_obj.push(makeGSTooltipRect({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2}));
-                added_obj.push(makeGSTooltip({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2},obj));
-            }
+            initArea(obj);
+            // if(obj.hasCanvas){
+            //     console.log(obj);
+            //     added_obj.push(makeGSTooltipRect({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2}));
+            //     added_obj.push(makeGSTooltip({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2},obj));
+            // }
         }
     });
-    added_obj.map(function (obj) {
-        canvas.add(obj);
-        obj.hasControls = false;
-        obj.lockMovementX = true;
-        obj.lockMovementY = true;
-    });
+
     canvas.renderAll();
     canvas.on({
         'mouse:over':onMouseOver,
@@ -112,9 +130,13 @@ function createCanvas(layout,index){
         'mouse:move': onMouseMove,
         'mouse:down':onSelectCreated,
     });
-    canvas.renderAll();
-    canvases.push(canvas);
     if(index===0){
+        added_obj.map(function (obj) {
+            canvas.add(obj);
+            obj.hasControls = false;
+            obj.lockMovementX = true;
+            obj.lockMovementY = true;
+        });
         $("#"+canvas_wrapper_id).css({
             "display":"block"
         });
@@ -123,6 +145,33 @@ function createCanvas(layout,index){
             "display":"none"
         });
     }
+    canvas.renderAll();
+    canvases.push(canvas);
+}
+
+
+function initArea(obj) {
+    if(obj.hasCanvas){
+        obj.set("fill",findPriceColor(obj.highestPrice));
+        obj.set("stroke",findPriceColor(obj.highestPrice));
+        added_obj.push(makeGsName(obj));
+        // added_obj.push(makeGSTooltip({x:obj.left+(obj.width-gs_tooltip_width)/2,y:obj.top+(obj.height-gs_tooltip_height)/2},obj));
+    }
+}
+
+function makeGsName(obj) {
+    let name = obj.name;
+    let width = area_name_single_width*name.length;
+    let height = area_name_height;
+    console.log(name);
+    return new fabric.IText(name, {
+        left: obj.left+(obj.width-width)/2,
+        top: obj.top+(obj.height-height)/2,
+        fontFamily: 'optima',
+        // fill: '#333333',
+        fill: '#ffffff',
+        fontSize: 36
+    });
 }
 
 function onMouseOver(event) {
@@ -142,7 +191,7 @@ function onMouseOver(event) {
                 // checkSeatState(obj);
             }else if(obj.type.split('-')[0] === 'grandstand'){
                 obj.setShadow({ color: 'rgba(0,0,0,0.7)',blur: 10 });
-                // showGSTooltip(obj);
+                showGSTooltip(obj);
                 canvas.renderAll();
             }
         }
@@ -161,7 +210,7 @@ function onMouseOut(event) {
                 hideToolTip();
             }else if(obj.type.split('-')[0]==='grandstand'){
                 obj.setShadow({ color: 'rgba(0,0,0,0.0)',blur: 0 });
-                // hideGsToolTip();
+                hideGsToolTip();
                 canvas.renderAll();
             }
         }
@@ -169,9 +218,9 @@ function onMouseOut(event) {
     }
 }
 function onMouseMove() {
-    // if(gs_tooltip){
-    //     moveGSTooltip();
-    // }
+    if(gs_tooltip){
+        moveGSTooltip();
+    }
 }
 function onSelectCreated(event) {
     let obj = event.target;
@@ -219,7 +268,7 @@ function addToChart(obj) {
             "</div>"+
             "<div class='seat-info'>" +
             "<div>座号：<span class='seat-location'>"+obj.row+"排"+obj.column+"座"+"</span></div>"+
-            "<div>看台：<span class='gs'>"+obj.area+"</span></div>"+
+            "<div>区域：<span class='gs'>"+obj.area+"</span></div>"+
             "<div>楼层：<span class='floor'>"+obj.floor+"</span></div>"+
             "</div>"+
             "</div>";
@@ -229,6 +278,7 @@ function addToChart(obj) {
         });
         obj.set('state','已选择');
         obj.set('fill',chosen);
+        obj.set('stroke',chosen);
         canvases[canvas_pointer].renderAll();
         //计算总票数
         $("#total-seats").text(parseInt($("#total-seats").text())+1);
@@ -264,6 +314,7 @@ function removeFromChart(obj) {
     obj.set('state','可售');
     let fill = $("#"+seatid).attr('price-fill');
     obj.set('fill',fill);
+    obj.set('stroke',fill);
     canvases[canvas_pointer].renderAll();
     let price = $("#"+seatid).find('.seat-price span').text();
     $("#"+seatid).remove();
@@ -389,15 +440,25 @@ function moveGSTooltip() {
 }
 
 function makeGSTooltipRect(pointer) {
+    // return  new fabric.Rect({
+    //     left:pointer.x,
+    //     top: pointer.y,
+    //     width: gs_tooltip_width,
+    //     height: gs_tooltip_height,
+    //     strokeWidth: 1,
+    //     fill: '#ffffff',
+    //     stroke: '#ffffff',
+    //     // shadow: 'rgba(0,0,0,0.3) 6px 6px 12px'
+    // });
     return  new fabric.Rect({
         left:pointer.x,
         top: pointer.y,
         width: gs_tooltip_width,
         height: gs_tooltip_height,
         strokeWidth: 1,
-        fill: '#ffffff',
-        stroke: '#ffffff',
-        // shadow: 'rgba(0,0,0,0.3) 6px 6px 12px'
+        fill: '#000000',
+        stroke: '#000000',
+        shadow: 'rgba(0,0,0,0.3) 6px 6px 12px'
     });
 }
 
@@ -410,7 +471,8 @@ function makeGSTooltip(pointer,obj) {
         left: pointer.x+10,
         top: pointer.y+10,
         fontFamily: 'optima',
-        fill: '#333333',
+        // fill: '#333333',
+        fill: '#ffffff',
         fontSize: 12
     });
 }
@@ -443,6 +505,8 @@ function makeTooltip(pointer,obj) {
 function changeCanvasPointer(to) {
     hideToolTip();
     hideGsToolTip();
+
+
     canvases[canvas_pointer].discardActiveObject();
     if(to===0){
         $("#venue-header").css("display","block");
@@ -450,7 +514,13 @@ function changeCanvasPointer(to) {
         $("#gs-wrapper-"+canvas_pointer).css("display","none");
         canvas_pointer = to;
         $("#gs-wrapper-"+canvas_pointer).css("display","block");
+        $(".color-part").css({
+            "display":"none"
+        });
     }else {
+        $(".color-part").css({
+            "display":"block"
+        });
         const loading_index = layer.load();
         $("#venue-header").css("display","none");
         $("#gs-header").css("display","block");
@@ -492,10 +562,15 @@ function changeCanvasPointer(to) {
 
 function setSeatState(obj,isAvailable) {
     if(!isAvailable){
-        obj.set('opacity','0.1');
+        obj.set('fill',unavailable);
+        obj.set('stroke',unavailable);
+        // obj.set('opacity','0.1');
         obj.set('state','不可售');
     }else {
-        obj.set('opacity','1');
+        // obj.set("stroke",obj.fill);
+        obj.set("stroke",obj.origin_fill);
+        // obj.set('fill',obj.fill);
+        obj.set('fill',obj.origin_fill);
         obj.set('state','可售');
     }
 }
@@ -580,6 +655,13 @@ function submitOrder() {
 }
 
 $(".give-up").on('click',function () {
+    forward(`/pages/venue/activity/activity-info.html?aid=${aid}`);
+});
+
+$("#activity-guide").on('click',function () {
+    forward(`/pages/venue/activity/activity-info.html?aid=${aid}`);
+});
+$("#period-guide").on('click',function () {
     forward(`/pages/venue/activity/activity-info.html?aid=${aid}`);
 });
 

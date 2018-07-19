@@ -12,27 +12,32 @@ function getOrderTotalNum() {
     }).done(function (data) {
         subscribedTotalNum = parseInt(data);
         console.log(subscribedTotalNum);
-        if(subscribedTotalNum>0){
-            $(".nothing").css("display","none");
-            $("#subscribed-page").css("display","block");
-        }else {
+        if(subscribedTotalNum<=0){
             $(".nothing").css("display","block");
-            $("#subscribed-page").css("display","none");
+            // $("#subscribed-page").css("display","none");
+        }else {
+            $(".nothing").css("display","none");
+            if(subscribedTotalNum<=perPage){
+                getSubscribedList(0);
+                // $("#subscribed-page").css("display","none");
+            }else {
+                $("#subscribed-page").css("display","block");
+                layui.use(['laypage'],function () {
+                    let laypage = layui.laypage;
+                    laypage.render({
+                        elem: 'subscribed-page',
+                        count: subscribedTotalNum,
+                        limit: perPage,
+                        layout: ['prev', 'page', 'next'],
+                        theme: '#f5c026',
+                        jump: function(obj){
+                            getSubscribedList(obj.curr-1);
+                        }
+                    });
+                });
+            }
         }
 
-        layui.use(['laypage'],function () {
-            let laypage = layui.laypage;
-            laypage.render({
-                elem: 'subscribed-page',
-                count: subscribedTotalNum,
-                limit: perPage,
-                layout: ['prev', 'page', 'next'],
-                theme: '#f5c026',
-                jump: function(obj){
-                    getSubscribedList(obj.curr-1);
-                }
-            });
-        });
     }).fail(function (data) {
         layer.msg(data.responseText);
     })
@@ -65,13 +70,13 @@ function setData(orders) {
         if(order.canUnsubscribe){
             operation_content =
                 "<div class='order-item-right'>" +
+                "<button class='order-btn-detail' oid='"+order.oidshow+"'>订单详情</button>" +
                 "<button class='order-info-btn-unsub' style='display: block' oid='"+order.oid+"'>退订</button>" +
-                "<button class='order-btn-detail' oid='"+order.oid+"'>订单详情</button>" +
                 "</div>";
         }else {
             operation_content =
                 "<div class='order-item-right'>" +
-                "<button class='order-btn-detail' style='margin-top: 46px' oid='"+order.oid+"'>订单详情</button>" +
+                "<button class='order-btn-detail' style='margin-top: 46px' oid='"+order.oidshow+"'>订单详情</button>" +
                 "</div>";
         }
         const order_dom =
